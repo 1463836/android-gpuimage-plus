@@ -20,7 +20,7 @@ import org.wysaid.common.Common;
 import org.wysaid.myUtils.FileUtil;
 import org.wysaid.myUtils.ImageUtil;
 import org.wysaid.myUtils.MsgUtil;
-import org.wysaid.nativePort.CGEFrameRenderer;
+import org.wysaid.nativePort.FrameRenderer;
 import org.wysaid.view.VideoPlayerGLSurfaceView;
 
 public class VideoPlayerDemoActivity extends AppCompatActivity {
@@ -103,7 +103,7 @@ public class VideoPlayerDemoActivity extends AppCompatActivity {
                     if (bmp != null) {
                         mPlayerView.setMaskBitmap(bmp, false, new VideoPlayerGLSurfaceView.SetMaskBitmapCallback() {
                             @Override
-                            public void setMaskOK(CGEFrameRenderer renderer) {
+                            public void setMaskOK(FrameRenderer renderer) {
 //                                if(mPlayerView.isUsingMask()) {
 //                                    renderer.setMaskFlipScale(1.0f, -1.0f);
 //                                }

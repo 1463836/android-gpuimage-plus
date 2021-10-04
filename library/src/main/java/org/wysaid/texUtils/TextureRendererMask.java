@@ -54,7 +54,7 @@ public class TextureRendererMask extends TextureRendererDrawOrigin {
 
     public static TextureRendererMask create(boolean isExternalOES) {
         TextureRendererMask renderer = new TextureRendererMask();
-        if(!renderer.init(isExternalOES)) {
+        if (!renderer.init(isExternalOES)) {
             renderer.release();
             return null;
         }
@@ -63,7 +63,7 @@ public class TextureRendererMask extends TextureRendererDrawOrigin {
 
     @Override
     public boolean init(boolean isExternalOES) {
-        if(setProgramDefault(getVertexShaderString(), getFragmentShaderString(), isExternalOES)) {
+        if (setProgramDefault(getVertexShaderString(), getFragmentShaderString(), isExternalOES)) {
             mProgram.bind();
             mMaskRotLoc = mProgram.getUniformLoc(MASK_ROTATION_NAME);
             mMaskFlipscaleLoc = mProgram.getUniformLoc(MASK_FLIPSCALE_NAME);
@@ -76,10 +76,10 @@ public class TextureRendererMask extends TextureRendererDrawOrigin {
     }
 
     public void setMaskRotation(float rad) {
-        final float cosRad = (float)Math.cos(rad);
-        final float sinRad = (float)Math.sin(rad);
+        final float cosRad = (float) Math.cos(rad);
+        final float sinRad = (float) Math.sin(rad);
 
-        float rot[] = new float[] {
+        float rot[] = new float[]{
                 cosRad, sinRad,
                 -sinRad, cosRad
         };
@@ -96,7 +96,7 @@ public class TextureRendererMask extends TextureRendererDrawOrigin {
     }
 
     public void setMaskTexture(int texID) {
-        if(texID == mMaskTexture)
+        if (texID == mMaskTexture)
             return;
 
         GLES20.glDeleteTextures(1, new int[]{mMaskTexture}, 0);
@@ -106,7 +106,7 @@ public class TextureRendererMask extends TextureRendererDrawOrigin {
     @Override
     public void renderTexture(int texID, Viewport viewport) {
 
-        if(viewport != null) {
+        if (viewport != null) {
             GLES20.glViewport(viewport.x, viewport.y, viewport.width, viewport.height);
         }
 

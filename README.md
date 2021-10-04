@@ -97,11 +97,11 @@ protected void onCreate(Bundle savedInstanceState) {
 ### 2. Custom Shader Filter ###
 
 #### 2.1 Write your own filter ####
->Your filter must inherit [CGEImageFilterInterfaceAbstract](https://github.com/wysaid/android-gpuimage-plus/blob/master/library/src/main/jni/include/cgeImageFilter.h#L42) or its child class. Most of the filters are inherited from [CGEImageFilterInterface](https://github.com/wysaid/android-gpuimage-plus/blob/master/library/src/main/jni/include/cgeImageFilter.h#L57) because it has many useful functions.
+>Your filter must inherit [ImageFilterInterfaceAbstract](https://github.com/wysaid/android-gpuimage-plus/blob/master/library/src/main/jni/include/cgeImageFilter.h#L42) or its child class. Most of the filters are inherited from [ImageFilterInterface](https://github.com/wysaid/android-gpuimage-plus/blob/master/library/src/main/jni/include/cgeImageFilter.h#L57) because it has many useful functions.
 
 ```
 // A simple customized filter to do a color reversal.
-class MyCustomFilter : public CGE::CGEImageFilterInterface
+class MyCustomFilter : public CGE::ImageFilterInterface
 {
 public:
     
@@ -120,14 +120,14 @@ public:
         }
         );
 
-        //m_program is defined in 'CGEImageFilterInterface'
-        return m_program.initWithShaderStrings(g_vshDefaultWithoutTexCoord, s_fsh);
+        //program is defined in 'ImageFilterInterface'
+        return program.initWithShaderStrings(g_vshDefaultWithoutTexCoord, s_fsh);
     }
 
-    //void render2Texture(CGE::CGEImageHandlerInterface* handler, GLuint srcTexture, GLuint vertexBufferID)
+    //void render2Texture(CGE::ImageHandlerInterface* handler, GLuint srcTexture, GLuint vertexBufferID)
     //{
     //  //Your own render functions here.
-    //  //Do not override this function to use the CGEImageFilterInterface's.
+    //  //Do not override this function to use the ImageFilterInterface's.
     //}
 };
 ```
@@ -136,7 +136,7 @@ public:
 
 #### 2.2 Run your own filter ####
 
-__In C++, you can use a CGEImageHandler to do that:__
+__In C++, you can use a ImageHandler to do that:__
 ```
 //Assume the gl context already exists:
 //JNIEnv* env = ...;
@@ -164,7 +164,7 @@ __In Java, you can simply follow the sample:__
 
 See: [CGENativeLibrary.cgeFilterImageWithCustomFilter](https://github.com/wysaid/android-gpuimage-plus/blob/master/cgeDemo/src/main/java/org/wysaid/cgeDemo/TestCaseActivity.java#L123)
 
-__Or to do with a [CGEImageHandler](https://github.com/wysaid/android-gpuimage-plus/blob/master/library/src/main/java/org/wysaid/nativePort/CGEImageHandler.java#L93)__
+__Or to do with a [ImageHandler](https://github.com/wysaid/android-gpuimage-plus/blob/master/library/src/main/java/org/wysaid/nativePort/ImageHandler.java#L93)__
 
 ### 3. Filter Rule String ###
 

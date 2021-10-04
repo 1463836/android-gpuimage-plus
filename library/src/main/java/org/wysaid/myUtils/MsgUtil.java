@@ -35,8 +35,8 @@ public class MsgUtil {
     }
 
     public static void toastMsg(Context context, String msg, int duration) {
-        if(mContext == null || mContext.get() != context) {
-            if(context == null) {
+        if (mContext == null || mContext.get() != context) {
+            if (context == null) {
                 mContext = null;
                 return;
             }
@@ -46,7 +46,7 @@ public class MsgUtil {
             mToast.setDuration(duration);
         }
 
-        if(mContext.get() != null && mToast != null) {
+        if (mContext.get() != null && mToast != null) {
 //            mToast.cancel();
             mToast.setText(msg);
             mToast.show();

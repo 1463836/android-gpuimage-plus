@@ -33,7 +33,7 @@ public class TextureRendererWave extends TextureRendererDrawOrigin {
 
     public static TextureRendererWave create(boolean isExternalOES) {
         TextureRendererWave renderer = new TextureRendererWave();
-        if(!renderer.init(isExternalOES)) {
+        if (!renderer.init(isExternalOES)) {
             renderer.release();
             return null;
         }
@@ -42,7 +42,7 @@ public class TextureRendererWave extends TextureRendererDrawOrigin {
 
     @Override
     public boolean init(boolean isExternalOES) {
-        if(setProgramDefault(vshDrawDefault, fshWave, isExternalOES)) {
+        if (setProgramDefault(vshDrawDefault, fshWave, isExternalOES)) {
             mProgram.bind();
             mMotionLoc = mProgram.getUniformLoc("motion");
             return true;
@@ -63,7 +63,7 @@ public class TextureRendererWave extends TextureRendererDrawOrigin {
     @Override
     public void renderTexture(int texID, Viewport viewport) {
 
-        if(viewport != null) {
+        if (viewport != null) {
             GLES20.glViewport(viewport.x, viewport.y, viewport.width, viewport.height);
         }
 
@@ -75,10 +75,10 @@ public class TextureRendererWave extends TextureRendererDrawOrigin {
         GLES20.glVertexAttribPointer(0, 2, GLES20.GL_FLOAT, false, 0, 0);
 
         mProgram.bind();
-        if(mAutoMotion) {
+        if (mAutoMotion) {
             mMotion += mMotionSpeed;
             GLES20.glUniform1f(mMotionLoc, mMotion);
-            if(mMotion > Math.PI * 20.0f) {
+            if (mMotion > Math.PI * 20.0f) {
                 mMotion -= Math.PI * 20.0f;
             }
         }

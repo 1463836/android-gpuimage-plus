@@ -18,8 +18,7 @@ public class CGENativeLibrary {
         NativeLibraryLoader.load();
     }
 
-    public enum TextureBlendMode
-    {
+    public enum TextureBlendMode {
         CGE_BLEND_MIX,            // 0 正常 - "result.rgb = src.rgb * (1 - alpha) + dst.rgb * alpha, alpha = intensity * dst.a, result.a = src.a" - Because android is using premultiplied bitmap&texture, 'CGE_BLEND_MIX' may get a result of twice the strength of the blendImage's alpha channel(The result would be darker than you want). For common usage of mix blending, please use 'CGE_BLEND_ADDREV'.
         CGE_BLEND_DISSOLVE,       // 1 溶解
 
@@ -55,17 +54,20 @@ public class CGENativeLibrary {
 
         /////////////    More blend mode below (You can't see them in Adobe Photoshop)    //////////////
 
-        CGE_BLEND_ADD,			  // 27
+        CGE_BLEND_ADD,              // 27
         CGE_BLEND_ADDREV,         // 28 - A fix for premultiplied BLEND_MIX
-        CGE_BLEND_COLORBW,		  // 29
+        CGE_BLEND_COLORBW,          // 29
 
         /////////////    More blend mode above     //////////////
 
         CGE_BLEND_TYPE_MAX_NUM //Its value defines the max num of blend.
-    };
+    }
+
+    ;
 
     public interface LoadImageCallback {
         Bitmap loadImage(String name, Object arg);
+
         void loadImageOK(Bitmap bmp, Object arg);
     }
 
@@ -84,14 +86,14 @@ public class CGENativeLibrary {
 
     //will be called from jni.
     public static TextureResult loadTextureByName(String sourceName) {
-        if(loadImageCallback == null) {
+        if (loadImageCallback == null) {
             Log.i(Common.LOG_TAG, "The loading callback is not set!");
             return null;
         }
 
         Bitmap bmp = loadImageCallback.loadImage(sourceName, callbackArg);
 
-        if(bmp == null) {
+        if (bmp == null) {
             return null;
         }
 
@@ -104,7 +106,7 @@ public class CGENativeLibrary {
     //May be called from jni.
     public static TextureResult loadTextureByBitmap(Bitmap bmp) {
 
-        if(bmp == null) {
+        if (bmp == null) {
             return null;
         }
 
@@ -124,14 +126,14 @@ public class CGENativeLibrary {
     }
 
     public static Bitmap filterImage_MultipleEffects(Bitmap bmp, String config, float intensity) {
-        if(config == null || config.length() == 0) {
+        if (config == null || config.length() == 0) {
             return bmp;
         }
         return cgeFilterImage_MultipleEffects(bmp, config, intensity);
     }
 
     public static void filterImage_MultipleEffectsWriteBack(Bitmap bmp, String config, float intensity) {
-        if(config != null && config.length() != 0) {
+        if (config != null && config.length() != 0) {
             cgeFilterImage_MultipleEffectsWriteBack(bmp, config, intensity);
         }
     }
@@ -159,7 +161,9 @@ public class CGENativeLibrary {
     ////////////////////////////////////
 
     public static native long cgeCreateFilterWithConfig(String config, float intensity);
+
     public static native void cgeDeleteFilterWithAddress(long address);
+
     public static native long cgeCreateBlendFilter(int blendMode, int texID, int texWidth, int texHeight, int blendFilterType, float intensity);
 
     ////////////////////////////////////
@@ -168,10 +172,12 @@ public class CGENativeLibrary {
     // `intensity`:  0 for origin, 1 for most. (It can be more than 1 when `useWrapper` is true)
     // `useWrapper` marks if you want to use a wrapper. (The wrapper will receive the intensity, and do interpolation between the origin and the result when it's true)
     public static native Bitmap cgeFilterImageWithCustomFilter(Bitmap bmp, int index, float intensity, boolean hasContext, boolean useWrapper);
+
     // `index` marks which you want from your custom filter list.
     // `intensity`:  0 for origin, 1 for most. (It can be more than 1 when `useWrapper` is true)
     // `useWrapper` marks if you want to use a wrapper. (The wrapper will receive the intensity, and do interpolation between the origin and the result when it's true)
     public static native long cgeCreateCustomNativeFilter(int index, float intensity, boolean useWrapper);
+
     public static native int cgeGetCustomFilterNum();
 
 }

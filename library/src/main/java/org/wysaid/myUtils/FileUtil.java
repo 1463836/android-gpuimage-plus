@@ -31,11 +31,11 @@ public class FileUtil {
 
     public static String getPath(Context context) {
 
-        if(storagePath == null) {
-            storagePath = externalStorageDirectory.getAbsolutePath() + "/" + mDefaultFolder;
+        if (storagePath == null) {
+            storagePath = externalStorageDirectory.getAbsolutePath();//+ "/" + mDefaultFolder;
             File file = new File(storagePath);
-            if(!file.exists()) {
-                if(!file.mkdirs()) {
+            if (!file.exists()) {
+                if (!file.mkdirs()) {
                     storagePath = getPathInPackage(context, true);
                 }
             }
@@ -46,20 +46,20 @@ public class FileUtil {
 
     public static String getPathInPackage(Context context, boolean grantPermissions) {
 
-        if(context == null || packageFilesDirectory != null)
+        if (context == null || packageFilesDirectory != null)
             return packageFilesDirectory;
 
         //手机不存在sdcard, 需要使用 data/data/name.of.package/files 目录
-        String path = context.getFilesDir() + "/" + mDefaultFolder;
+        String path = context.getFilesDir().getAbsolutePath();//+ "/" + mDefaultFolder;
         File file = new File(path);
 
-        if(!file.exists()) {
-            if(!file.mkdirs()) {
+        if (!file.exists()) {
+            if (!file.mkdirs()) {
                 Log.e(LOG_TAG, "Create package dir of CGE failed!");
                 return null;
             }
 
-            if(grantPermissions) {
+            if (grantPermissions) {
 
                 //设置隐藏目录权限.
                 if (file.setExecutable(true, false)) {
@@ -96,7 +96,7 @@ public class FileUtil {
     public static String getTextContent(String filename) {
         Log.i(LOG_TAG, "Reading text : " + filename);
 
-        if(filename == null) {
+        if (filename == null) {
             return null;
         }
 
@@ -108,10 +108,10 @@ public class FileUtil {
             FileInputStream filein = new FileInputStream(filename);
             int len;
 
-            while(true) {
+            while (true) {
                 len = filein.read(buffer);
 
-                if(len <= 0)
+                if (len <= 0)
                     break;
 
                 content += new String(buffer, 0, len);

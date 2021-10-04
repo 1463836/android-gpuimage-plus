@@ -22,13 +22,13 @@ public class TextureRendererDrawOrigin extends TextureRenderer {
     }
 
     protected TextureRendererDrawOrigin(boolean noDefaultInitialize) {
-        if(!noDefaultInitialize)
+        if (!noDefaultInitialize)
             defaultInitialize();
     }
 
     public static TextureRendererDrawOrigin create(boolean isExternalOES) {
         TextureRendererDrawOrigin renderer = new TextureRendererDrawOrigin();
-        if(!renderer.init(isExternalOES)) {
+        if (!renderer.init(isExternalOES)) {
             renderer.release();
             return null;
         }
@@ -51,7 +51,7 @@ public class TextureRendererDrawOrigin extends TextureRenderer {
     @Override
     public void renderTexture(int texID, Viewport viewport) {
 
-        if(viewport != null) {
+        if (viewport != null) {
             GLES20.glViewport(viewport.x, viewport.y, viewport.width, viewport.height);
         }
 

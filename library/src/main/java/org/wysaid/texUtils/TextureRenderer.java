@@ -21,12 +21,12 @@ public abstract class TextureRenderer {
 
     //为了保证GLContext 的对应， 不能等待finalize
     public void release() {
-        if(mVertexBuffer != 0) {
+        if (mVertexBuffer != 0) {
             GLES20.glDeleteBuffers(1, new int[]{mVertexBuffer}, 0);
             mVertexBuffer = 0;
         }
 
-        if(mProgram != null) {
+        if (mProgram != null) {
             mProgram.release();
             mProgram = null;
         }
@@ -43,7 +43,10 @@ public abstract class TextureRenderer {
     public static class Viewport {
         public int x, y;
         public int width, height;
-        public Viewport() {}
+
+        public Viewport() {
+        }
+
         public Viewport(int _x, int _y, int _width, int _height) {
             x = _x;
             y = _y;
@@ -91,10 +94,10 @@ public abstract class TextureRenderer {
 
     //设置界面旋转弧度 -- 录像时一般是 PI / 2 (也就是 90°) 的整数倍
     public void setRotation(float rad) {
-        final float cosRad = (float)Math.cos(rad);
-        final float sinRad = (float)Math.sin(rad);
+        final float cosRad = (float) Math.cos(rad);
+        final float sinRad = (float) Math.sin(rad);
 
-        float rot[] = new float[] {
+        float rot[] = new float[]{
                 cosRad, sinRad,
                 -sinRad, cosRad
         };
@@ -120,7 +123,7 @@ public abstract class TextureRenderer {
         mProgram = new ProgramObject();
         mProgram.bindAttribLocation(POSITION_NAME, 0);
         String fshResult = (isExternalOES ? REQUIRE_STRING_EXTERNAL_OES : "") + String.format(fsh, isExternalOES ? SAMPLER2D_VAR_EXTERNAL_OES : SAMPLER2D_VAR);
-        if(mProgram.init(vsh, fshResult)) {
+        if (mProgram.init(vsh, fshResult)) {
             mRotationLoc = mProgram.getUniformLoc(ROTATION_NAME);
             mFlipScaleLoc = mProgram.getUniformLoc(FLIPSCALE_NAME);
             mTransformLoc = mProgram.getUniformLoc(TRANSFORM_NAME);
@@ -142,7 +145,7 @@ public abstract class TextureRenderer {
         GLES20.glGenBuffers(1, vertexBuffer, 0);
         mVertexBuffer = vertexBuffer[0];
 
-        if(mVertexBuffer == 0) {
+        if (mVertexBuffer == 0) {
             Log.e(LOG_TAG, "Invalid VertexBuffer!");
         }
 

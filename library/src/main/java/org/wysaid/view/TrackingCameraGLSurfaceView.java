@@ -1,9 +1,10 @@
 package org.wysaid.view;
 
 import android.content.Context;
-import android.hardware.Camera;
 import android.util.AttributeSet;
 import android.util.Log;
+
+import org.wysaid.camera.CameraInstance;
 
 import java.nio.ByteBuffer;
 
@@ -26,9 +27,13 @@ public class TrackingCameraGLSurfaceView extends CameraGLSurfaceViewWithBuffer {
 
     public interface TrackingProc {
         boolean setup(int width, int height);
+
         void resize(int width, int height);
+
         void processTracking(ByteBuffer luminanceBuffer);
+
         void render(TrackingCameraGLSurfaceView glView);
+
         void release();
     }
 
@@ -48,7 +53,7 @@ public class TrackingCameraGLSurfaceView extends CameraGLSurfaceViewWithBuffer {
         if (proc == null)
             return true;
 
-        if(!proc.setup(mRecordWidth, mRecordHeight)) {
+        if (!proc.setup(recordWidth, recordHeight)) {
             Log.e(LOG_TAG, "setup proc failed!");
             proc.release();
             return false;
@@ -69,17 +74,17 @@ public class TrackingCameraGLSurfaceView extends CameraGLSurfaceViewWithBuffer {
     @Override
     public void onDrawFrame(GL10 gl) {
 
-        if(mSurfaceTexture == null || !cameraInstance().isPreviewing()) {
+        if (mSurfaceTexture == null || !CameraInstance.getInstance().isPreviewing()) {
             return;
         }
 
-        if(mBufferUpdated && mTrackingProc != null) {
+        if (mBufferUpdated && mTrackingProc != null) {
             synchronized (mBufferUpdateLock) {
                 mTrackingProc.processTracking(mBufferY);
             }
         }
 
-        if(mTrackingProc == null) {
+        if (mTrackingProc == null) {
             super.onDrawFrame(gl);
         } else {
             mTrackingProc.render(this);

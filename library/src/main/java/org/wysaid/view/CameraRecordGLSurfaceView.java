@@ -50,7 +50,7 @@ public class CameraRecordGLSurfaceView extends CameraGLSurfaceViewWithTexture {
             @Override
             public void run() {
 
-                if (mFrameRecorder == null) {
+                if (frameRecorder == null) {
                     Log.e(LOG_TAG, "Error: startRecording after release!!");
                     if (recordingCallback != null) {
                         recordingCallback.startRecordingOver(false);
@@ -58,7 +58,7 @@ public class CameraRecordGLSurfaceView extends CameraGLSurfaceViewWithTexture {
                     return;
                 }
 
-                if (!mFrameRecorder.startRecording(30, filename)) {
+                if (!frameRecorder.startRecording(30, filename)) {
                     Log.e(LOG_TAG, "start recording failed!");
                     if (recordingCallback != null)
                         recordingCallback.startRecordingOver(false);
@@ -96,7 +96,7 @@ public class CameraRecordGLSurfaceView extends CameraGLSurfaceViewWithTexture {
             mShouldRecord = false;
         }
 
-        if (mFrameRecorder == null) {
+        if (frameRecorder == null) {
             Log.e(LOG_TAG, "Error: endRecording after release!!");
             return;
         }
@@ -106,8 +106,8 @@ public class CameraRecordGLSurfaceView extends CameraGLSurfaceViewWithTexture {
         queueEvent(new Runnable() {
             @Override
             public void run() {
-                if (mFrameRecorder != null)
-                    mFrameRecorder.endRecording(shouldSave);
+                if (frameRecorder != null)
+                    frameRecorder.endRecording(shouldSave);
                 if (callback != null) {
                     callback.endRecordingOK();
                 }
@@ -165,11 +165,9 @@ public class CameraRecordGLSurfaceView extends CameraGLSurfaceViewWithTexture {
         private AudioRecordRunnable(StartRecordingCallback callback) {
             recordingCallback = callback;
             try {
-                bufferSize = AudioRecord.getMinBufferSize(sampleRate,
-                        AudioFormat.CHANNEL_IN_MONO, AudioFormat.ENCODING_PCM_16BIT);
+                bufferSize = AudioRecord.getMinBufferSize(sampleRate, AudioFormat.CHANNEL_IN_MONO, AudioFormat.ENCODING_PCM_16BIT);
                 Log.i(LOG_TAG, "audio min buffer size: " + bufferSize);
-                audioRecord = new AudioRecord(MediaRecorder.AudioSource.MIC, sampleRate,
-                        AudioFormat.CHANNEL_IN_MONO, AudioFormat.ENCODING_PCM_16BIT, bufferSize);
+                audioRecord = new AudioRecord(MediaRecorder.AudioSource.MIC, sampleRate, AudioFormat.CHANNEL_IN_MONO, AudioFormat.ENCODING_PCM_16BIT, bufferSize);
 //                audioData = new short[bufferSize];
                 audioBufferRef = ByteBuffer.allocateDirect(bufferSize * 2).order(ByteOrder.nativeOrder());
                 audioBuffer = audioBufferRef.asShortBuffer();
@@ -238,12 +236,12 @@ public class CameraRecordGLSurfaceView extends CameraGLSurfaceViewWithTexture {
 
                 audioBufferRef.position(0);
                 bufferReadResult = this.audioRecord.read(audioBufferRef, bufferSize * 2);
-                if (mShouldRecord && bufferReadResult > 0 && mFrameRecorder != null &&
-                        mFrameRecorder.getTimestamp() > mFrameRecorder.getAudioStreamtime()) {
+                if (mShouldRecord && bufferReadResult > 0 && frameRecorder != null &&
+                        frameRecorder.getTimestamp() > frameRecorder.getAudioStreamtime()) {
 //                    Log.e(LOG_TAG, "buffer Result: " + bufferReadResult);
                     audioBuffer.position(0);
 //                    audioBuffer.put(audioData).position(0);
-                    mFrameRecorder.recordAudioFrame(audioBuffer, bufferReadResult / 2);
+                    frameRecorder.recordAudioFrame(audioBuffer, bufferReadResult / 2);
                 }
             }
             this.audioRecord.stop();

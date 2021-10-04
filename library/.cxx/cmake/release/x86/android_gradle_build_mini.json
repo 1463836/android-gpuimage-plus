@@ -1,0 +1,23 @@
+{
+  "buildFiles": [
+    "E:\\android_development_windows\\android-sdk-windows\\ndk\\16.1.4479499\\build\\cmake\\android.toolchain.cmake",
+    "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\CMakeLists.txt"
+  ],
+  "cleanCommands": [
+    "E:\\Android_development_windows\\android-sdk-windows\\cmake\\3.10.2.4988404\\bin\\ninja.exe -C \"F:\\temp\\android-gpuimage-plus\\library\\.cxx\\cmake\\release\\x86\" clean"
+  ],
+  "buildTargetsCommand": "E:\\Android_development_windows\\android-sdk-windows\\cmake\\3.10.2.4988404\\bin\\ninja.exe  -C \"F:\\temp\\android-gpuimage-plus\\library\\.cxx\\cmake\\release\\x86\" {LIST_OF_TARGETS_TO_BUILD}",
+  "libraries": {
+    "native-lib-Release-x86": {
+      "artifactName": "native-lib",
+      "buildCommand": "E:\\Android_development_windows\\android-sdk-windows\\cmake\\3.10.2.4988404\\bin\\ninja.exe -C \"F:\\temp\\android-gpuimage-plus\\library\\.cxx\\cmake\\release\\x86\" native-lib",
+      "abi": "x86",
+      "output": "F:\\temp\\android-gpuimage-plus\\library\\build\\intermediates\\cmake\\release\\obj\\x86\\libnative-lib.so",
+      "runtimeFiles": [
+        "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\..\\libs\\x86\\libffmpeg.so",
+        "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\..\\libs\\x86\\libFaceTracker.so",
+        "E:\\Android_development_windows\\android-sdk-windows\\ndk\\16.1.4479499\\sources\\cxx-stl\\gnu-libstdc++\\4.9\\libs\\x86\\libgnustl_static.a"
+      ]
+    }
+  }
+}

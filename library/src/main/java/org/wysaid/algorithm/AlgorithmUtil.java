@@ -8,10 +8,10 @@ package org.wysaid.algorithm;
  */
 public class AlgorithmUtil {
     public static float getNormalizeScaling(final float x, final float y, final float z) {
-        return (float)(1.0 / Math.sqrt(x*x + y*y + z*z));
+        return (float) (1.0 / Math.sqrt(x * x + y * y + z * z));
     }
 
     public static float getNormalizeScaling(final float x, final float y, final float z, final float w) {
-        return (float)(1.0 / Math.sqrt(x*x + y*y + z*z + w*w));
+        return (float) (1.0 / Math.sqrt(x * x + y * y + z * z + w * w));
     }
 }

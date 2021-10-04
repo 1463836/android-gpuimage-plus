@@ -16,9 +16,9 @@ public class Matrix3x3 {
 
     public static Matrix3x3 makeIdentity() {
         return new Matrix3x3(new float[]{
-            1.0f, 0.0f, 0.0f,
-            0.0f, 1.0f, 0.0f,
-            0.0f, 0.0f, 1.0f
+                1.0f, 0.0f, 0.0f,
+                0.0f, 1.0f, 0.0f,
+                0.0f, 0.0f, 1.0f
         });
     }
 
@@ -29,9 +29,9 @@ public class Matrix3x3 {
         y *= normScaling;
         z *= normScaling;
 
-        final float cosRad = (float)Math.cos(rad);
+        final float cosRad = (float) Math.cos(rad);
         final float cosp = 1.0f - cosRad;
-        final float sinRad = (float)Math.sin(rad);
+        final float sinRad = (float) Math.sin(rad);
 
         return new Matrix3x3(new float[]{
                 cosRad + cosp * x * x,
@@ -47,9 +47,9 @@ public class Matrix3x3 {
     }
 
     public static Matrix3x3 makeXRotation(float rad) {
-        final float cosRad = (float)Math.cos(rad);
-        final float sinRad = (float)Math.sin(rad);
-        return new Matrix3x3(new float[] {
+        final float cosRad = (float) Math.cos(rad);
+        final float sinRad = (float) Math.sin(rad);
+        return new Matrix3x3(new float[]{
                 1.0f, 0.0f, 0.0f,
                 0.0f, cosRad, sinRad,
                 0.0f, -sinRad, cosRad
@@ -57,9 +57,9 @@ public class Matrix3x3 {
     }
 
     public static Matrix3x3 makeYRotation(float rad) {
-        final float cosRad = (float)Math.cos(rad);
-        final float sinRad = (float)Math.sin(rad);
-        return new Matrix3x3(new float[] {
+        final float cosRad = (float) Math.cos(rad);
+        final float sinRad = (float) Math.sin(rad);
+        return new Matrix3x3(new float[]{
                 cosRad, 0.0f, -sinRad,
                 0.0f, 1.0f, 0.0f,
                 sinRad, 0.0f, cosRad
@@ -67,9 +67,9 @@ public class Matrix3x3 {
     }
 
     public static Matrix3x3 makeZRotation(float rad) {
-        final float cosRad = (float)Math.cos(rad);
-        final float sinRad = (float)Math.sin(rad);
-        return new Matrix3x3(new float[] {
+        final float cosRad = (float) Math.cos(rad);
+        final float sinRad = (float) Math.sin(rad);
+        return new Matrix3x3(new float[]{
                 cosRad, sinRad, 0.0f,
                 -sinRad, cosRad, 0.0f,
                 0.0f, 0.0f, 1.0f
@@ -77,7 +77,7 @@ public class Matrix3x3 {
     }
 
     protected static float[] _mul(float[] d1, float[] d2) {
-        return new float[] {
+        return new float[]{
                 d1[0] * d2[0] + d1[3] * d2[1] + d1[6] * d2[2],
                 d1[1] * d2[0] + d1[4] * d2[1] + d1[7] * d2[2],
                 d1[2] * d2[0] + d1[5] * d2[1] + d1[8] * d2[2],

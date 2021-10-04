@@ -72,7 +72,7 @@ public class TextureRendererBlur extends TextureRendererDrawOrigin {
 
     public static TextureRendererBlur create(boolean isExternalOES) {
         TextureRendererBlur renderer = new TextureRendererBlur();
-        if(!renderer.init(isExternalOES)) {
+        if (!renderer.init(isExternalOES)) {
             renderer.release();
             return null;
         }
@@ -95,7 +95,7 @@ public class TextureRendererBlur extends TextureRendererDrawOrigin {
         mProgramDrawCache = new ProgramObject();
         mProgramDrawCache.bindAttribLocation(POSITION_NAME, 0);
 
-        if(!mProgramDrawCache.init(vshBlurCache, fshBlurExtOES)) {
+        if (!mProgramDrawCache.init(vshBlurCache, fshBlurExtOES)) {
             Log.e(LOG_TAG, "blur filter program init failed - 1...");
             return false;
         }
@@ -106,7 +106,7 @@ public class TextureRendererBlur extends TextureRendererDrawOrigin {
         mProgram = new ProgramObject();
         mProgram.bindAttribLocation(POSITION_NAME, 0);
 
-        if(!mProgram.init(vshBlur, fshBlurTex2D)) {
+        if (!mProgram.init(vshBlur, fshBlurTex2D)) {
             Log.e(LOG_TAG, "blur filter program init failed - 2...");
             return false;
         }
@@ -120,7 +120,7 @@ public class TextureRendererBlur extends TextureRendererDrawOrigin {
 
     @Override
     public void release() {
-        if(mProgramDrawCache != mProgram)
+        if (mProgramDrawCache != mProgram)
             mProgramDrawCache.release();
         super.release();
         GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER, 0);
@@ -134,7 +134,7 @@ public class TextureRendererBlur extends TextureRendererDrawOrigin {
     @Override
     public void renderTexture(int texID, Viewport viewport) {
 
-        if(mTexCache == 0 || mCacheTexWidth != mTextureWidth || mCacheTexHeight != mTextureHeight) {
+        if (mTexCache == 0 || mCacheTexWidth != mTextureWidth || mCacheTexHeight != mTextureHeight) {
             resetCacheTexture();
         }
 
@@ -154,7 +154,7 @@ public class TextureRendererBlur extends TextureRendererDrawOrigin {
 
         GLES20.glDrawArrays(DRAW_FUNCTION, 0, 4);
 
-        if(viewport != null)
+        if (viewport != null)
             GLES20.glViewport(viewport.x, viewport.y, viewport.width, viewport.height);
 
         mProgram.bind();
@@ -184,8 +184,7 @@ public class TextureRendererBlur extends TextureRendererDrawOrigin {
         Log.i(LOG_TAG, "resetCacheTexture...");
         mCacheTexWidth = mTextureWidth;
         mCacheTexHeight = mTextureHeight;
-        if(mTexCache == 0)
-        {
+        if (mTexCache == 0) {
             int[] texCache = new int[1];
             GLES20.glGenTextures(1, texCache, 0);
             mTexCache = texCache[0];

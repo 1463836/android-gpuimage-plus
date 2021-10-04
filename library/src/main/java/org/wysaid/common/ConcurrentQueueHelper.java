@@ -30,7 +30,7 @@ public class ConcurrentQueueHelper {
 
             do {
                 runnable = mQueue.poll();
-                if(runnable != null)
+                if (runnable != null)
                     runnable.run();
             } while (runnable != null);
         } catch (Throwable throwable) {
@@ -49,7 +49,7 @@ public class ConcurrentQueueHelper {
 
             do {
                 runnable = mQueue.poll();
-                if(runnable != null)
+                if (runnable != null)
                     runnable.run();
             } while (runnable != null);
         } catch (Throwable throwable) {

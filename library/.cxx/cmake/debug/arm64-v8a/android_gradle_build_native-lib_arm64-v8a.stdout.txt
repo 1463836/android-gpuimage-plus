@@ -1,0 +1,84 @@
+ninja: Entering directory `F:\temp\android-gpuimage-plus\library\.cxx\cmake\debug\arm64-v8a'
+[1/71] Building CXX object CMakeFiles/native-lib.dir/cge/common/Global.cpp.o
+[2/71] Building CXX object CMakeFiles/native-lib.dir/cge/common/ShaderFunctions.cpp.o
+[3/71] Building CXX object CMakeFiles/native-lib.dir/cge/filters/ColorBalanceAdjust.cpp.o
+[4/71] Building CXX object CMakeFiles/native-lib.dir/cge/common/ImageFilter.cpp.o
+[5/71] Building CXX object CMakeFiles/native-lib.dir/cge/common/TextureUtils.cpp.o
+[6/71] Building CXX object CMakeFiles/native-lib.dir/cge/common/ImageHandler.cpp.o
+[7/71] Building CXX object CMakeFiles/native-lib.dir/cge/filters/AdvancedEffectsCommon.cpp.o
+[8/71] Building CXX object CMakeFiles/native-lib.dir/cge/filters/BlendFilter.cpp.o
+[9/71] Building CXX object CMakeFiles/native-lib.dir/cge/filters/AdvancedEffects.cpp.o
+[10/71] Building CXX object CMakeFiles/native-lib.dir/cge/filters/BrightnessAdjust.cpp.o
+[11/71] Building CXX object CMakeFiles/native-lib.dir/cge/filters/CrosshatchFilter.cpp.o
+[12/71] Building CXX object CMakeFiles/native-lib.dir/cge/filters/BilateralBlurFilter.cpp.o
+[13/71] Building CXX object CMakeFiles/native-lib.dir/cge/filters/BeautifyFilter.cpp.o
+[14/71] Building CXX object CMakeFiles/native-lib.dir/cge/filters/DynamicWaveFilter.cpp.o
+[15/71] Building CXX object CMakeFiles/native-lib.dir/cge/filters/ContrastAdjust.cpp.o
+[16/71] Building CXX object CMakeFiles/native-lib.dir/cge/filters/ColorLevelAdjust.cpp.o
+[17/71] Building CXX object CMakeFiles/native-lib.dir/cge/filters/ColorMappingFilter.cpp.o
+[18/71] Building CXX object CMakeFiles/native-lib.dir/cge/filters/CurveAdjust.cpp.o
+[19/71] Building CXX object CMakeFiles/native-lib.dir/cge/filters/DynamicFilters.cpp.o
+[20/71] Building CXX object CMakeFiles/native-lib.dir/cge/filters/ExposureAdjust.cpp.o
+[21/71] Building CXX object CMakeFiles/native-lib.dir/cge/filters/DataParsingEngine.cpp.o
+[22/71] Building CXX object CMakeFiles/native-lib.dir/cge/filters/FilterBasic.cpp.o
+[23/71] Building CXX object CMakeFiles/native-lib.dir/cge/filters/EmbossFilter.cpp.o
+[24/71] Building CXX object CMakeFiles/native-lib.dir/cge/filters/HazeFilter.cpp.o
+[25/71] Building CXX object CMakeFiles/native-lib.dir/cge/filters/HueAdjust.cpp.o
+[26/71] Building CXX object CMakeFiles/native-lib.dir/cge/filters/EdgeFilter.cpp.o
+[27/71] Building CXX object CMakeFiles/native-lib.dir/cge/filters/LookupFilter.cpp.o
+[28/71] Building CXX object CMakeFiles/native-lib.dir/cge/filters/HalftoneFilter.cpp.o
+[29/71] Building CXX object CMakeFiles/native-lib.dir/cge/filters/LerpblurFilter.cpp.o
+[30/71] Building CXX object CMakeFiles/native-lib.dir/cge/filters/MaxValueFilter.cpp.o
+[31/71] Building CXX object CMakeFiles/native-lib.dir/cge/filters/MidValueFilter.cpp.o
+[32/71] Building CXX object CMakeFiles/native-lib.dir/cge/filters/LiquifyFilter.cpp.o
+[33/71] Building CXX object CMakeFiles/native-lib.dir/cge/filters/MultipleEffectsCommon.cpp.o
+F:/temp/android-gpuimage-plus/library/src/main/cpp/cge/filters/MultipleEffectsCommon.cpp:778:25: warning: flag ' ' results in undefined behavior with 's' conversion specifier [-Wformat]
+        sprintf(buffer, s_fshColorMul, p1, p2);
+                        ^~~~~~~~~~~~~
+F:/temp/android-gpuimage-plus/library/src/main/cpp/cge/filters/MultipleEffectsCommon.cpp:737:39: note: format string is defined here
+static CGEConstString s_fshColorMul = CGE_SHADER_STRING_PRECISION_M
+                                      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+F:/temp/android-gpuimage-plus/library/src/main/cpp/include/CommonDefine.h:84:70: note: expanded from macro 'CGE_SHADER_STRING_PRECISION_M'
+#define CGE_SHADER_STRING_PRECISION_M(...) CGE_GLES_ATTACH_STRING_M  #__VA_ARGS__
+                                                                     ^
+<scratch space>:11:80: note: expanded from here
+"varying vec2 textureCoordinate; uniform sampler2D inputImageTexture; uniform % s cmul; void main() { vec4 src = texture2D(inputImageTexture, textureCoordinate); src.rgb *= cmul; %s; gl_FragColor = vec4(src.rgb, src.a); }"
+                                                                              ~^~
+1 warning generated.
+[34/71] Building CXX object CMakeFiles/native-lib.dir/cge/filters/PolarPixellateFilter.cpp.o
+[35/71] Building CXX object CMakeFiles/native-lib.dir/cge/filters/MosaicBlurFilter.cpp.o
+[36/71] Building CXX object CMakeFiles/native-lib.dir/cge/filters/MinValueFilter.cpp.o
+[37/71] Building CXX object CMakeFiles/native-lib.dir/cge/filters/MonochromeAdjust.cpp.o
+[38/71] Building CXX object CMakeFiles/native-lib.dir/cge/filters/MotionFlowFilter.cpp.o
+[39/71] Building CXX object CMakeFiles/native-lib.dir/cge/common/GLFunctions.cpp.o
+[40/71] Building CXX object CMakeFiles/native-lib.dir/cge/filters/MultipleEffects.cpp.o
+[41/71] Building CXX object CMakeFiles/native-lib.dir/cge/filters/PolkaDotFilter.cpp.o
+[42/71] Building CXX object CMakeFiles/native-lib.dir/cge/common/CommonDefine.cpp.o
+[43/71] Building CXX object CMakeFiles/native-lib.dir/cge/filters/SaturationAdjust.cpp.o
+[44/71] Building CXX object CMakeFiles/native-lib.dir/cge/filters/SketchFilter.cpp.o
+[45/71] Building CXX object CMakeFiles/native-lib.dir/cge/filters/SharpenBlurAdjust.cpp.o
+[46/71] Building CXX object CMakeFiles/native-lib.dir/cge/filters/TiltshiftAdjust.cpp.o
+[47/71] Building CXX object CMakeFiles/native-lib.dir/cge/filters/ShadowHighlightAdjust.cpp.o
+[48/71] Building CXX object CMakeFiles/native-lib.dir/cge/filters/RandomBlurFilter.cpp.o
+[49/71] Building CXX object CMakeFiles/native-lib.dir/cge/filters/SelectiveColorAdjust.cpp.o
+[50/71] Building CXX object CMakeFiles/native-lib.dir/cge/filters/VignetteAdjust.cpp.o
+[51/71] Building CXX object CMakeFiles/native-lib.dir/cge/filters/WhiteBalanceAdjust.cpp.o
+[52/71] Building CXX object CMakeFiles/native-lib.dir/interface/DeformFilterWrapper.cpp.o
+[53/71] Building CXX object CMakeFiles/native-lib.dir/interface/SharedGLContext.cpp.o
+[54/71] Building CXX object CMakeFiles/native-lib.dir/interface/ImageHandlerWrapper.cpp.o
+[55/71] Building CXX object CMakeFiles/native-lib.dir/interface/FrameRenderer.cpp.o
+[56/71] Building CXX object CMakeFiles/native-lib.dir/interface/NativeLibrary.cpp.o
+[57/71] Building CXX object CMakeFiles/native-lib.dir/interface/VideoEncoder.cpp.o
+[58/71] Building CXX object CMakeFiles/native-lib.dir/interface/ImageHandlerAndroid.cpp.o
+[59/71] Building CXX object CMakeFiles/native-lib.dir/interface/FrameRecorder.cpp.o
+[60/71] Building CXX object CMakeFiles/native-lib.dir/interface/FrameRecorderWrapper.cpp.o
+F:/temp/android-gpuimage-plus/library/src/main/cpp/interface/FrameRecorderWrapper.cpp:185:34: warning: inequality comparison result unused [-Wunused-comparison]
+     recorder->getGlobalFilter() != nullptr;
+     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~
+1 warning generated.
+[61/71] Building CXX object CMakeFiles/native-lib.dir/interface/UtilFunctions.cpp.o
+[62/71] Building CXX object CMakeFiles/native-lib.dir/source/CustomFilterWrapper.cpp.o
+[63/71] Building CXX object CMakeFiles/native-lib.dir/source/customHelper.cpp.o
+[64/71] Building CXX object CMakeFiles/native-lib.dir/interface/FrameRendererWrapper.cpp.o
+[65/71] Building CXX object CMakeFiles/native-lib.dir/source/customFilter_0.cpp.o
+[66/71] Building CXX object CMakeFiles/native-li

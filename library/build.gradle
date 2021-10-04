@@ -5,37 +5,66 @@ android {
 
     defaultConfig {
         minSdkVersion 14
-        targetSdkVersion 22
+        targetSdkVersion 30
         versionCode 1
         versionName "2.4.6"
 
-        ndk {
-            moduleName "CGE"
+        externalNativeBuild {
+            cmake {
+//                arguments '-DANDROID_PLATFORM=android-14', '-DANDROID_TOOLCHAIN=clang', '-DANDROID_STL=c++_static'
+                cppFlags "-fPIC -frtti -fexceptions -std=c++11"
+                abiFilters 'armeabi-v7a' ,'arm64-v8a','x86'
+            }
+        }
+
+//        ndk {
+//            moduleName "CGE"
 //            cFlags "-std=c++11 -DANDROID_NDK -DDEBUG -D_CGE_ONLY_FILTERS_ -D_CGE_STATIC_ASSERT_ -DCGE_TEXTURE_PREMULTIPLIED=1 -DCGE_LOG_TAG=\\\"libCGE\\\" -I${project.buildDir}/../src/main/jni/include -I${project.buildDir}/../src/main/jni/include/filters"
 //            stl "gnustl_shared"
 ////            abiFilters "all"
 //            abiFilters "armeabi", "armeabi-v7a"
 //            ldLibs "log", "android", "EGL", "GLESv2", "jnigraphics"
-        }
+//        }
 
     }
+
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+        debug {
+            manifestPlaceholders CGE_NDK_DIR: 'E:\\\\android_development_windows\\\\android-sdk-windows\\\\ndk\\\\16.1.4479499'
+            matchingFallbacks = []
+        }
     }
 
-    ////////////////////////////////////////
 
     sourceSets.main {
         jniLibs.srcDir 'src/main/libs' //set libs as .so's location instead of jni
         jni.srcDirs = [] //disable automatic ndk-build call with auto-generated Android.mk file
     }
 
+    externalNativeBuild {
+        cmake {
+            path file('src/main/cpp/CMakeLists.txt')
+        }
+    }
+
+    packagingOptions {
+        // pickFirsts:当出现重复文件，会使用第一个匹配的文件打包进入apk
+        pickFirst 'lib/armeabi-v7a/libffmpeg.so'
+        pickFirst 'lib/armeabi-v7a/libFaceTracker.so'
+
+        pickFirst 'lib/arm64-v8a/libffmpeg.so'
+        pickFirst 'lib/arm64-v8a/libFaceTracker.so'
+
+        pickFirst 'lib/x86/libffmpeg.so'
+        pickFirst 'lib/x86/libFaceTracker.so'
+    }
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:appcompat-v7:25.2.0'
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.android.support:appcompat-v7:25.2.0'
 }

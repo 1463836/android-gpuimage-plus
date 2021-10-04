@@ -53,7 +53,7 @@ public class ImageUtil extends FileUtil {
 
     public static FaceRects findFaceByBitmap(Bitmap bmp, int maxFaces) {
 
-        if(bmp == null) {
+        if (bmp == null) {
             Log.e(LOG_TAG, "Invalid Bitmap for Face Detection!");
             return null;
         }
@@ -61,7 +61,7 @@ public class ImageUtil extends FileUtil {
         Bitmap newBitmap = bmp;
 
         //人脸检测API 仅支持 RGB_565 格式当图像. (for now)
-        if(newBitmap.getConfig() != Bitmap.Config.RGB_565) {
+        if (newBitmap.getConfig() != Bitmap.Config.RGB_565) {
             newBitmap = newBitmap.copy(Bitmap.Config.RGB_565, false);
         }
 
@@ -77,12 +77,11 @@ public class ImageUtil extends FileUtil {
         }
 
 
-        if(newBitmap != bmp) {
+        if (newBitmap != bmp) {
             newBitmap.recycle();
         }
         return rects;
     }
-
 
 
 }

@@ -43,7 +43,7 @@ public class CGEFaceTracker {
 
     public static CGEFaceTracker createFaceTracker() {
 
-        if(!sIsTrackerSetup) {
+        if (!sIsTrackerSetup) {
             nativeSetupTracker(null, null, null);
             sIsTrackerSetup = true;
         }
@@ -52,7 +52,7 @@ public class CGEFaceTracker {
     }
 
     public void release() {
-        if(mNativeAddress != 0) {
+        if (mNativeAddress != 0) {
             nativeRelease(mNativeAddress);
             mNativeAddress = 0;
         }
@@ -112,7 +112,7 @@ public class CGEFaceTracker {
     public FaceResultSimple detectFaceWithSimpleResult(Bitmap bmp, boolean drawFeature) {
         float[] result = nativeDetectFaceWithSimpleResult(mNativeAddress, bmp, drawFeature);
 
-        if(result == null) {
+        if (result == null) {
             return null;
         }
 
@@ -160,7 +160,9 @@ public class CGEFaceTracker {
 
     //non-static
     protected native long nativeCreateFaceTracker();
+
     protected native void nativeRelease(long addr);
+
     protected native float[] nativeDetectFaceWithSimpleResult(long addr, Bitmap bmp, boolean drawFeature);
 
     protected native boolean nativeDetectFaceWithBuffer(long addr, ByteBuffer buffer, int w, int h, int channel, int bytesPerRow, FloatBuffer outputBuffer);

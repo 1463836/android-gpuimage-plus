@@ -31,8 +31,7 @@ public class TextureDrawerNV21ToRGB extends TextureDrawerCodec {
 
     public static TextureDrawerNV21ToRGB create() {
         TextureDrawerNV21ToRGB drawer = new TextureDrawerNV21ToRGB();
-        if(!drawer.init(vshDrawer, fshNV21ToRGB))
-        {
+        if (!drawer.init(vshDrawer, fshNV21ToRGB)) {
             Log.e(Common.LOG_TAG, "TextureDrawerNV21ToRGB create failed!");
             drawer.release();
             drawer = null;
@@ -43,7 +42,7 @@ public class TextureDrawerNV21ToRGB extends TextureDrawerCodec {
     @Override
     protected boolean init(String vsh, String fsh) {
 
-        if(super.init(vsh, fsh)) {
+        if (super.init(vsh, fsh)) {
             mProgram.bind();
             mProgram.sendUniformi("textureUV", 1);
             mProgram.sendUniformMat3(COLOR_CONVERSION_NAME, 1, false, MATRIX_YUV2RGB);

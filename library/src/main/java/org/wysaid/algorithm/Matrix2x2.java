@@ -19,13 +19,13 @@ public class Matrix2x2 {
     }
 
     public static Matrix2x2 makeRotation(float rad) {
-        final float cosRad = (float)Math.cos(rad);
-        final float sinRad = (float)Math.sin(rad);
+        final float cosRad = (float) Math.cos(rad);
+        final float sinRad = (float) Math.sin(rad);
         return new Matrix2x2(new float[]{cosRad, sinRad, -sinRad, cosRad});
     }
 
     protected static float[] _mul(float[] d1, float[] d2) {
-        return new float[] {
+        return new float[]{
                 d1[0] * d2[0] + d1[2] * d2[1],
                 d1[1] * d2[0] + d1[3] * d2[1],
                 d1[0] * d2[2] + d1[2] * d2[3],

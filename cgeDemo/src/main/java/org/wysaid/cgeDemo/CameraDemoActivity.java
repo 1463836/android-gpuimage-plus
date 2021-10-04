@@ -27,9 +27,9 @@ public class CameraDemoActivity extends AppCompatActivity {
 
     public static String lastVideoPathFileName = FileUtil.getPath() + "/lastVideoPath.txt";
 
-    private String mCurrentConfig;
+    private String currentConfig;
 
-    private CameraRecordGLSurfaceView mCameraView;
+    private CameraRecordGLSurfaceView cameraView;
 
     public final static String LOG_TAG = CameraRecordGLSurfaceView.LOG_TAG;
 
@@ -40,7 +40,7 @@ public class CameraDemoActivity extends AppCompatActivity {
     }
 
     private void showText(final String s) {
-        mCameraView.post(new Runnable() {
+        cameraView.post(new Runnable() {
             @Override
             public void run() {
                 MsgUtil.toastMsg(CameraDemoActivity.this, s);
@@ -48,7 +48,7 @@ public class CameraDemoActivity extends AppCompatActivity {
         });
     }
 
-    public static class MyButtons extends Button {
+    public static class MyButtons extends android.support.v7.widget.AppCompatButton {
 
         public String filterConfig;
 
@@ -74,12 +74,12 @@ public class CameraDemoActivity extends AppCompatActivity {
 
             isValid = false;
 
-            if (!mCameraView.isRecording()) {
+            if (!cameraView.isRecording()) {
                 btn.setText("Recording");
                 Log.i(LOG_TAG, "Start recording...");
-                recordFilename = ImageUtil.getPath() + "/rec_" + System.currentTimeMillis() + ".mp4";
+                recordFilename = ImageUtil.getPath() + "/record.mp4";
 //                recordFilename = ImageUtil.getPath(CameraDemoActivity.this, false) + "/rec_1.mp4";
-                mCameraView.startRecording(recordFilename, new CameraRecordGLSurfaceView.StartRecordingCallback() {
+                cameraView.startRecording(recordFilename, new CameraRecordGLSurfaceView.StartRecordingCallback() {
                     @Override
                     public void startRecordingOver(boolean success) {
                         if (success) {
@@ -96,7 +96,7 @@ public class CameraDemoActivity extends AppCompatActivity {
                 showText("Recorded as: " + recordFilename);
                 btn.setText("Recorded");
                 Log.i(LOG_TAG, "End recording...");
-                mCameraView.endRecording(new CameraRecordGLSurfaceView.EndRecordingCallback() {
+                cameraView.endRecording(new CameraRecordGLSurfaceView.EndRecordingCallback() {
                     @Override
                     public void endRecordingOK() {
                         Log.i(LOG_TAG, "End recording OK");
@@ -117,8 +117,8 @@ public class CameraDemoActivity extends AppCompatActivity {
         Button takePicBtn = (Button) findViewById(R.id.takePicBtn);
         Button takeShotBtn = (Button) findViewById(R.id.takeShotBtn);
         Button recordBtn = (Button) findViewById(R.id.recordBtn);
-        mCameraView = (CameraRecordGLSurfaceView) findViewById(R.id.myGLSurfaceView);
-        mCameraView.presetCameraForward(false);
+        cameraView = (CameraRecordGLSurfaceView) findViewById(R.id.myGLSurfaceView);
+        cameraView.presetCameraForward(false);
         SeekBar seekBar = (SeekBar) findViewById(R.id.globalRestoreSeekBar);
 
         takePicBtn.setOnClickListener(new View.OnClickListener() {
@@ -126,7 +126,7 @@ public class CameraDemoActivity extends AppCompatActivity {
             public void onClick(View v) {
                 showText("Taking Picture...");
 
-                mCameraView.takePicture(new CameraRecordGLSurfaceView.TakePictureCallback() {
+                cameraView.takePicture(new CameraRecordGLSurfaceView.TakePictureCallback() {
                     @Override
                     public void takePictureOK(Bitmap bmp) {
                         if (bmp != null) {
@@ -137,7 +137,7 @@ public class CameraDemoActivity extends AppCompatActivity {
                         } else
                             showText("Take picture failed!");
                     }
-                }, null, mCurrentConfig, 1.0f, true);
+                }, null, currentConfig, 1.0f, true);
             }
         });
 
@@ -147,7 +147,7 @@ public class CameraDemoActivity extends AppCompatActivity {
             public void onClick(View v) {
                 showText("Taking Shot...");
 
-                mCameraView.takeShot(new CameraRecordGLSurfaceView.TakePictureCallback() {
+                cameraView.takeShot(new CameraRecordGLSurfaceView.TakePictureCallback() {
                     @Override
                     public void takePictureOK(Bitmap bmp) {
                         if (bmp != null) {
@@ -173,7 +173,7 @@ public class CameraDemoActivity extends AppCompatActivity {
                 button.setText("None");
             else
                 button.setText("Filter" + i);
-            button.setOnClickListener(mFilterSwitchListener);
+            button.setOnClickListener(filterSwitchListener);
             layout.addView(button);
         }
 
@@ -181,7 +181,7 @@ public class CameraDemoActivity extends AppCompatActivity {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 float intensity = progress / 100.0f;
-                mCameraView.setFilterIntensity(intensity);
+                cameraView.setFilterIntensity(intensity);
             }
 
             @Override
@@ -202,7 +202,7 @@ public class CameraDemoActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                mCameraView.switchCamera();
+                cameraView.switchCamera();
             }
         });
 
@@ -219,22 +219,22 @@ public class CameraDemoActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                mCameraView.setFlashLightMode(flashModes[flashIndex]);
+                cameraView.setFlashLightMode(flashModes[flashIndex]);
                 ++flashIndex;
                 flashIndex %= flashModes.length;
             }
         });
 
         //Recording video size
-        mCameraView.presetRecordingSize(480, 640);
+        cameraView.presetRecordingSize(480, 640);
 //        mCameraView.presetRecordingSize(720, 1280);
 
         //Taking picture size.
-        mCameraView.setPictureSize(2048, 2048, true); // > 4MP
-        mCameraView.setZOrderOnTop(false);
-        mCameraView.setZOrderMediaOverlay(true);
+        cameraView.setPictureSize(2048, 2048, true); // > 4MP
+        cameraView.setZOrderOnTop(false);
+        cameraView.setZOrderMediaOverlay(true);
 
-        mCameraView.setOnCreateCallback(new CameraRecordGLSurfaceView.OnCreateCallback() {
+        cameraView.setOnCreateCallback(new CameraRecordGLSurfaceView.OnCreateCallback() {
             @Override
             public void createOver() {
                 Log.i(LOG_TAG, "view onCreate");
@@ -247,14 +247,14 @@ public class CameraDemoActivity extends AppCompatActivity {
         pauseBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mCameraView.stopPreview();
+                cameraView.stopPreview();
             }
         });
 
         resumeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mCameraView.resumePreview();
+                cameraView.resumePreview();
             }
         });
 
@@ -265,28 +265,28 @@ public class CameraDemoActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 shouldFit = !shouldFit;
-                mCameraView.setFitFullView(shouldFit);
+                cameraView.setFitFullView(shouldFit);
             }
         });
 
-        mCameraView.setOnTouchListener(new View.OnTouchListener() {
+        cameraView.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, final MotionEvent event) {
 
                 switch (event.getActionMasked()) {
                     case MotionEvent.ACTION_DOWN: {
                         Log.i(LOG_TAG, String.format("Tap to focus: %g, %g", event.getX(), event.getY()));
-                        final float focusX = event.getX() / mCameraView.getWidth();
-                        final float focusY = event.getY() / mCameraView.getHeight();
+                        final float focusX = event.getX() / cameraView.getWidth();
+                        final float focusY = event.getY() / cameraView.getHeight();
 
-                        mCameraView.focusAtPoint(focusX, focusY, new Camera.AutoFocusCallback() {
+                        cameraView.focusAtPoint(focusX, focusY, new Camera.AutoFocusCallback() {
                             @Override
                             public void onAutoFocus(boolean success, Camera camera) {
                                 if (success) {
                                     Log.e(LOG_TAG, String.format("Focus OK, pos: %g, %g", focusX, focusY));
                                 } else {
                                     Log.e(LOG_TAG, String.format("Focus failed, pos: %g, %g", focusX, focusY));
-                                    mCameraView.cameraInstance().setFocusMode(Camera.Parameters.FOCUS_MODE_CONTINUOUS_VIDEO);
+                                  CameraInstance.getInstance().setFocusMode(Camera.Parameters.FOCUS_MODE_CONTINUOUS_VIDEO);
                                 }
                             }
                         });
@@ -302,12 +302,12 @@ public class CameraDemoActivity extends AppCompatActivity {
 
     }
 
-    private View.OnClickListener mFilterSwitchListener = new View.OnClickListener() {
+    private View.OnClickListener filterSwitchListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             MyButtons btn = (MyButtons) v;
-            mCameraView.setFilterWithConfig(btn.filterConfig);
-            mCurrentConfig = btn.filterConfig;
+            cameraView.setFilterWithConfig(btn.filterConfig);
+            currentConfig = btn.filterConfig;
         }
     };
 
@@ -316,18 +316,18 @@ public class CameraDemoActivity extends AppCompatActivity {
     public void customFilterClicked(View view) {
         ++customFilterIndex;
         customFilterIndex %= CGENativeLibrary.cgeGetCustomFilterNum();
-        mCameraView.queueEvent(new Runnable() {
+        cameraView.queueEvent(new Runnable() {
             @Override
             public void run() {
                 long customFilter = CGENativeLibrary.cgeCreateCustomNativeFilter(customFilterIndex, 1.0f, true);
-                mCameraView.getRecorder().setNativeFilter(customFilter);
+                cameraView.getRecorder().setNativeFilter(customFilter);
             }
         });
     }
 
     public void dynamicFilterClicked(View view) {
 
-        mCameraView.setFilterWithConfig("#unpack @dynamic mf 10 0");
+        cameraView.setFilterWithConfig("#unpack @dynamic mf 10 0");
 
     }
 
@@ -348,15 +348,15 @@ public class CameraDemoActivity extends AppCompatActivity {
         super.onPause();
         CameraInstance.getInstance().stopCamera();
         Log.i(LOG_TAG, "activity onPause...");
-        mCameraView.release(null);
-        mCameraView.onPause();
+        cameraView.release(null);
+        cameraView.onPause();
     }
 
     @Override
     public void onResume() {
         super.onResume();
 
-        mCameraView.onResume();
+        cameraView.onResume();
     }
 
     @Override

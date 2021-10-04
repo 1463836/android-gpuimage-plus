@@ -25,7 +25,7 @@ public class CGEDeformFilterWrapper {
     //'stride': Set the mesh in real pixels, the mesh size would be (width / stride, height / stride)
     public static CGEDeformFilterWrapper create(int w, int h, float stride) {
         CGEDeformFilterWrapper wrapper = new CGEDeformFilterWrapper(w, h, stride);
-        if(wrapper.mNativeAddress == 0) {
+        if (wrapper.mNativeAddress == 0) {
             wrapper.release(true);
             wrapper = null;
             Log.e(Common.LOG_TAG, "CGEDeformFilterWrapper.create failed!");
@@ -36,8 +36,8 @@ public class CGEDeformFilterWrapper {
     // You should not delete the native filter if the wrapper is binding to the image handler.
     // The handler will release the native filter when necessary.
     public void release(boolean shouldDeleteNativeFilter) {
-        if(mNativeAddress != 0) {
-            if(shouldDeleteNativeFilter) {
+        if (mNativeAddress != 0) {
+            if (shouldDeleteNativeFilter) {
                 nativeRelease(mNativeAddress);
             }
             mNativeAddress = 0;
@@ -115,21 +115,32 @@ public class CGEDeformFilterWrapper {
     }
 
     protected native long nativeCreate(int width, int height, float stride);
+
     protected native void nativeRelease(long holder);
 
     // reset to default.
     protected native void nativeRestore(long holder);
+
     protected native void nativeRestoreWithIntensity(long holder, float intensity);
+
     protected native void nativeForwardDeform(long holder, float startX, float startY, float endX, float endY, float w, float h, float radius, float intensity);
+
     protected native void nativeRestoreWithPoint(long holder, float x, float y, float w, float h, float radius, float intensity);
+
     protected native void nativeBloatDeform(long holder, float x, float y, float w, float h, float radius, float intensity);
+
     protected native void nativeWrinkleDeform(long holder, float x, float y, float w, float h, float radius, float intensity);
 
     protected native void nativeSetUndoSteps(long holder, int undoSteps);
+
     protected native boolean nativeCanUndo(long holder);
+
     protected native boolean nativeCanRedo(long holder);
+
     protected native boolean nativeUndo(long holder);
+
     protected native boolean nativeRedo(long holder);
+
     protected native boolean nativePushDeformStep(long holder);
 
     protected native void nativeShowMesh(long holder, boolean show);

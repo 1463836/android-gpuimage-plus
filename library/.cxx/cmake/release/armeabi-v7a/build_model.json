@@ -1,0 +1,231 @@
+{
+  "abi": "ARMEABI_V7A",
+  "abiPlatformVersion": 14,
+  "buildSettings": {
+    "environmentVariables": []
+  },
+  "cmake": {
+    "cmakeArtifactsBaseFolder": "F:\\temp\\android-gpuimage-plus\\library\\.cxx\\cmake\\release\\armeabi-v7a",
+    "cmakeServerLogFile": "F:\\temp\\android-gpuimage-plus\\library\\.cxx\\cmake\\release\\armeabi-v7a\\cmake_server_log.txt",
+    "cmakeWrappingBaseFolder": "F:\\temp\\android-gpuimage-plus\\library\\.cxx\\cxx\\release\\armeabi-v7a",
+    "effectiveConfiguration": {
+      "name": "traditional-android-studio-cmake-environment",
+      "description": "Composite reified CMakeSettings configuration",
+      "generator": "Ninja",
+      "inheritEnvironments": [
+        "ndk"
+      ],
+      "buildRoot": "F:\\temp\\android-gpuimage-plus\\library\\.cxx\\cmake\\release\\armeabi-v7a",
+      "cmakeToolchain": "E:\\Android_development_windows\\android-sdk-windows\\ndk\\16.1.4479499\\build\\cmake\\android.toolchain.cmake",
+      "cmakeExecutable": "E:\\Android_development_windows\\android-sdk-windows\\cmake\\3.10.2.4988404\\bin\\cmake.exe",
+      "variables": [
+        {
+          "name": "CMAKE_CXX_FLAGS",
+          "value": "-fPIC -frtti -fexceptions -std\u003dc++11"
+        },
+        {
+          "name": "CMAKE_FIND_ROOT_PATH",
+          "value": "F:\\temp\\android-gpuimage-plus\\library\\.cxx\\cmake\\release\\prefab\\armeabi-v7a\\prefab"
+        },
+        {
+          "name": "CMAKE_BUILD_TYPE",
+          "value": "Release"
+        },
+        {
+          "name": "CMAKE_TOOLCHAIN_FILE",
+          "value": "E:\\Android_development_windows\\android-sdk-windows\\ndk\\16.1.4479499\\build\\cmake\\android.toolchain.cmake"
+        },
+        {
+          "name": "ANDROID_ABI",
+          "value": "armeabi-v7a"
+        },
+        {
+          "name": "ANDROID_NDK",
+          "value": "E:\\Android_development_windows\\android-sdk-windows\\ndk\\16.1.4479499"
+        },
+        {
+          "name": "ANDROID_PLATFORM",
+          "value": "android-14"
+        },
+        {
+          "name": "CMAKE_ANDROID_ARCH_ABI",
+          "value": "armeabi-v7a"
+        },
+        {
+          "name": "CMAKE_ANDROID_NDK",
+          "value": "E:\\Android_development_windows\\android-sdk-windows\\ndk\\16.1.4479499"
+        },
+        {
+          "name": "CMAKE_EXPORT_COMPILE_COMMANDS",
+          "value": "ON"
+        },
+        {
+          "name": "CMAKE_LIBRARY_OUTPUT_DIRECTORY",
+          "value": "F:\\temp\\android-gpuimage-plus\\library\\build\\intermediates\\cmake\\release\\obj\\armeabi-v7a"
+        },
+        {
+          "name": "CMAKE_MAKE_PROGRAM",
+          "value": "E:\\Android_development_windows\\android-sdk-windows\\cmake\\3.10.2.4988404\\bin\\ninja.exe"
+        },
+        {
+          "name": "CMAKE_SYSTEM_NAME",
+          "value": "Android"
+        },
+        {
+          "name": "CMAKE_SYSTEM_VERSION",
+          "value": "14"
+        }
+      ]
+    }
+  },
+  "cxxBuildFolder": "F:\\temp\\android-gpuimage-plus\\library\\.cxx\\cmake\\release\\armeabi-v7a",
+  "info": {
+    "abi": "ARMEABI_V7A",
+    "bitness": 32,
+    "deprecated": false,
+    "default": true
+  },
+  "originalCxxBuildFolder": "F:\\temp\\android-gpuimage-plus\\library\\.cxx\\cmake\\release\\armeabi-v7a",
+  "variant": {
+    "buildSystemArgumentList": [],
+    "buildTargetSet": [],
+    "cFlagsList": [],
+    "cmakeSettingsConfiguration": "android-gradle-plugin-predetermined-name",
+    "cppFlagsList": [
+      "-fPIC -frtti -fexceptions -std\u003dc++11"
+    ],
+    "isDebuggableEnabled": false,
+    "module": {
+      "buildSystem": "CMAKE",
+      "cmake": {
+        "cmakeExe": "E:\\Android_development_windows\\android-sdk-windows\\cmake\\3.10.2.4988404\\bin\\cmake.exe",
+        "minimumCmakeVersion": "3.10.2",
+        "ninjaExe": "E:\\Android_development_windows\\android-sdk-windows\\cmake\\3.10.2.4988404\\bin\\ninja.exe"
+      },
+      "cmakeToolchainFile": "E:\\Android_development_windows\\android-sdk-windows\\ndk\\16.1.4479499\\build\\cmake\\android.toolchain.cmake",
+      "cxxFolder": "F:\\temp\\android-gpuimage-plus\\library\\.cxx",
+      "gradleModulePathName": ":library",
+      "intermediatesFolder": "F:\\temp\\android-gpuimage-plus\\library\\build\\intermediates",
+      "makeFile": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\CMakeLists.txt",
+      "moduleBuildFile": "F:\\temp\\android-gpuimage-plus\\library\\build.gradle",
+      "moduleRootFolder": "F:\\temp\\android-gpuimage-plus\\library",
+      "ndkDefaultAbiList": [
+        "ARMEABI_V7A",
+        "ARM64_V8A",
+        "X86",
+        "X86_64"
+      ],
+      "ndkFolder": "E:\\Android_development_windows\\android-sdk-windows\\ndk\\16.1.4479499",
+      "ndkMetaAbiList": [
+        {
+          "abi": "ARMEABI",
+          "bitness": 32,
+          "deprecated": true,
+          "default": false
+        },
+        {
+          "abi": "ARMEABI_V7A",
+          "bitness": 32,
+          "deprecated": false,
+          "default": true
+        },
+        {
+          "abi": "ARM64_V8A",
+          "bitness": 64,
+          "deprecated": false,
+          "default": true
+        },
+        {
+          "abi": "MIPS",
+          "bitness": 32,
+          "deprecated": true,
+          "default": false
+        },
+        {
+          "abi": "MIPS64",
+          "bitness": 64,
+          "deprecated": true,
+          "default": false
+        },
+        {
+          "abi": "X86",
+          "bitness": 32,
+          "deprecated": false,
+          "default": true
+        },
+        {
+          "abi": "X86_64",
+          "bitness": 64,
+          "deprecated": false,
+          "default": true
+        }
+      ],
+      "ndkSupportedAbiList": [
+        "ARMEABI",
+        "ARMEABI_V7A",
+        "ARM64_V8A",
+        "MIPS",
+        "MIPS64",
+        "X86",
+        "X86_64"
+      ],
+      "ndkDefaultStl": "GNUSTL_STATIC",
+      "ndkVersion": "16.1.4479499",
+      "project": {
+        "compilerSettingsCacheFolder": "F:\\temp\\android-gpuimage-plus\\.cxx",
+        "cxxFolder": "F:\\temp\\android-gpuimage-plus\\.cxx",
+        "isBuildOnlyTargetAbiEnabled": true,
+        "isCmakeBuildCohabitationEnabled": false,
+        "isNativeCompilerSettingsCacheEnabled": false,
+        "rootBuildGradleFolder": "F:\\temp\\android-gpuimage-plus",
+        "sdkFolder": "E:\\Android_development_windows\\android-sdk-windows",
+        "isPrefabEnabled": false
+      },
+      "splitsAbiFilterSet": [],
+      "stlSharedObjectMap": {
+        "GNUSTL_SHARED": {
+          "ARMEABI": "E:\\Android_development_windows\\android-sdk-windows\\ndk\\16.1.4479499\\sources\\cxx-stl\\gnu-libstdc++\\4.9\\libs\\armeabi\\libgnustl_shared.so",
+          "ARMEABI_V7A": "E:\\Android_development_windows\\android-sdk-windows\\ndk\\16.1.4479499\\sources\\cxx-stl\\gnu-libstdc++\\4.9\\libs\\armeabi-v7a\\libgnustl_shared.so",
+          "ARM64_V8A": "E:\\Android_development_windows\\android-sdk-windows\\ndk\\16.1.4479499\\sources\\cxx-stl\\gnu-libstdc++\\4.9\\libs\\arm64-v8a\\libgnustl_shared.so",
+          "MIPS": "E:\\Android_development_windows\\android-sdk-windows\\ndk\\16.1.4479499\\sources\\cxx-stl\\gnu-libstdc++\\4.9\\libs\\mips\\libgnustl_shared.so",
+          "MIPS64": "E:\\Android_development_windows\\android-sdk-windows\\ndk\\16.1.4479499\\sources\\cxx-stl\\gnu-libstdc++\\4.9\\libs\\mips64\\libgnustl_shared.so",
+          "X86": "E:\\Android_development_windows\\android-sdk-windows\\ndk\\16.1.4479499\\sources\\cxx-stl\\gnu-libstdc++\\4.9\\libs\\x86\\libgnustl_shared.so",
+          "X86_64": "E:\\Android_development_windows\\android-sdk-windows\\ndk\\16.1.4479499\\sources\\cxx-stl\\gnu-libstdc++\\4.9\\libs\\x86_64\\libgnustl_shared.so"
+        },
+        "GNUSTL_STATIC": {},
+        "LIBCXX_SHARED": {
+          "ARMEABI": "E:\\Android_development_windows\\android-sdk-windows\\ndk\\16.1.4479499\\sources\\cxx-stl\\llvm-libc++\\libs\\armeabi\\libc++_shared.so",
+          "ARMEABI_V7A": "E:\\Android_development_windows\\android-sdk-windows\\ndk\\16.1.4479499\\sources\\cxx-stl\\llvm-libc++\\libs\\armeabi-v7a\\libc++_shared.so",
+          "ARM64_V8A": "E:\\Android_development_windows\\android-sdk-windows\\ndk\\16.1.4479499\\sources\\cxx-stl\\llvm-libc++\\libs\\arm64-v8a\\libc++_shared.so",
+          "MIPS": "E:\\Android_development_windows\\android-sdk-windows\\ndk\\16.1.4479499\\sources\\cxx-stl\\llvm-libc++\\libs\\mips\\libc++_shared.so",
+          "MIPS64": "E:\\Android_development_windows\\android-sdk-windows\\ndk\\16.1.4479499\\sources\\cxx-stl\\llvm-libc++\\libs\\mips64\\libc++_shared.so",
+          "X86": "E:\\Android_development_windows\\android-sdk-windows\\ndk\\16.1.4479499\\sources\\cxx-stl\\llvm-libc++\\libs\\x86\\libc++_shared.so",
+          "X86_64": "E:\\Android_development_windows\\android-sdk-windows\\ndk\\16.1.4479499\\sources\\cxx-stl\\llvm-libc++\\libs\\x86_64\\libc++_shared.so"
+        },
+        "LIBCXX_STATIC": {},
+        "NONE": {},
+        "STLPORT_SHARED": {
+          "ARMEABI": "E:\\Android_development_windows\\android-sdk-windows\\ndk\\16.1.4479499\\sources\\cxx-stl\\stlport\\libs\\armeabi\\libstlport_shared.so",
+          "ARMEABI_V7A": "E:\\Android_development_windows\\android-sdk-windows\\ndk\\16.1.4479499\\sources\\cxx-stl\\stlport\\libs\\armeabi-v7a\\libstlport_shared.so",
+          "ARM64_V8A": "E:\\Android_development_windows\\android-sdk-windows\\ndk\\16.1.4479499\\sources\\cxx-stl\\stlport\\libs\\arm64-v8a\\libstlport_shared.so",
+          "MIPS": "E:\\Android_development_windows\\android-sdk-windows\\ndk\\16.1.4479499\\sources\\cxx-stl\\stlport\\libs\\mips\\libstlport_shared.so",
+          "MIPS64": "E:\\Android_development_windows\\android-sdk-windows\\ndk\\16.1.4479499\\sources\\cxx-stl\\stlport\\libs\\mips64\\libstlport_shared.so",
+          "X86": "E:\\Android_development_windows\\android-sdk-windows\\ndk\\16.1.4479499\\sources\\cxx-stl\\stlport\\libs\\x86\\libstlport_shared.so",
+          "X86_64": "E:\\Android_development_windows\\android-sdk-windows\\ndk\\16.1.4479499\\sources\\cxx-stl\\stlport\\libs\\x86_64\\libstlport_shared.so"
+        },
+        "STLPORT_STATIC": {},
+        "SYSTEM": {}
+      }
+    },
+    "objFolder": "F:\\temp\\android-gpuimage-plus\\library\\build\\intermediates\\cmake\\release\\obj",
+    "variantName": "release",
+    "validAbiList": [
+      "ARMEABI_V7A",
+      "ARM64_V8A",
+      "X86"
+    ],
+    "prefabDirectory": "F:\\temp\\android-gpuimage-plus\\library\\.cxx\\cmake\\release\\prefab",
+    "prefabPackageDirectoryList": []
+  },
+  "prefabFolder": "F:\\temp\\android-gpuimage-plus\\library\\.cxx\\cmake\\release\\prefab\\armeabi-v7a"
+}

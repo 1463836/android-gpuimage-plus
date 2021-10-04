@@ -148,7 +148,7 @@ public class MultiInputDemo extends CameraRecordGLSurfaceView {
                 initResourceList();
                 mWrapper = CGEMultiInputFilterWrapper.create(VSH, FSH);
                 if(mWrapper != null) {
-                    mFrameRecorder.setNativeFilter(mWrapper.getNativeAddress());
+                    frameRecorder.setNativeFilter(mWrapper.getNativeAddress());
                 }
             }
         });

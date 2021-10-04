@@ -26,8 +26,8 @@ public class CameraInstance {
 
     private static final String ASSERT_MSG = "检测到CameraDevice 为 null! 请检查";
 
-    private Camera mCameraDevice;
-    private Camera.Parameters mParams;
+    private Camera camera;
+    private Camera.Parameters parameters;
 
     public static final int DEFAULT_PREVIEW_RATE = 30;
 
@@ -37,36 +37,50 @@ public class CameraInstance {
     private int mDefaultCameraID = -1;
 
     private static CameraInstance mThisInstance;
-    private int mPreviewWidth;
-    private int mPreviewHeight;
+    private int previewWidth;
+    private int previewHeight;
 
-    private int mPictureWidth = 1000;
-    private int mPictureHeight = 1000;
+    private int pictureWidth = 1000;
+    private int pictureHeight = 1000;
 
-    private int mPreferPreviewWidth = 640;
-    private int mPreferPreviewHeight = 640;
+    private int preferPreviewWidth = 640;
+    private int preferPreviewHeight = 640;
 
     private int mFacing = 0;
 
-    private CameraInstance() {}
+    private CameraInstance() {
+    }
 
     public static synchronized CameraInstance getInstance() {
-        if(mThisInstance == null) {
+        if (mThisInstance == null) {
             mThisInstance = new CameraInstance();
         }
         return mThisInstance;
     }
 
-    public boolean isPreviewing() { return mIsPreviewing; }
+    public boolean isPreviewing() {
+        return mIsPreviewing;
+    }
 
-    public int previewWidth() { return mPreviewWidth; }
-    public int previewHeight() { return mPreviewHeight; }
-    public int pictureWidth() { return mPictureWidth; }
-    public int pictureHeight() { return mPictureHeight; }
+    public int previewWidth() {
+        return previewWidth;
+    }
+
+    public int previewHeight() {
+        return previewHeight;
+    }
+
+    public int pictureWidth() {
+        return pictureWidth;
+    }
+
+    public int pictureHeight() {
+        return pictureHeight;
+    }
 
     public void setPreferPreviewSize(int w, int h) {
-        mPreferPreviewHeight = w;
-        mPreferPreviewWidth = h;
+        preferPreviewHeight = w;
+        preferPreviewWidth = h;
     }
 
     public interface CameraOpenCallback {
@@ -84,10 +98,8 @@ public class CameraInstance {
     public synchronized boolean tryOpenCamera(CameraOpenCallback callback, int facing) {
         Log.i(LOG_TAG, "try open camera...");
 
-        try
-        {
-            if(Build.VERSION.SDK_INT > Build.VERSION_CODES.FROYO)
-            {
+        try {
+            if (Build.VERSION.SDK_INT > Build.VERSION_CODES.FROYO) {
                 int numberOfCameras = Camera.getNumberOfCameras();
 
                 Camera.CameraInfo cameraInfo = new Camera.CameraInfo();
@@ -101,33 +113,30 @@ public class CameraInstance {
                 }
             }
             stopPreview();
-            if(mCameraDevice != null)
-                mCameraDevice.release();
+            if (camera != null)
+                camera.release();
 
-            if(mDefaultCameraID >= 0) {
-                mCameraDevice = Camera.open(mDefaultCameraID);
-            }
-            else {
-                mCameraDevice = Camera.open();
+            if (mDefaultCameraID >= 0) {
+                camera = Camera.open(mDefaultCameraID);
+            } else {
+                camera = Camera.open();
                 mFacing = Camera.CameraInfo.CAMERA_FACING_BACK; //default: back facing
             }
-        }
-        catch(Exception e)
-        {
+        } catch (Exception e) {
             Log.e(LOG_TAG, "Open Camera Failed!");
             e.printStackTrace();
-            mCameraDevice = null;
+            camera = null;
             return false;
         }
 
-        if(mCameraDevice != null) {
+        if (camera != null) {
             Log.i(LOG_TAG, "Camera opened!");
 
             try {
                 initCamera(DEFAULT_PREVIEW_RATE);
             } catch (Exception e) {
-                mCameraDevice.release();
-                mCameraDevice = null;
+                camera.release();
+                camera = null;
                 return false;
             }
 
@@ -142,37 +151,37 @@ public class CameraInstance {
     }
 
     public synchronized void stopCamera() {
-        if(mCameraDevice != null) {
+        if (camera != null) {
             mIsPreviewing = false;
-            mCameraDevice.stopPreview();
-            mCameraDevice.setPreviewCallback(null);
-            mCameraDevice.release();
-            mCameraDevice = null;
+            camera.stopPreview();
+            camera.setPreviewCallback(null);
+            camera.release();
+            camera = null;
         }
     }
 
     public boolean isCameraOpened() {
-        return mCameraDevice != null;
+        return camera != null;
     }
 
     public synchronized void startPreview(SurfaceTexture texture, Camera.PreviewCallback callback) {
         Log.i(LOG_TAG, "Camera startPreview...");
-        if(mIsPreviewing) {
+        if (mIsPreviewing) {
             Log.e(LOG_TAG, "Err: camera is previewing...");
-            return ;
+            return;
         }
 
-        if(mCameraDevice != null) {
+        if (camera != null) {
             try {
-                mCameraDevice.setPreviewTexture(texture);
+                camera.setPreviewTexture(texture);
 //                mCameraDevice.addCallbackBuffer(callbackBuffer);
 //                mCameraDevice.setPreviewCallbackWithBuffer(callback);
-                mCameraDevice.setPreviewCallbackWithBuffer(callback);
+                camera.setPreviewCallbackWithBuffer(callback);
             } catch (IOException e) {
                 e.printStackTrace();
             }
 
-            mCameraDevice.startPreview();
+            camera.startPreview();
             mIsPreviewing = true;
         }
     }
@@ -186,30 +195,30 @@ public class CameraInstance {
     }
 
     public synchronized void stopPreview() {
-        if(mIsPreviewing && mCameraDevice != null) {
+        if (mIsPreviewing && camera != null) {
             Log.i(LOG_TAG, "Camera stopPreview...");
             mIsPreviewing = false;
-            mCameraDevice.stopPreview();
+            camera.stopPreview();
         }
     }
 
     public synchronized Camera.Parameters getParams() {
-        if(mCameraDevice != null)
-            return mCameraDevice.getParameters();
-        assert mCameraDevice != null : ASSERT_MSG;
+        if (camera != null)
+            return camera.getParameters();
+        assert camera != null : ASSERT_MSG;
         return null;
     }
 
     public synchronized void setParams(Camera.Parameters param) {
-        if(mCameraDevice != null) {
-            mParams = param;
-            mCameraDevice.setParameters(mParams);
+        if (camera != null) {
+            parameters = param;
+            camera.setParameters(parameters);
         }
-        assert mCameraDevice != null : ASSERT_MSG;
+        assert camera != null : ASSERT_MSG;
     }
 
     public Camera getCameraDevice() {
-        return mCameraDevice;
+        return camera;
     }
 
     //保证从大到小排列
@@ -217,102 +226,102 @@ public class CameraInstance {
         @Override
         public int compare(Camera.Size lhs, Camera.Size rhs) {
             int w = rhs.width - lhs.width;
-            if(w == 0)
+            if (w == 0)
                 return rhs.height - lhs.height;
             return w;
         }
     };
 
     //保证从小到大排列
-    private Comparator<Camera.Size> comparatorSmaller= new Comparator<Camera.Size>() {
+    private Comparator<Camera.Size> comparatorSmaller = new Comparator<Camera.Size>() {
         @Override
         public int compare(Camera.Size lhs, Camera.Size rhs) {
             int w = lhs.width - rhs.width;
-            if(w == 0)
+            if (w == 0)
                 return lhs.height - rhs.height;
             return w;
         }
     };
 
     public void initCamera(int previewRate) {
-        if(mCameraDevice == null) {
+        if (camera == null) {
             Log.e(LOG_TAG, "initCamera: Camera is not opened!");
             return;
         }
 
-        mParams = mCameraDevice.getParameters();
-        List<Integer> supportedPictureFormats = mParams.getSupportedPictureFormats();
+        parameters = camera.getParameters();
+        List<Integer> supportedPictureFormats = parameters.getSupportedPictureFormats();
 
-        for(int fmt : supportedPictureFormats) {
+        for (int fmt : supportedPictureFormats) {
             Log.i(LOG_TAG, String.format("Picture Format: %x", fmt));
         }
 
-        mParams.setPictureFormat(PixelFormat.JPEG);
+        parameters.setPictureFormat(PixelFormat.JPEG);
 
-        List<Camera.Size> picSizes = mParams.getSupportedPictureSizes();
+        List<Camera.Size> picSizes = parameters.getSupportedPictureSizes();
         Camera.Size picSz = null;
 
         Collections.sort(picSizes, comparatorBigger);
 
-        for(Camera.Size sz : picSizes) {
-            Log.i(LOG_TAG, String.format("Supported picture size: %d x %d", sz.width, sz.height));
-            if(picSz == null || (sz.width >= mPictureWidth && sz.height >= mPictureHeight)) {
+        for (Camera.Size sz : picSizes) {
+//            Log.i(LOG_TAG, String.format("Supported picture size: %d x %d", sz.width, sz.height));
+            if (picSz == null || (sz.width >= pictureWidth && sz.height >= pictureHeight)) {
                 picSz = sz;
             }
         }
 
-        List<Camera.Size> prevSizes = mParams.getSupportedPreviewSizes();
+        List<Camera.Size> prevSizes = parameters.getSupportedPreviewSizes();
         Camera.Size prevSz = null;
 
         Collections.sort(prevSizes, comparatorBigger);
 
-        for(Camera.Size sz : prevSizes) {
-            Log.i(LOG_TAG, String.format("Supported preview size: %d x %d", sz.width, sz.height));
-            if(prevSz == null || (sz.width >= mPreferPreviewWidth && sz.height >= mPreferPreviewHeight)) {
+        for (Camera.Size sz : prevSizes) {
+//            Log.i(LOG_TAG, String.format("Supported preview size: %d x %d", sz.width, sz.height));
+            if (prevSz == null || (sz.width >= preferPreviewWidth && sz.height >= preferPreviewHeight)) {
                 prevSz = sz;
             }
         }
 
-        List<Integer> frameRates = mParams.getSupportedPreviewFrameRates();
+        List<Integer> frameRates = parameters.getSupportedPreviewFrameRates();
 
         int fpsMax = 0;
 
-        for(Integer n : frameRates) {
-            Log.i(LOG_TAG, "Supported frame rate: " + n);
-            if(fpsMax < n) {
+        for (Integer n : frameRates) {
+//            Log.i(LOG_TAG, "Supported frame rate: " + n);
+            if (fpsMax < n) {
                 fpsMax = n;
             }
         }
 
-        mParams.setPreviewSize(prevSz.width, prevSz.height);
-        mParams.setPictureSize(picSz.width, picSz.height);
+        parameters.setPreviewSize(prevSz.width, prevSz.height);
+        parameters.setPictureSize(picSz.width, picSz.height);
 
-        List<String> focusModes = mParams.getSupportedFocusModes();
-        if(focusModes.contains(Camera.Parameters.FOCUS_MODE_CONTINUOUS_VIDEO)){
-            mParams.setFocusMode(Camera.Parameters.FOCUS_MODE_CONTINUOUS_VIDEO);
+        List<String> focusModes = parameters.getSupportedFocusModes();
+        if (focusModes.contains(Camera.Parameters.FOCUS_MODE_CONTINUOUS_VIDEO)) {
+            parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_CONTINUOUS_VIDEO);
         }
 
         previewRate = fpsMax;
-        mParams.setPreviewFrameRate(previewRate); //设置相机预览帧率
+        parameters.setPreviewFrameRate(previewRate); //设置相机预览帧率
 //        mParams.setPreviewFpsRange(20, 60);
 
         try {
-            mCameraDevice.setParameters(mParams);
-        }catch (Exception e) {
+            camera.setParameters(parameters);
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
 
-        mParams = mCameraDevice.getParameters();
+        parameters = camera.getParameters();
 
-        Camera.Size szPic = mParams.getPictureSize();
-        Camera.Size szPrev = mParams.getPreviewSize();
+        Camera.Size szPic = parameters.getPictureSize();
+        Camera.Size szPrev = parameters.getPreviewSize();
 
-        mPreviewWidth = szPrev.width;
-        mPreviewHeight = szPrev.height;
+        previewWidth = szPrev.width;
+        previewHeight = szPrev.height;
 
-        mPictureWidth = szPic.width;
-        mPictureHeight = szPic.height;
+        pictureWidth = szPic.width;
+        pictureHeight = szPic.height;
 
         Log.i(LOG_TAG, String.format("Camera Picture Size: %d x %d", szPic.width, szPic.height));
         Log.i(LOG_TAG, String.format("Camera Preview Size: %d x %d", szPrev.width, szPrev.height));
@@ -320,52 +329,52 @@ public class CameraInstance {
 
     public synchronized void setFocusMode(String focusMode) {
 
-        if(mCameraDevice == null)
+        if (camera == null)
             return;
 
-        mParams = mCameraDevice.getParameters();
-        List<String> focusModes = mParams.getSupportedFocusModes();
-        if(focusModes.contains(focusMode)){
-            mParams.setFocusMode(focusMode);
+        parameters = camera.getParameters();
+        List<String> focusModes = parameters.getSupportedFocusModes();
+        if (focusModes.contains(focusMode)) {
+            parameters.setFocusMode(focusMode);
         }
     }
 
     public synchronized void setPictureSize(int width, int height, boolean isBigger) {
 
-        if(mCameraDevice == null) {
-            mPictureWidth = width;
-            mPictureHeight = height;
+        if (camera == null) {
+            pictureWidth = width;
+            pictureHeight = height;
             return;
         }
 
-        mParams = mCameraDevice.getParameters();
+        parameters = camera.getParameters();
 
 
-        List<Camera.Size> picSizes = mParams.getSupportedPictureSizes();
-        Camera.Size picSz = null;
+        List<Camera.Size> picSizes = parameters.getSupportedPictureSizes();
+        Camera.Size size = null;
 
-        if(isBigger) {
+        if (isBigger) {
             Collections.sort(picSizes, comparatorBigger);
-            for(Camera.Size sz : picSizes) {
-                if(picSz == null || (sz.width >= width && sz.height >= height)) {
-                    picSz = sz;
+            for (Camera.Size sz : picSizes) {
+                if (size == null || (sz.width >= width && sz.height >= height)) {
+                    size = sz;
                 }
             }
         } else {
             Collections.sort(picSizes, comparatorSmaller);
-            for(Camera.Size sz : picSizes) {
-                if(picSz == null || (sz.width <= width && sz.height <= height)) {
-                    picSz = sz;
+            for (Camera.Size sz : picSizes) {
+                if (size == null || (sz.width <= width && sz.height <= height)) {
+                    size = sz;
                 }
             }
         }
 
-        mPictureWidth = picSz.width;
-        mPictureHeight= picSz.height;
+        pictureWidth = size.width;
+        pictureHeight = size.height;
 
         try {
-            mParams.setPictureSize(mPictureWidth, mPictureHeight);
-            mCameraDevice.setParameters(mParams);
+            parameters.setPictureSize(pictureWidth, pictureHeight);
+            camera.setParameters(parameters);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -376,14 +385,14 @@ public class CameraInstance {
     }
 
     public synchronized void focusAtPoint(float x, float y, float radius, final Camera.AutoFocusCallback callback) {
-        if(mCameraDevice == null) {
+        if (camera == null) {
             Log.e(LOG_TAG, "Error: focus after release.");
             return;
         }
 
-        mParams = mCameraDevice.getParameters();
+        parameters = camera.getParameters();
 
-        if(mParams.getMaxNumMeteringAreas() > 0) {
+        if (parameters.getMaxNumMeteringAreas() > 0) {
 
             int focusRadius = (int) (radius * 1000.0f);
             int left = (int) (x * 2000.0f - 1000.0f) - focusRadius;
@@ -398,18 +407,18 @@ public class CameraInstance {
             meteringAreas.add(new Camera.Area(focusArea, 800));
 
             try {
-                mCameraDevice.cancelAutoFocus();
-                mParams.setFocusMode(Camera.Parameters.FOCUS_MODE_AUTO);
-                mParams.setFocusAreas(meteringAreas);
-                mCameraDevice.setParameters(mParams);
-                mCameraDevice.autoFocus(callback);
+                camera.cancelAutoFocus();
+                parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_AUTO);
+                parameters.setFocusAreas(meteringAreas);
+                camera.setParameters(parameters);
+                camera.autoFocus(callback);
             } catch (Exception e) {
                 Log.e(LOG_TAG, "Error: focusAtPoint failed: " + e.toString());
             }
         } else {
             Log.i(LOG_TAG, "The device does not support metering areas...");
             try {
-                mCameraDevice.autoFocus(callback);
+                camera.autoFocus(callback);
             } catch (Exception e) {
                 Log.e(LOG_TAG, "Error: focusAtPoint failed: " + e.toString());
             }

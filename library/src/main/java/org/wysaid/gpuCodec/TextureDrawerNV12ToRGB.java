@@ -30,8 +30,7 @@ public class TextureDrawerNV12ToRGB extends TextureDrawerNV21ToRGB {
 
     public static TextureDrawerNV12ToRGB create() {
         TextureDrawerNV12ToRGB drawer = new TextureDrawerNV12ToRGB();
-        if(!drawer.init(vshDrawer, fshNV12ToRGB))
-        {
+        if (!drawer.init(vshDrawer, fshNV12ToRGB)) {
             Log.e(Common.LOG_TAG, "TextureDrawerNV12ToRGB create failed!");
             drawer.release();
             drawer = null;

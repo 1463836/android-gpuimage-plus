@@ -20,12 +20,13 @@ public class CGEMultiInputFilterWrapper {
 
     private long mNativeAddress = 0;
 
-    private CGEMultiInputFilterWrapper() {}
+    private CGEMultiInputFilterWrapper() {
+    }
 
     static public CGEMultiInputFilterWrapper create(String vsh, String fsh) {
         CGEMultiInputFilterWrapper wrapper = new CGEMultiInputFilterWrapper();
         wrapper.mNativeAddress = wrapper.nativeCreate(vsh, fsh);
-        if(wrapper.mNativeAddress == 0) {
+        if (wrapper.mNativeAddress == 0) {
             wrapper = null;
         }
         return wrapper;
@@ -33,8 +34,8 @@ public class CGEMultiInputFilterWrapper {
 
     // The native filter should not be deleted if passed to an image handler!
     public void release(boolean deleteFilter) {
-        if(mNativeAddress != 0) {
-            if(deleteFilter) {
+        if (mNativeAddress != 0) {
+            if (deleteFilter) {
                 nativeRelease(mNativeAddress);
             }
             mNativeAddress = 0;
@@ -52,7 +53,7 @@ public class CGEMultiInputFilterWrapper {
     }
 
     public void updateInputTextures(int[] inputTextures) {
-        if(mInputTextureBuffer == null || mInputTextureBuffer.capacity() < inputTextures.length) {
+        if (mInputTextureBuffer == null || mInputTextureBuffer.capacity() < inputTextures.length) {
             mInputTextureBuffer = ByteBuffer.allocateDirect(inputTextures.length * Integer.BYTES).order(ByteOrder.nativeOrder()).asIntBuffer();
         }
         mInputTextureBuffer.put(inputTextures);
@@ -64,6 +65,7 @@ public class CGEMultiInputFilterWrapper {
     /////////////////////////////////
 
     protected static native long nativeCreate(String vsh, String fsh);
+
     protected static native void nativeRelease(long holder);
 
     protected native void nativeUpdateInputTextures(long holder, IntBuffer inputTextureBuffer, int count);

@@ -96,7 +96,7 @@ public class ImageGLSurfaceView extends GLSurfaceView implements Renderer {
     }
 
     //See: CGEImageHandler.setFilterIntensityAtIndex
-    public void setFilterIntensityForIndex(final float intensity, final int index, final  boolean shouldProcess) {
+    public void setFilterIntensityForIndex(final float intensity, final int index, final boolean shouldProcess) {
         if (mImageHandler == null)
             return;
 
@@ -119,7 +119,7 @@ public class ImageGLSurfaceView extends GLSurfaceView implements Renderer {
                     Log.e(LOG_TAG, "set intensity after release!!");
                 } else {
                     mImageHandler.setFilterIntensityAtIndex(mFilterIntensity, index, shouldProcess);
-                    if(shouldProcess) {
+                    if (shouldProcess) {
                         requestRender();
                     }
                 }
@@ -175,7 +175,7 @@ public class ImageGLSurfaceView extends GLSurfaceView implements Renderer {
                     Log.e(LOG_TAG, "flush after release!!");
                 } else {
                     runnable.run();
-                    if(runFilter) {
+                    if (runFilter) {
                         mImageHandler.revertImage();
                         mImageHandler.processFilters();
                     }
@@ -206,7 +206,7 @@ public class ImageGLSurfaceView extends GLSurfaceView implements Renderer {
                 if (mImageHandler == null) {
                     Log.e(LOG_TAG, "flush after release!!");
                 } else {
-                    if(runFilter) {
+                    if (runFilter) {
                         mImageHandler.revertImage();
                         mImageHandler.processFilters();
                     }

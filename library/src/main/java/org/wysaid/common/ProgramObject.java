@@ -29,8 +29,7 @@ public class ProgramObject {
     }
 
     public final void release() {
-        if(mProgramID != 0)
-        {
+        if (mProgramID != 0) {
             GLES20.glDeleteProgram(mProgramID);
             mProgramID = 0;
         }
@@ -41,18 +40,18 @@ public class ProgramObject {
     }
 
     public boolean init(final String vsh, final String fsh, int programID) {
-        if(programID == 0) {
+        if (programID == 0) {
             programID = GLES20.glCreateProgram();
 
-            if(programID == 0) {
+            if (programID == 0) {
                 Log.e(LOG_TAG, "Invalid Program ID! Check if the context is bound!");
                 return false;
             }
         }
 
-        if(mVertexShader != null)
+        if (mVertexShader != null)
             mVertexShader.release();
-        if(mFragmentShader != null)
+        if (mFragmentShader != null)
             mFragmentShader.release();
 
         mVertexShader = new ShaderObject(vsh, GLES20.GL_VERTEX_SHADER);
@@ -72,13 +71,13 @@ public class ProgramObject {
         mVertexShader = null;
         mFragmentShader = null;
 
-        if(programStatus[0] != GLES20.GL_TRUE) {
+        if (programStatus[0] != GLES20.GL_TRUE) {
             String msg = GLES20.glGetProgramInfoLog(programID);
             Log.e(LOG_TAG, msg);
             return false;
         }
 
-        if(mProgramID != programID && mProgramID != 0) {
+        if (mProgramID != programID && mProgramID != 0) {
             GLES20.glDeleteProgram(mProgramID);
         }
 
@@ -92,8 +91,8 @@ public class ProgramObject {
 
     public int getUniformLoc(final String name) {
         int uniform = GLES20.glGetUniformLocation(mProgramID, name);
-        if(Common.DEBUG) {
-            if(uniform < 0)
+        if (Common.DEBUG) {
+            if (uniform < 0)
                 Log.e(LOG_TAG, String.format("uniform name %s does not exist", name));
         }
         return uniform;
@@ -180,7 +179,7 @@ public class ProgramObject {
             //Debug Only
             assert mShaderID != 0 : "Shader Create Failed!";
 
-            if(mShaderID == 0) {
+            if (mShaderID == 0) {
                 Log.e(LOG_TAG, "glCreateShader Failed!...");
                 return false;
             }
@@ -189,7 +188,7 @@ public class ProgramObject {
         }
 
         public final void release() {
-            if(mShaderID == 0)
+            if (mShaderID == 0)
                 return;
             GLES20.glDeleteShader(mShaderID);
             mShaderID = 0;
@@ -198,13 +197,12 @@ public class ProgramObject {
         public static int loadShader(int type, final String code) {
             int shaderID = GLES20.glCreateShader(type);
 
-            if(shaderID != 0) {
+            if (shaderID != 0) {
                 GLES20.glShaderSource(shaderID, code);
                 GLES20.glCompileShader(shaderID);
                 int[] compiled = {0};
                 GLES20.glGetShaderiv(shaderID, GLES20.GL_COMPILE_STATUS, compiled, 0);
-                if(compiled[0] != GLES20.GL_TRUE)
-                {
+                if (compiled[0] != GLES20.GL_TRUE) {
                     String errMsg = GLES20.glGetShaderInfoLog(shaderID);
                     Log.e(LOG_TAG, errMsg);
                     GLES20.glDeleteShader(shaderID);

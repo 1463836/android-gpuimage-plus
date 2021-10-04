@@ -57,7 +57,7 @@ public class SharedContext {
     public static SharedContext create(EGLContext context, int width, int height, int contextType, Object obj) {
 
         SharedContext sharedContext = new SharedContext();
-        if(!sharedContext.initEGL(context, width, height, contextType, obj)) {
+        if (!sharedContext.initEGL(context, width, height, contextType, obj)) {
             sharedContext.release();
             sharedContext = null;
         }
@@ -84,11 +84,12 @@ public class SharedContext {
         return mGl;
     }
 
-    SharedContext() {}
+    SharedContext() {
+    }
 
     public void release() {
         Log.i(LOG_TAG, "#### CGESharedGLContext Destroying context... ####");
-        if(mDisplay != EGL10.EGL_NO_DISPLAY) {
+        if (mDisplay != EGL10.EGL_NO_DISPLAY) {
             mEgl.eglMakeCurrent(mDisplay, EGL10.EGL_NO_SURFACE, EGL10.EGL_NO_SURFACE, EGL10.EGL_NO_CONTEXT);
             mEgl.eglDestroyContext(mDisplay, mContext);
             mEgl.eglDestroySurface(mDisplay, mSurface);
@@ -101,7 +102,7 @@ public class SharedContext {
     }
 
     public void makeCurrent() {
-        if(!mEgl.eglMakeCurrent(mDisplay, mSurface, mSurface, mContext)) {
+        if (!mEgl.eglMakeCurrent(mDisplay, mSurface, mSurface, mContext)) {
             Log.e(LOG_TAG, "eglMakeCurrent failed:" + mEgl.eglGetError());
         }
     }
@@ -137,19 +138,19 @@ public class SharedContext {
 
         mEgl = (EGL10) EGLContext.getEGL();
 
-        if((mDisplay = mEgl.eglGetDisplay(EGL10.EGL_DEFAULT_DISPLAY)) == EGL10.EGL_NO_DISPLAY) {
+        if ((mDisplay = mEgl.eglGetDisplay(EGL10.EGL_DEFAULT_DISPLAY)) == EGL10.EGL_NO_DISPLAY) {
             Log.e(LOG_TAG, String.format("eglGetDisplay() returned error 0x%x", mEgl.eglGetError()));
             return false;
         }
 
-        if(!mEgl.eglInitialize(mDisplay, version)) {
+        if (!mEgl.eglInitialize(mDisplay, version)) {
             Log.e(LOG_TAG, String.format("eglInitialize() returned error 0x%x", mEgl.eglGetError()));
             return false;
         }
 
         Log.i(LOG_TAG, String.format("eglInitialize - major: %d, minor: %d", version[0], version[1]));
 
-        if(!mEgl.eglChooseConfig(mDisplay, configSpec, configs, 1, numConfig)) {
+        if (!mEgl.eglChooseConfig(mDisplay, configSpec, configs, 1, numConfig)) {
             Log.e(LOG_TAG, String.format("eglChooseConfig() returned error 0x%x", mEgl.eglGetError()));
             return false;
         }

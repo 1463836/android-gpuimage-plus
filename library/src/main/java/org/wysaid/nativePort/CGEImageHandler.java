@@ -23,10 +23,10 @@ public class CGEImageHandler {
     }
 
     public boolean initWithBitmap(Bitmap bmp) {
-        if(bmp == null)
+        if (bmp == null)
             return false;
 
-        if(bmp.getConfig() != Bitmap.Config.ARGB_8888) {
+        if (bmp.getConfig() != Bitmap.Config.ARGB_8888) {
             bmp = bmp.copy(Bitmap.Config.ARGB_8888, false);
         }
 
@@ -119,7 +119,7 @@ public class CGEImageHandler {
     }
 
     public void release() {
-        if(mNativeAddress != 0) {
+        if (mNativeAddress != 0) {
             nativeRelease(mNativeAddress);
             mNativeAddress = 0;
         }
@@ -132,23 +132,37 @@ public class CGEImageHandler {
     /////////////////      protected         ///////////////////////
 
     protected native long nativeCreateHandler();
+
     protected native boolean nativeInitWithBitmap(long holder, Bitmap bmp);
+
     protected native boolean nativeInitWithSize(long holder, int width, int height);
+
     protected native Bitmap nativeGetResultBitmap(long holder);
 
     protected native void nativeSetDrawerRotation(long holder, float rad);
+
     protected native void nativeSetDrawerFlipScale(long holder, float x, float y);
+
     protected native boolean nativeSetFilterWithConfig(long holder, String config, boolean shouldCleanOlder, boolean shouldProcess);
+
     protected native void nativeSetFilterWithAddress(long holder, long filter);
+
     protected native void nativeSetFilterIntensity(long holder, float value, boolean shouldProcess);
+
     protected native boolean nativeSetFilterIntensityAtIndex(long holder, float value, int index, boolean shouldProcess);
 
     protected native void nativeDrawResult(long holder);
+
     protected native void nativeBindTargetFBO(long holder);
+
     protected native void nativeSetAsTarget(long holder);
+
     protected native void nativeSwapBufferFBO(long holder);
+
     protected native void nativeRevertImage(long holder);
+
     protected native void nativeProcessingFilters(long holder);
+
     protected native void nativeProcessWithFilter(long holder, long filterAddress);
 
     protected native void nativeRelease(long holder);

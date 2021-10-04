@@ -15,7 +15,7 @@ import android.util.Log;
 import android.view.Surface;
 
 import org.wysaid.common.Common;
-import org.wysaid.nativePort.CGEFrameRenderer;
+import org.wysaid.nativePort.FrameRenderer;
 import org.wysaid.texUtils.TextureRenderer;
 
 import java.nio.IntBuffer;
@@ -33,7 +33,7 @@ public class VideoPlayerGLSurfaceView extends GLSurfaceView implements GLSurface
 
     private SurfaceTexture mSurfaceTexture;
     private int mVideoTextureID;
-    private CGEFrameRenderer mFrameRenderer;
+    private FrameRenderer mFrameRenderer;
 
 
     private TextureRenderer.Viewport mRenderViewport = new TextureRenderer.Viewport();
@@ -163,7 +163,7 @@ public class VideoPlayerGLSurfaceView extends GLSurfaceView implements GLSurface
     }
 
     public interface SetMaskBitmapCallback {
-        void setMaskOK(CGEFrameRenderer recorder);
+        void setMaskOK(FrameRenderer recorder);
     }
 
     public void setMaskBitmap(final Bitmap bmp, final boolean shouldRecycle) {
@@ -485,7 +485,7 @@ public class VideoPlayerGLSurfaceView extends GLSurfaceView implements GLSurface
                     public void run() {
 
                         if (mFrameRenderer == null) {
-                            mFrameRenderer = new CGEFrameRenderer();
+                            mFrameRenderer = new FrameRenderer();
                         }
 
                         if (mFrameRenderer.init(mVideoWidth, mVideoHeight, mVideoWidth, mVideoHeight)) {

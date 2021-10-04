@@ -48,12 +48,12 @@ public class CameraGLSurfaceViewWithBuffer extends CameraGLSurfaceView implement
     @Override
     protected void onRelease() {
         super.onRelease();
-        if(mYUVDrawer != null) {
+        if (mYUVDrawer != null) {
             mYUVDrawer.release();
             mYUVDrawer = null;
         }
 
-        if(mSurfaceTexture != null) {
+        if (mSurfaceTexture != null) {
             mSurfaceTexture.release();
             mSurfaceTexture = null;
         }
@@ -63,7 +63,7 @@ public class CameraGLSurfaceViewWithBuffer extends CameraGLSurfaceView implement
 //            mTextureID = 0;
 //        }
 
-        if(mTextureY != 0 || mTextureUV != 0) {
+        if (mTextureY != 0 || mTextureUV != 0) {
             GLES20.glDeleteTextures(2, new int[]{mTextureY, mTextureUV}, 0);
             mTextureY = mTextureUV = 0;
             mTextureWidth = 0;
@@ -86,8 +86,8 @@ public class CameraGLSurfaceViewWithBuffer extends CameraGLSurfaceView implement
             Common.texParamHelper(GLES20.GL_TEXTURE_2D, GLES20.GL_LINEAR, GLES20.GL_CLAMP_TO_EDGE);
         }
 
-        int width = cameraInstance().previewWidth();
-        int height = cameraInstance().previewHeight();
+        int width = CameraInstance.getInstance().previewWidth();
+        int height = CameraInstance.getInstance().previewHeight();
 
         if (mTextureWidth != width || mTextureHeight != height) {
             mTextureWidth = width;
@@ -101,7 +101,7 @@ public class CameraGLSurfaceViewWithBuffer extends CameraGLSurfaceView implement
     }
 
     protected void updateTextures() {
-        if(mBufferUpdated) {
+        if (mBufferUpdated) {
             synchronized (mBufferUpdateLock) {
                 GLES20.glActiveTexture(GLES20.GL_TEXTURE0);
                 GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, mTextureY);
@@ -137,14 +137,14 @@ public class CameraGLSurfaceViewWithBuffer extends CameraGLSurfaceView implement
 
     @Override
     public void resumePreview() {
-        if(mYUVDrawer == null) {
+        if (mYUVDrawer == null) {
             return;
         }
 
-        if (!cameraInstance().isCameraOpened()) {
-            int facing = mIsCameraBackForward ? Camera.CameraInfo.CAMERA_FACING_BACK : Camera.CameraInfo.CAMERA_FACING_FRONT;
+        if (!CameraInstance.getInstance().isCameraOpened()) {
+            int facing = isCameraBackForward ? Camera.CameraInfo.CAMERA_FACING_BACK : Camera.CameraInfo.CAMERA_FACING_FRONT;
 
-            cameraInstance().tryOpenCamera(new CameraInstance.CameraOpenCallback() {
+            CameraInstance.getInstance().tryOpenCamera(new CameraInstance.CameraOpenCallback() {
                 @Override
                 public void cameraReady() {
                     Log.i(LOG_TAG, "tryOpenCamera OK...");
@@ -152,29 +152,28 @@ public class CameraGLSurfaceViewWithBuffer extends CameraGLSurfaceView implement
             }, facing);
         }
 
-        if (!cameraInstance().isPreviewing()) {
-            Camera camera = cameraInstance().getCameraDevice();
+        if (!CameraInstance.getInstance().isPreviewing()) {
+            Camera camera = CameraInstance.getInstance().getCameraDevice();
             Camera.Parameters parameters = camera.getParameters();
             parameters.getPreviewFormat();
             Camera.Size sz = parameters.getPreviewSize();
             int format = parameters.getPreviewFormat();
 
-            if(format != ImageFormat.NV21)
-            {
+            if (format != ImageFormat.NV21) {
                 try {
                     parameters.setPreviewFormat(ImageFormat.NV21);
                     camera.setParameters(parameters);
                     format = ImageFormat.NV21;
                 } catch (Exception e) {
                     e.printStackTrace();
-                    return ;
+                    return;
                 }
             }
 
             mYSize = sz.width * sz.height;
             int newBufferSize = mYSize * ImageFormat.getBitsPerPixel(format) / 8;
 
-            if(mBufferSize != newBufferSize) {
+            if (mBufferSize != newBufferSize) {
                 mBufferSize = newBufferSize;
                 mUVSize = mBufferSize - mYSize;
                 mBufferY = ByteBuffer.allocateDirect(mYSize).order(ByteOrder.nativeOrder());
@@ -187,10 +186,10 @@ public class CameraGLSurfaceViewWithBuffer extends CameraGLSurfaceView implement
             camera.addCallbackBuffer(mPreviewBuffer0);
             camera.addCallbackBuffer(mPreviewBuffer1);
 
-            cameraInstance().startPreview(mSurfaceTexture, this);
+            CameraInstance.getInstance().startPreview(mSurfaceTexture, this);
         }
 
-        if(mIsCameraBackForward) {
+        if (isCameraBackForward) {
             mYUVDrawer.setFlipScale(-1.0f, 1.0f);
             mYUVDrawer.setRotation((float) (Math.PI / 2.0));
         } else {
@@ -205,20 +204,20 @@ public class CameraGLSurfaceViewWithBuffer extends CameraGLSurfaceView implement
     public void onSurfaceChanged(GL10 gl, int width, int height) {
         super.onSurfaceChanged(gl, width, height);
 
-        if (!cameraInstance().isPreviewing()) {
+        if (!CameraInstance.getInstance().isPreviewing()) {
             resumePreview();
         }
     }
 
     public void drawCurrentFrame() {
-        if(mYUVDrawer == null) {
+        if (mYUVDrawer == null) {
             return;
         }
 
         GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER, 0);
-        GLES20.glClearColor(0,0,0,1);
+        GLES20.glClearColor(0, 0, 0, 1);
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT);
-        GLES20.glViewport(mDrawViewport.x, mDrawViewport.y, mDrawViewport.width, mDrawViewport.height);
+        GLES20.glViewport(drawViewport.x, drawViewport.y, drawViewport.width, drawViewport.height);
         updateTextures();
         mYUVDrawer.drawTextures();
     }

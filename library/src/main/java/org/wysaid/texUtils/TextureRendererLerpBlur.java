@@ -121,7 +121,7 @@ public class TextureRendererLerpBlur extends TextureRendererDrawOrigin {
 
     public static TextureRendererLerpBlur create(boolean isExternalOES) {
         TextureRendererLerpBlur renderer = new TextureRendererLerpBlur();
-        if(!renderer.init(isExternalOES)) {
+        if (!renderer.init(isExternalOES)) {
             renderer.release();
             return null;
         }
@@ -131,11 +131,11 @@ public class TextureRendererLerpBlur extends TextureRendererDrawOrigin {
     //intensity >= 0
     public void setIntensity(int intensity) {
 
-        if(intensity == mIntensity)
+        if (intensity == mIntensity)
             return;
 
         mIntensity = intensity;
-        if(mIntensity > mLevel)
+        if (mIntensity > mLevel)
             mIntensity = mLevel;
     }
 
@@ -147,7 +147,7 @@ public class TextureRendererLerpBlur extends TextureRendererDrawOrigin {
     @Override
     public void renderTexture(int texID, Viewport viewport) {
 
-        if(mIntensity == 0) {
+        if (mIntensity == 0) {
             GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER, 0);
             super.renderTexture(texID, viewport);
             return;
@@ -167,14 +167,14 @@ public class TextureRendererLerpBlur extends TextureRendererDrawOrigin {
         super.renderTexture(texID, mTexViewport);
 
         mScaleProgram.bind();
-        for(int i = 1; i < mIntensity; ++i) {
+        for (int i = 1; i < mIntensity; ++i) {
             mFramebuffer.bindTexture(mTextureDownScale[i]);
             GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, mTextureDownScale[i - 1]);
             GLES20.glViewport(0, 0, calcMips(512, i + 1), calcMips(512, i + 1));
             GLES20.glDrawArrays(DRAW_FUNCTION, 0, 4);
         }
 
-        for(int i = mIntensity - 1; i > 0; --i) {
+        for (int i = mIntensity - 1; i > 0; --i) {
             mFramebuffer.bindTexture(mTextureDownScale[i - 1]);
             GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, mTextureDownScale[i]);
             GLES20.glViewport(0, 0, calcMips(512, i), calcMips(512, i));
@@ -208,7 +208,7 @@ public class TextureRendererLerpBlur extends TextureRendererDrawOrigin {
         mScaleProgram.bindAttribLocation(POSITION_NAME, 0);
 
 //        if(!mScaleProgram.init(vshBlurUpScale, fshBlurUpScale)) {
-        if(!mScaleProgram.init(vshUpScale, fshUpScale)) {
+        if (!mScaleProgram.init(vshUpScale, fshUpScale)) {
             Log.e(LOG_TAG, "Lerp blur initLocal failed...");
             return false;
         }
@@ -254,7 +254,6 @@ public class TextureRendererLerpBlur extends TextureRendererDrawOrigin {
     }
 
 
-
     @Override
     public void setTextureSize(int w, int h) {
         super.setTextureSize(w, h);
@@ -264,7 +263,7 @@ public class TextureRendererLerpBlur extends TextureRendererDrawOrigin {
         mTextureDownScale = new int[level];
         GLES20.glGenTextures(level, mTextureDownScale, 0);
 
-        for(int i = 0; i < level; ++i) {
+        for (int i = 0; i < level; ++i) {
             GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, mTextureDownScale[i]);
             GLES20.glTexImage2D(GLES20.GL_TEXTURE_2D, 0, GLES20.GL_RGBA, calcMips(width, i + 1), calcMips(height, i + 1), 0, GLES20.GL_RGBA, GLES20.GL_UNSIGNED_BYTE, null);
             GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MIN_FILTER, GLES20.GL_LINEAR);

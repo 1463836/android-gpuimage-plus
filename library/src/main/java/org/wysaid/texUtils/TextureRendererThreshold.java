@@ -26,7 +26,7 @@ public class TextureRendererThreshold extends TextureRendererDrawOrigin {
 
     public static TextureRendererThreshold create(boolean isExternalOES) {
         TextureRendererThreshold renderer = new TextureRendererThreshold();
-        if(!renderer.init(isExternalOES)) {
+        if (!renderer.init(isExternalOES)) {
             renderer.release();
             renderer = null;
         }

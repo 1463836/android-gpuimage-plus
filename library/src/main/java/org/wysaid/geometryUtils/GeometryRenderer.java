@@ -48,7 +48,7 @@ public class GeometryRenderer {
     protected boolean init() {
         mProgram = new ProgramObject();
         mProgram.bindAttribLocation(POSITION_NAME, 0);
-        if(!mProgram.init(vshDrawDefault, fshDrawOrigin)) {
+        if (!mProgram.init(vshDrawDefault, fshDrawOrigin)) {
             release();
             return false;
         }
@@ -58,12 +58,12 @@ public class GeometryRenderer {
     }
 
     public void release() {
-        if(mProgram != null) {
+        if (mProgram != null) {
             mProgram.release();
             mProgram = null;
         }
 
-        if(mVertexBuffer != 0) {
+        if (mVertexBuffer != 0) {
             GLES20.glDeleteBuffers(1, new int[]{mVertexBuffer}, 0);
             mVertexBuffer = 0;
         }
@@ -71,7 +71,7 @@ public class GeometryRenderer {
 
     public static GeometryRenderer create() {
         GeometryRenderer renderer = new GeometryRenderer();
-        if(!renderer.init()) {
+        if (!renderer.init()) {
             renderer.release();
             renderer = null;
         }

@@ -33,8 +33,7 @@ public class TextureDrawerI420ToRGB extends TextureDrawerCodec {
 
     public static TextureDrawerI420ToRGB create() {
         TextureDrawerI420ToRGB drawer = new TextureDrawerI420ToRGB();
-        if(!drawer.init(vshDrawer, fshI420ToRGB))
-        {
+        if (!drawer.init(vshDrawer, fshI420ToRGB)) {
             Log.e(Common.LOG_TAG, "TextureDrawerI420ToRGB create failed!");
             drawer.release();
             drawer = null;
@@ -45,7 +44,7 @@ public class TextureDrawerI420ToRGB extends TextureDrawerCodec {
     @Override
     protected boolean init(String vsh, String fsh) {
 
-        if(super.init(vsh, fsh)) {
+        if (super.init(vsh, fsh)) {
             mProgram.bind();
             mProgram.sendUniformi("textureU", 1);
             mProgram.sendUniformi("textureV", 2);

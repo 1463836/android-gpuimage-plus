@@ -22,7 +22,7 @@ public class TextureRendererEmboss extends TextureRendererDrawOrigin {
 
     public static TextureRendererEmboss create(boolean isExternalOES) {
         TextureRendererEmboss renderer = new TextureRendererEmboss();
-        if(!renderer.init(isExternalOES)) {
+        if (!renderer.init(isExternalOES)) {
             renderer.release();
             return null;
         }
@@ -31,7 +31,7 @@ public class TextureRendererEmboss extends TextureRendererDrawOrigin {
 
     @Override
     public boolean init(boolean isExternalOES) {
-        if(setProgramDefault(getVertexShaderString(), getFragmentShaderString(), isExternalOES)) {
+        if (setProgramDefault(getVertexShaderString(), getFragmentShaderString(), isExternalOES)) {
             mProgram.bind();
             mProgram.sendUniformf(SAMPLER_STEPS, 1.0f / 640.0f, 1.0f / 640.0f);
             return true;

@@ -30,9 +30,9 @@ public class Matrix4x4 {
         y *= normScaling;
         z *= normScaling;
 
-        final float cosRad = (float)Math.cos(rad);
+        final float cosRad = (float) Math.cos(rad);
         final float cosp = 1.0f - cosRad;
-        final float sinRad = (float)Math.sin(rad);
+        final float sinRad = (float) Math.sin(rad);
 
         return new Matrix4x4(new float[]{
                 cosRad + cosp * x * x,
@@ -55,8 +55,8 @@ public class Matrix4x4 {
     }
 
     public static Matrix4x4 makeXRotation(float rad) {
-        final float cosRad = (float)Math.cos(rad);
-        final float sinRad = (float)Math.sin(rad);
+        final float cosRad = (float) Math.cos(rad);
+        final float sinRad = (float) Math.sin(rad);
         return new Matrix4x4(new float[]{
                 1.0f, 0.0f, 0.0f, 0.0f,
                 0.0f, cosRad, sinRad, 0.0f,
@@ -66,8 +66,8 @@ public class Matrix4x4 {
     }
 
     public static Matrix4x4 makeYRotation(float rad) {
-        final float cosRad = (float)Math.cos(rad);
-        final float sinRad = (float)Math.sin(rad);
+        final float cosRad = (float) Math.cos(rad);
+        final float sinRad = (float) Math.sin(rad);
         return new Matrix4x4(new float[]{
                 cosRad, 0.0f, -sinRad, 0.0f,
                 0.0f, 1.0f, 0.0f, 0.0f,
@@ -77,8 +77,8 @@ public class Matrix4x4 {
     }
 
     public static Matrix4x4 makeZRotation(float rad) {
-        final float cosRad = (float)Math.cos(rad);
-        final float sinRad = (float)Math.sin(rad);
+        final float cosRad = (float) Math.cos(rad);
+        final float sinRad = (float) Math.sin(rad);
         return new Matrix4x4(new float[]{
                 cosRad, sinRad, 0.0f, 0.0f,
                 -sinRad, cosRad, 0.0f, 0.0f,
@@ -107,7 +107,7 @@ public class Matrix4x4 {
 
     public static Matrix4x4 makePerspective(float fovyRad, float aspect, float nearZ, float farZ) {
 
-        final float cotan = 1.0f / (float)Math.tan(fovyRad / 2.0f);
+        final float cotan = 1.0f / (float) Math.tan(fovyRad / 2.0f);
 
         return new Matrix4x4(new float[]{
                 cotan / aspect, 0.0f, 0.0f, 0.0f,
@@ -134,8 +134,7 @@ public class Matrix4x4 {
         });
     }
 
-    public static Matrix4x4 makeOrtho(float left, float right, float bottom, float top, float nearZ, float farZ)
-    {
+    public static Matrix4x4 makeOrtho(float left, float right, float bottom, float top, float nearZ, float farZ) {
         final float ral = right + left;
         final float rsl = right - left;
         final float tsb = top - bottom;

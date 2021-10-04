@@ -39,17 +39,17 @@ public class CameraGLSurfaceView extends GLSurfaceView implements GLSurfaceView.
 
     public int mMaxTextureSize = 0;
 
-    protected int mViewWidth;
-    protected int mViewHeight;
+    protected int viewWidth;
+    protected int viewHeight;
 
-    protected int mRecordWidth = 480;
-    protected int mRecordHeight = 640;
+    protected int recordWidth = 480;
+    protected int recordHeight = 640;
 
     //isBigger 为true 表示当宽高不满足时，取最近的较大值.
     // 若为 false 则取较小的
     public void setPictureSize(int width, int height, boolean isBigger) {
         //默认会旋转90度.
-        cameraInstance().setPictureSize(height, width, isBigger);
+        CameraInstance.getInstance().setPictureSize(height, width, isBigger);
     }
 
     // mode value should be:
@@ -65,11 +65,11 @@ public class CameraGLSurfaceView extends GLSurfaceView implements GLSurfaceView.
             return false;
         }
 
-        if (!mIsCameraBackForward) {
+        if (!isCameraBackForward) {
             return false;
         }
 
-        Camera.Parameters parameters = cameraInstance().getParams();
+        Camera.Parameters parameters = CameraInstance.getInstance().getParams();
 
         if (parameters == null)
             return false;
@@ -82,7 +82,7 @@ public class CameraGLSurfaceView extends GLSurfaceView implements GLSurfaceView.
             }
 
             parameters.setFlashMode(mode);
-            cameraInstance().setParams(parameters);
+            CameraInstance.getInstance().setParams(parameters);
         } catch (Exception e) {
             Log.e(LOG_TAG, "Switch flash light failed, check if you're using front camera.");
             return false;
@@ -91,61 +91,58 @@ public class CameraGLSurfaceView extends GLSurfaceView implements GLSurfaceView.
         return true;
     }
 
-    protected int mMaxPreviewWidth = 1280;
-    protected int mMaxPreviewHeight = 1280;
+    protected int maxPreviewWidth = 1280;
+    protected int maxPreviewHeight = 1280;
 
     public static class Viewport {
-         public int x, y, width, height;
+        public int x, y, width, height;
     }
 
-    protected Viewport mDrawViewport = new Viewport();
+    protected Viewport drawViewport = new Viewport();
 
     public Viewport getDrawViewport() {
-        return mDrawViewport;
+        return drawViewport;
     }
 
     //The max preview size. Change it to 1920+ if you want to preview with 1080P
     void setMaxPreviewSize(int w, int h) {
-        mMaxPreviewWidth = w;
-        mMaxPreviewHeight = h;
+        maxPreviewWidth = w;
+        maxPreviewHeight = h;
     }
 
-    protected boolean mFitFullView = false;
+    protected boolean fitFullView = false;
 
     public void setFitFullView(boolean fit) {
-        mFitFullView = fit;
+        fitFullView = fit;
         calcViewport();
     }
 
     //是否使用后置摄像头
-    protected boolean mIsCameraBackForward = true;
+    protected boolean isCameraBackForward = true;
 
     public boolean isCameraBackForward() {
-        return mIsCameraBackForward;
+        return isCameraBackForward;
     }
 
-    public CameraInstance cameraInstance() {
-        return CameraInstance.getInstance();
-    }
 
     //should be called before 'onSurfaceCreated'.
     public void presetCameraForward(boolean isBackForward) {
-        mIsCameraBackForward = isBackForward;
+        isCameraBackForward = isBackForward;
     }
 
     //注意， 录制的尺寸将影响preview的尺寸
     //这里的width和height表示竖屏尺寸
     //在onSurfaceCreated之前设置有效
     public void presetRecordingSize(int width, int height) {
-        if (width > mMaxPreviewWidth || height > mMaxPreviewHeight) {
-            float scaling = Math.min(mMaxPreviewWidth / (float) width, mMaxPreviewHeight / (float) height);
+        if (width > maxPreviewWidth || height > maxPreviewHeight) {
+            float scaling = Math.min(maxPreviewWidth / (float) width, maxPreviewHeight / (float) height);
             width = (int) (width * scaling);
             height = (int) (height * scaling);
         }
 
-        mRecordWidth = width;
-        mRecordHeight = height;
-        cameraInstance().setPreferPreviewSize(width, height);
+        recordWidth = width;
+        recordHeight = height;
+        CameraInstance.getInstance().setPreferPreviewSize(width, height);
     }
 
     public void resumePreview() {
@@ -156,7 +153,7 @@ public class CameraGLSurfaceView extends GLSurfaceView implements GLSurfaceView.
         queueEvent(new Runnable() {
             @Override
             public void run() {
-                cameraInstance().stopPreview();
+                CameraInstance.getInstance().stopPreview();
             }
         });
     }
@@ -166,17 +163,17 @@ public class CameraGLSurfaceView extends GLSurfaceView implements GLSurfaceView.
     }
 
     public final void switchCamera() {
-        mIsCameraBackForward = !mIsCameraBackForward;
+        isCameraBackForward = !isCameraBackForward;
 
         queueEvent(new Runnable() {
             @Override
             public void run() {
 
-                cameraInstance().stopCamera();
+                CameraInstance.getInstance().stopCamera();
                 onSwitchCamera();
-                int facing = mIsCameraBackForward ? Camera.CameraInfo.CAMERA_FACING_BACK : Camera.CameraInfo.CAMERA_FACING_FRONT;
+                int facing = isCameraBackForward ? Camera.CameraInfo.CAMERA_FACING_BACK : Camera.CameraInfo.CAMERA_FACING_FRONT;
 
-                cameraInstance().tryOpenCamera(new CameraInstance.CameraOpenCallback() {
+                CameraInstance.getInstance().tryOpenCamera(new CameraInstance.CameraOpenCallback() {
                     @Override
                     public void cameraReady() {
                         resumePreview();
@@ -192,13 +189,13 @@ public class CameraGLSurfaceView extends GLSurfaceView implements GLSurfaceView.
     //If you want to keep the previous focus mode， please reset the focus mode after 'AutoFocusCallback'.
     //x,y should be: [0, 1]， stands for 'touchEventPosition / viewSize'.
     public void focusAtPoint(float x, float y, Camera.AutoFocusCallback focusCallback) {
-        cameraInstance().focusAtPoint(y, 1.0f - x, focusCallback);
+        CameraInstance.getInstance().focusAtPoint(y, 1.0f - x, focusCallback);
     }
 
     @Override
     public void surfaceDestroyed(SurfaceHolder holder) {
         super.surfaceDestroyed(holder);
-        cameraInstance().stopCamera();
+        CameraInstance.getInstance().stopCamera();
     }
 
     public interface OnCreateCallback {
@@ -236,8 +233,8 @@ public class CameraGLSurfaceView extends GLSurfaceView implements GLSurfaceView.
 
         GLES20.glClearColor(0, 0, 0, 0);
 
-        mViewWidth = width;
-        mViewHeight = height;
+        viewWidth = width;
+        viewHeight = height;
 
         calcViewport();
     }
@@ -257,7 +254,7 @@ public class CameraGLSurfaceView extends GLSurfaceView implements GLSurfaceView.
     public void onPause() {
         Log.i(LOG_TAG, "glsurfaceview onPause in...");
 
-        cameraInstance().stopCamera();
+        CameraInstance.getInstance().stopCamera();
         super.onPause();
         Log.i(LOG_TAG, "glsurfaceview onPause out...");
     }
@@ -295,36 +292,37 @@ public class CameraGLSurfaceView extends GLSurfaceView implements GLSurfaceView.
 
     protected void calcViewport() {
 
-        float scaling = mRecordWidth / (float) mRecordHeight;
-        float viewRatio = mViewWidth / (float) mViewHeight;
+        float scaling = recordWidth / (float) recordHeight;
+        float viewRatio = viewWidth / (float) viewHeight;
         float s = scaling / viewRatio;
 
         int w, h;
 
-        if (mFitFullView) {
+        if (fitFullView) {
             //撑满全部view(内容大于view)
             if (s > 1.0) {
-                w = (int) (mViewHeight * scaling);
-                h = mViewHeight;
+                w = (int) (viewHeight * scaling);
+                h = viewHeight;
             } else {
-                w = mViewWidth;
-                h = (int) (mViewWidth / scaling);
+                w = viewWidth;
+                h = (int) (viewWidth / scaling);
             }
         } else {
             //显示全部内容(内容小于view)
             if (s > 1.0) {
-                w = mViewWidth;
-                h = (int) (mViewWidth / scaling);
+                w = viewWidth;
+                h = (int) (viewWidth / scaling);
             } else {
-                h = mViewHeight;
-                w = (int) (mViewHeight * scaling);
+                h = viewHeight;
+                w = (int) (viewHeight * scaling);
             }
         }
 
-        mDrawViewport.width = w;
-        mDrawViewport.height = h;
-        mDrawViewport.x = (mViewWidth - mDrawViewport.width) / 2;
-        mDrawViewport.y = (mViewHeight - mDrawViewport.height) / 2;
-        Log.i(LOG_TAG, String.format("View port: %d, %d, %d, %d", mDrawViewport.x, mDrawViewport.y, mDrawViewport.width, mDrawViewport.height));
+        drawViewport.width = w;
+        drawViewport.height = h;
+        drawViewport.x = (viewWidth - drawViewport.width) / 2;
+        drawViewport.y = (viewHeight - drawViewport.height) / 2;
+        Log.w(LOG_TAG, String.format("calcViewport : x %d, y %d, drawViewport w %d, drawViewport h %d,viewWidth w %d, viewHeight h %d",
+                drawViewport.x, drawViewport.y, drawViewport.width, drawViewport.height,viewWidth,viewHeight));
     }
 }
