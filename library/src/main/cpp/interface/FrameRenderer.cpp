@@ -61,8 +61,8 @@ namespace CGE {
 
     //////////////////////////////////////////////
 
-    FrameRenderer::FrameRenderer() : textureDrawer(nullptr), textureDrawerExtOES(nullptr),
-                                     cacheDrawer(nullptr), m_isUsingMask(false),
+    FrameRenderer::FrameRenderer() : textureDrawBase(nullptr), textureDrawOES(nullptr),
+                                     textureDrawCache(nullptr), m_isUsingMask(false),
                                      m_drawerFlipScaleX(1.0f), m_drawerFlipScaleY(1.0f),
                                      fastFrameHandler(nullptr) {
 
@@ -71,32 +71,33 @@ namespace CGE {
 
     FrameRenderer::~FrameRenderer() {
 
-        delete textureDrawer;
-        delete textureDrawerExtOES;
+        delete textureDrawBase;
+        delete textureDrawOES;
 
-        delete cacheDrawer;
-        cacheDrawer = nullptr;
+        delete textureDrawCache;
+        textureDrawCache = nullptr;
 
         delete fastFrameHandler;
         fastFrameHandler = nullptr;
     }
 
     bool FrameRenderer::init(int srcWidth, int srcHeight, int dstWidth, int dstHeight) {
-        loge("src w %d h %d dest w %d h %d",srcWidth,srcHeight,dstWidth,dstHeight);
+//        src w 480 h 640 dest w 480 h 640
+        loge("src w %d h %d dest w %d h %d", srcWidth, srcHeight, dstWidth, dstHeight);
         srcSize.set(srcWidth, srcHeight);
         dstSize.set(dstWidth, dstHeight);
 
         //有可能通过预先设置为 mask版
-        if (textureDrawer == nullptr)
-            textureDrawer = TextureDrawer::create();
+        if (textureDrawBase == nullptr)
+            textureDrawBase = TextureDrawer::create();
 
 //        class TextureDrawer4ExtOES : public TextureDrawer
-        if (textureDrawerExtOES == nullptr)
-            textureDrawerExtOES = TextureDrawer4ExtOES::create();
+        if (textureDrawOES == nullptr)
+            textureDrawOES = TextureDrawer4ExtOES::create();
 
 
-        if (cacheDrawer == nullptr)
-            cacheDrawer = TextureDrawer::create();
+        if (textureDrawCache == nullptr)
+            textureDrawCache = TextureDrawer::create();
 
         calcViewport(srcWidth, srcHeight, dstWidth, dstHeight);
 
@@ -106,9 +107,9 @@ namespace CGE {
             fastFrameHandler = new FastFrameHandler();
         }
 
-        return textureDrawer != nullptr && textureDrawerExtOES != nullptr &&
-                fastFrameHandler->initWithRawBufferData(nullptr, dstWidth, dstHeight,
-                                                        CGE_FORMAT_RGBA_INT8, false);
+        return textureDrawBase != nullptr && textureDrawOES != nullptr &&
+               fastFrameHandler->initWithRawBufferData(nullptr, dstWidth, dstHeight,
+                                                       CGE_FORMAT_RGBA_INT8, false);
     }
 
     void FrameRenderer::srcResize(int width, int height) {
@@ -124,27 +125,31 @@ namespace CGE {
     }
 
     void FrameRenderer::calcViewport(int srcWidth, int srcHeight, int dstWidth, int dstHeight) {
+//        src w 480 h 640 dest w 480 h 640
+
         float scaling = CGE_MAX(dstWidth / (float) srcWidth, dstHeight / (float) srcHeight);
 
         if (scaling != 0.0f) {
-            float sw = srcWidth * scaling, sh = srcHeight * scaling;
+            float sw = srcWidth * scaling,
+                    sh = srcHeight * scaling;
             viewport[0] = (dstWidth - sw) / 2.0f;
             viewport[1] = (dstHeight - sh) / 2.0f;
             viewport[2] = sw;
             viewport[3] = sh;
-            logi("CGEFrameRenderer - viewport: %d, %d, %d, %d", viewport[0],
+            logw("FrameRenderer - viewport: %d, %d, %d, %d", viewport[0],
                  viewport[1], viewport[2], viewport[3]);
+
         }
     }
 
-    void FrameRenderer::update(GLuint externalTexture, float *transformMatrix) {
+    void FrameRenderer::update(GLuint textureOES, float *matrix) {
         CHECK_RENDERER_STATUS;
 
         fastFrameHandler->useImageFBO();
         glViewport(viewport[0], viewport[1], viewport[2], viewport[3]);
 
-        textureDrawerExtOES->setTransform(transformMatrix);
-        textureDrawerExtOES->drawTexture(externalTexture);
+        textureDrawOES->setTransform(matrix);
+        textureDrawOES->drawTexture(textureOES);
     }
 
     void FrameRenderer::runProc() {
@@ -156,39 +161,40 @@ namespace CGE {
 
     void FrameRenderer::render(int x, int y, int width, int height) {
         CHECK_RENDERER_STATUS;
-
         glViewport(x, y, width, height);
-        textureDrawer->drawTexture(fastFrameHandler->getTargetTextureID());
+        textureDrawBase->drawTexture(fastFrameHandler->getTargetTextureID());
     }
 
     void FrameRenderer::drawCache() {
         CHECK_RENDERER_STATUS;
 
-        cacheDrawer->drawTexture(fastFrameHandler->getTargetTextureID());
+        textureDrawCache->drawTexture(fastFrameHandler->getTargetTextureID());
     }
 
     void FrameRenderer::setSrcRotation(float rad) {
-        textureDrawerExtOES->setRotation(rad);
+        textureDrawOES->setRotation(rad);
     }
 
     void FrameRenderer::setSrcFlipScale(float x, float y) {
-        textureDrawerExtOES->setFlipScale(x, y);
+        textureDrawOES->setFlipScale(x, y);
     }
 
     void FrameRenderer::setRenderRotation(float rad) {
-        textureDrawer->setRotation(rad);
+        textureDrawBase->setRotation(rad);
     }
 
     void FrameRenderer::setRenderFlipScale(float x, float y) {
         m_drawerFlipScaleX = x;
         m_drawerFlipScaleY = y;
-        textureDrawer->setFlipScale(x, y);
+        textureDrawBase->setFlipScale(x, y);
     }
 
-    void FrameRenderer::setFilterWithConfig(CGEConstString config, CGETextureLoadFun texLoadFunc,
-                                            void *loadArg) {
+//    cgeGlobalTextureLoadFunc             CGETexLoadArg
+    void FrameRenderer::setFilterWithConfig(ConstString config, CGETextureLoadFun cgeGlobalTextureLoadFunc,
+                                            void *cgeTexLoadArg) {
         CHECK_RENDERER_STATUS;
 
+        logw("%s %s",__FUNCTION__ ,config);
         std::unique_lock<std::mutex> uniqueLock(resultMutex);
 
         if (config == nullptr || *config == '\0') {
@@ -197,7 +203,7 @@ namespace CGE {
         }
 
         CGEMutipleEffectFilter *filter = new CGEMutipleEffectFilter;
-        filter->setTextureLoadFunction(texLoadFunc, loadArg);
+        filter->setTextureLoadFunction(cgeGlobalTextureLoadFunc, cgeTexLoadArg);
 
         if (!filter->initWithEffectString(config)) {
             delete filter;
@@ -230,11 +236,11 @@ namespace CGE {
 
     void FrameRenderer::setMaskTexture(GLuint maskTexture, float aspectRatio) {
         if (maskTexture == 0) {
-            if (m_isUsingMask || textureDrawer == nullptr) {
+            if (m_isUsingMask || textureDrawBase == nullptr) {
                 m_isUsingMask = false;
-                delete textureDrawer;
-                textureDrawer = TextureDrawer::create();
-                textureDrawer->setFlipScale(m_drawerFlipScaleX, m_drawerFlipScaleY);
+                delete textureDrawBase;
+                textureDrawBase = TextureDrawer::create();
+                textureDrawBase->setFlipScale(m_drawerFlipScaleX, m_drawerFlipScaleY);
             }
             return;
         }
@@ -247,8 +253,8 @@ namespace CGE {
             return;
         }
 
-        delete textureDrawer;
-        textureDrawer = drawer;
+        delete textureDrawBase;
+        textureDrawBase = drawer;
         drawer->setMaskTexture(maskTexture);
         setMaskTextureRatio(aspectRatio);
     }
@@ -257,9 +263,9 @@ namespace CGE {
         float dstRatio = dstSize.width / (float) dstSize.height;
         float s = dstRatio / aspectRatio;
         if (s > 1.0f) {
-            textureDrawer->setFlipScale(m_drawerFlipScaleX / s, m_drawerFlipScaleY);
+            textureDrawBase->setFlipScale(m_drawerFlipScaleX / s, m_drawerFlipScaleY);
         } else {
-            textureDrawer->setFlipScale(m_drawerFlipScaleX, s * m_drawerFlipScaleY);
+            textureDrawBase->setFlipScale(m_drawerFlipScaleX, s * m_drawerFlipScaleY);
         }
     }
 
@@ -282,19 +288,19 @@ namespace CGE {
     }
 
     void FrameRenderer::setMaskRotation(float rad) {
-        if (!m_isUsingMask || textureDrawer == nullptr)
+        if (!m_isUsingMask || textureDrawBase == nullptr)
             return;
 
-        TextureDrawerWithMask *drawer = dynamic_cast<TextureDrawerWithMask *>(textureDrawer);
+        TextureDrawerWithMask *drawer = dynamic_cast<TextureDrawerWithMask *>(textureDrawBase);
         assert(drawer != nullptr);
         drawer->setMaskRotation(rad);
     }
 
     void FrameRenderer::setMaskFlipScale(float x, float y) {
-        if (!m_isUsingMask || textureDrawer == nullptr)
+        if (!m_isUsingMask || textureDrawBase == nullptr)
             return;
 
-        TextureDrawerWithMask *drawer = dynamic_cast<TextureDrawerWithMask *>(textureDrawer);
+        TextureDrawerWithMask *drawer = dynamic_cast<TextureDrawerWithMask *>(textureDrawBase);
         assert(drawer != nullptr);
         drawer->setMaskFlipScale(x, y);
     }

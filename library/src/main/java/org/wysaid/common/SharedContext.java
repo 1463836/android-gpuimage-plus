@@ -20,12 +20,12 @@ public class SharedContext {
     public static final String LOG_TAG = Common.LOG_TAG;
     public static final int EGL_RECORDABLE_ANDROID = 0x3142;
 
-    private EGLContext mContext;
-    private EGLConfig mConfig;
-    private EGLDisplay mDisplay;
-    private EGLSurface mSurface;
-    private EGL10 mEgl;
-    private GL10 mGl;
+    private EGLContext eglContext;
+    private EGLConfig eglConfig;
+    private EGLDisplay eglDisplay;
+    private EGLSurface eglSurface;
+    private EGL10 egl10;
+    private GL10 gl10;
 
     private static int mBitsR = 8, mBitsG = 8, mBitsB = 8, mBitsA = 8;
 
@@ -54,10 +54,10 @@ public class SharedContext {
     //             EGL10.EGL_PIXMAP_BIT
     //             EGL_RECORDABLE_ANDROID ( = 0x3142 )
     //             etc.
-    public static SharedContext create(EGLContext context, int width, int height, int contextType, Object obj) {
+    public static SharedContext create(EGLContext eglContext, int width, int height, int contextType, Object obj) {
 
         SharedContext sharedContext = new SharedContext();
-        if (!sharedContext.initEGL(context, width, height, contextType, obj)) {
+        if (!sharedContext.initEGL(eglContext, width, height, contextType, obj)) {
             sharedContext.release();
             sharedContext = null;
         }
@@ -65,23 +65,23 @@ public class SharedContext {
     }
 
     public EGLContext getContext() {
-        return mContext;
+        return eglContext;
     }
 
     public EGLDisplay getDisplay() {
-        return mDisplay;
+        return eglDisplay;
     }
 
     public EGLSurface getSurface() {
-        return mSurface;
+        return eglSurface;
     }
 
     public EGL10 getEGL() {
-        return mEgl;
+        return egl10;
     }
 
     public GL10 getGL() {
-        return mGl;
+        return gl10;
     }
 
     SharedContext() {
@@ -89,26 +89,26 @@ public class SharedContext {
 
     public void release() {
         Log.i(LOG_TAG, "#### CGESharedGLContext Destroying context... ####");
-        if (mDisplay != EGL10.EGL_NO_DISPLAY) {
-            mEgl.eglMakeCurrent(mDisplay, EGL10.EGL_NO_SURFACE, EGL10.EGL_NO_SURFACE, EGL10.EGL_NO_CONTEXT);
-            mEgl.eglDestroyContext(mDisplay, mContext);
-            mEgl.eglDestroySurface(mDisplay, mSurface);
-            mEgl.eglTerminate(mDisplay);
+        if (eglDisplay != EGL10.EGL_NO_DISPLAY) {
+            egl10.eglMakeCurrent(eglDisplay, EGL10.EGL_NO_SURFACE, EGL10.EGL_NO_SURFACE, EGL10.EGL_NO_CONTEXT);
+            egl10.eglDestroyContext(eglDisplay, eglContext);
+            egl10.eglDestroySurface(eglDisplay, eglSurface);
+            egl10.eglTerminate(eglDisplay);
         }
 
-        mDisplay = EGL10.EGL_NO_DISPLAY;
-        mSurface = EGL10.EGL_NO_SURFACE;
-        mContext = EGL10.EGL_NO_CONTEXT;
+        eglDisplay = EGL10.EGL_NO_DISPLAY;
+        eglSurface = EGL10.EGL_NO_SURFACE;
+        eglContext = EGL10.EGL_NO_CONTEXT;
     }
 
     public void makeCurrent() {
-        if (!mEgl.eglMakeCurrent(mDisplay, mSurface, mSurface, mContext)) {
-            Log.e(LOG_TAG, "eglMakeCurrent failed:" + mEgl.eglGetError());
+        if (!egl10.eglMakeCurrent(eglDisplay, eglSurface, eglSurface, eglContext)) {
+            Log.e(LOG_TAG, "eglMakeCurrent failed:" + egl10.eglGetError());
         }
     }
 
     public boolean swapBuffers() {
-        return mEgl.eglSwapBuffers(mDisplay, mSurface);
+        return egl10.eglSwapBuffers(eglDisplay, eglSurface);
     }
 
     private boolean initEGL(EGLContext context, int width, int height, int contextType, Object obj) {
@@ -136,64 +136,64 @@ public class SharedContext {
                 EGL10.EGL_NONE
         };
 
-        mEgl = (EGL10) EGLContext.getEGL();
+        egl10 = (EGL10) EGLContext.getEGL();
 
-        if ((mDisplay = mEgl.eglGetDisplay(EGL10.EGL_DEFAULT_DISPLAY)) == EGL10.EGL_NO_DISPLAY) {
-            Log.e(LOG_TAG, String.format("eglGetDisplay() returned error 0x%x", mEgl.eglGetError()));
+        if ((eglDisplay = egl10.eglGetDisplay(EGL10.EGL_DEFAULT_DISPLAY)) == EGL10.EGL_NO_DISPLAY) {
+            Log.e(LOG_TAG, String.format("eglGetDisplay() returned error 0x%x", egl10.eglGetError()));
             return false;
         }
 
-        if (!mEgl.eglInitialize(mDisplay, version)) {
-            Log.e(LOG_TAG, String.format("eglInitialize() returned error 0x%x", mEgl.eglGetError()));
+        if (!egl10.eglInitialize(eglDisplay, version)) {
+            Log.e(LOG_TAG, String.format("eglInitialize() returned error 0x%x", egl10.eglGetError()));
             return false;
         }
 
         Log.i(LOG_TAG, String.format("eglInitialize - major: %d, minor: %d", version[0], version[1]));
 
-        if (!mEgl.eglChooseConfig(mDisplay, configSpec, configs, 1, numConfig)) {
-            Log.e(LOG_TAG, String.format("eglChooseConfig() returned error 0x%x", mEgl.eglGetError()));
+        if (!egl10.eglChooseConfig(eglDisplay, configSpec, configs, 1, numConfig)) {
+            Log.e(LOG_TAG, String.format("eglChooseConfig() returned error 0x%x", egl10.eglGetError()));
             return false;
         }
 
         Log.i(LOG_TAG, String.format("Config num: %d, has sharedContext: %s", numConfig[0], context == EGL10.EGL_NO_CONTEXT ? "NO" : "YES"));
 
-        mConfig = configs[0];
+        eglConfig = configs[0];
 
-        mContext = mEgl.eglCreateContext(mDisplay, mConfig,
+        eglContext = egl10.eglCreateContext(eglDisplay, eglConfig,
                 context, contextAttribList);
-        if (mContext == EGL10.EGL_NO_CONTEXT) {
+        if (eglContext == EGL10.EGL_NO_CONTEXT) {
             Log.e(LOG_TAG, "eglCreateContext Failed!");
             return false;
         }
 
         switch (contextType) {
             case EGL10.EGL_PIXMAP_BIT:
-                mSurface = mEgl.eglCreatePixmapSurface(mDisplay, mConfig, obj, surfaceAttribList);
+                eglSurface = egl10.eglCreatePixmapSurface(eglDisplay, eglConfig, obj, surfaceAttribList);
                 break;
             case EGL10.EGL_WINDOW_BIT:
-                mSurface = mEgl.eglCreateWindowSurface(mDisplay, mConfig, obj, surfaceAttribList);
+                eglSurface = egl10.eglCreateWindowSurface(eglDisplay, eglConfig, obj, surfaceAttribList);
                 break;
             case EGL10.EGL_PBUFFER_BIT:
             case EGL_RECORDABLE_ANDROID:
-                mSurface = mEgl.eglCreatePbufferSurface(mDisplay, mConfig,
+                eglSurface = egl10.eglCreatePbufferSurface(eglDisplay, eglConfig,
                         surfaceAttribList);
         }
 
-        if (mSurface == EGL10.EGL_NO_SURFACE) {
+        if (eglSurface == EGL10.EGL_NO_SURFACE) {
             Log.e(LOG_TAG, "eglCreatePbufferSurface Failed!");
             return false;
         }
 
-        if (!mEgl.eglMakeCurrent(mDisplay, mSurface, mSurface, mContext)) {
-            Log.e(LOG_TAG, "eglMakeCurrent failed:" + mEgl.eglGetError());
+        if (!egl10.eglMakeCurrent(eglDisplay, eglSurface, eglSurface, eglContext)) {
+            Log.e(LOG_TAG, "eglMakeCurrent failed:" + egl10.eglGetError());
             return false;
         }
 
         int[] clientVersion = new int[1];
-        mEgl.eglQueryContext(mDisplay, mContext, EGL14.EGL_CONTEXT_CLIENT_VERSION, clientVersion);
+        egl10.eglQueryContext(eglDisplay, eglContext, EGL14.EGL_CONTEXT_CLIENT_VERSION, clientVersion);
         Log.i(LOG_TAG, "EGLContext created, client version " + clientVersion[0]);
 
-        mGl = (GL10) mContext.getGL();
+        gl10 = (GL10) eglContext.getGL();
 
         return true;
     }

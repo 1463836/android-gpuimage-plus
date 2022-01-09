@@ -41,11 +41,9 @@ cmake_minimum_required(VERSION 3.9)
 
 include_directories(
         #        ${CGE_CORE_HEADER_DIR}
-        ${CMAKE_CURRENT_SOURCE_DIR}/cge/common
-        ${CMAKE_CURRENT_SOURCE_DIR}/cge/extends
-        ${CMAKE_CURRENT_SOURCE_DIR}/cge/filters
+        ${CMAKE_CURRENT_SOURCE_DIR}/common
+        ${CMAKE_CURRENT_SOURCE_DIR}/filters
         ${CMAKE_CURRENT_SOURCE_DIR}/include
-        ${CMAKE_CURRENT_SOURCE_DIR}/include/filters
         ${CMAKE_CURRENT_SOURCE_DIR}/interface
         ${CMAKE_CURRENT_SOURCE_DIR}/source
         ${CMAKE_CURRENT_SOURCE_DIR}/faceTracker
@@ -61,63 +59,60 @@ include_directories(
 # file(GLOB_RECURSE FM_CORE_RESOURCE "${CMAKE_CURRENT_SOURCE_DIR}/facemagic/*.cpp")
 
 add_library(
-        #        CGE
-        #        ${CGE_CORE_SRC}
-
         native-lib
         SHARED
-        ${CMAKE_SOURCE_DIR}/cge/common/CommonDefine.cpp
-        ${CMAKE_SOURCE_DIR}/cge/common/GLFunctions.cpp
-        ${CMAKE_SOURCE_DIR}/cge/common/Global.cpp
-        ${CMAKE_SOURCE_DIR}/cge/common/ImageFilter.cpp
-        ${CMAKE_SOURCE_DIR}/cge/common/ImageHandler.cpp
-        ${CMAKE_SOURCE_DIR}/cge/common/ShaderFunctions.cpp
-        ${CMAKE_SOURCE_DIR}/cge/common/TextureUtils.cpp
-        ${CMAKE_SOURCE_DIR}/cge/extends/Thread.cpp
-        ${CMAKE_SOURCE_DIR}/cge/filters/AdvancedEffects.cpp
-        ${CMAKE_SOURCE_DIR}/cge/filters/AdvancedEffectsCommon.cpp
-        ${CMAKE_SOURCE_DIR}/cge/filters/BeautifyFilter.cpp
-        ${CMAKE_SOURCE_DIR}/cge/filters/BilateralBlurFilter.cpp
-        ${CMAKE_SOURCE_DIR}/cge/filters/BlendFilter.cpp
-        ${CMAKE_SOURCE_DIR}/cge/filters/BrightnessAdjust.cpp
-        ${CMAKE_SOURCE_DIR}/cge/filters/ColorBalanceAdjust.cpp
-        ${CMAKE_SOURCE_DIR}/cge/filters/ColorLevelAdjust.cpp
-        ${CMAKE_SOURCE_DIR}/cge/filters/ColorMappingFilter.cpp
-        ${CMAKE_SOURCE_DIR}/cge/filters/ContrastAdjust.cpp
-        ${CMAKE_SOURCE_DIR}/cge/filters/CrosshatchFilter.cpp
-        ${CMAKE_SOURCE_DIR}/cge/filters/CurveAdjust.cpp
-        ${CMAKE_SOURCE_DIR}/cge/filters/DataParsingEngine.cpp
-        ${CMAKE_SOURCE_DIR}/cge/filters/DynamicFilters.cpp
-        ${CMAKE_SOURCE_DIR}/cge/filters/DynamicWaveFilter.cpp
-        ${CMAKE_SOURCE_DIR}/cge/filters/EdgeFilter.cpp
-        ${CMAKE_SOURCE_DIR}/cge/filters/EmbossFilter.cpp
-        ${CMAKE_SOURCE_DIR}/cge/filters/ExposureAdjust.cpp
-        ${CMAKE_SOURCE_DIR}/cge/filters/FilterBasic.cpp
-        ${CMAKE_SOURCE_DIR}/cge/filters/HalftoneFilter.cpp
-        ${CMAKE_SOURCE_DIR}/cge/filters/HazeFilter.cpp
-        ${CMAKE_SOURCE_DIR}/cge/filters/HueAdjust.cpp
-        ${CMAKE_SOURCE_DIR}/cge/filters/LerpblurFilter.cpp
-        ${CMAKE_SOURCE_DIR}/cge/filters/LiquifyFilter.cpp
-        ${CMAKE_SOURCE_DIR}/cge/filters/LookupFilter.cpp
-        ${CMAKE_SOURCE_DIR}/cge/filters/MaxValueFilter.cpp
-        ${CMAKE_SOURCE_DIR}/cge/filters/MidValueFilter.cpp
-        ${CMAKE_SOURCE_DIR}/cge/filters/MinValueFilter.cpp
-        ${CMAKE_SOURCE_DIR}/cge/filters/MonochromeAdjust.cpp
-        ${CMAKE_SOURCE_DIR}/cge/filters/MosaicBlurFilter.cpp
-        ${CMAKE_SOURCE_DIR}/cge/filters/MotionFlowFilter.cpp
-        ${CMAKE_SOURCE_DIR}/cge/filters/MultipleEffects.cpp
-        ${CMAKE_SOURCE_DIR}/cge/filters/MultipleEffectsCommon.cpp
-        ${CMAKE_SOURCE_DIR}/cge/filters/PolarPixellateFilter.cpp
-        ${CMAKE_SOURCE_DIR}/cge/filters/PolkaDotFilter.cpp
-        ${CMAKE_SOURCE_DIR}/cge/filters/RandomBlurFilter.cpp
-        ${CMAKE_SOURCE_DIR}/cge/filters/SaturationAdjust.cpp
-        ${CMAKE_SOURCE_DIR}/cge/filters/SelectiveColorAdjust.cpp
-        ${CMAKE_SOURCE_DIR}/cge/filters/ShadowHighlightAdjust.cpp
-        ${CMAKE_SOURCE_DIR}/cge/filters/SharpenBlurAdjust.cpp
-        ${CMAKE_SOURCE_DIR}/cge/filters/SketchFilter.cpp
-        ${CMAKE_SOURCE_DIR}/cge/filters/TiltshiftAdjust.cpp
-        ${CMAKE_SOURCE_DIR}/cge/filters/VignetteAdjust.cpp
-        ${CMAKE_SOURCE_DIR}/cge/filters/WhiteBalanceAdjust.cpp
+        ${CMAKE_SOURCE_DIR}/common/CommonDefine.cpp
+        ${CMAKE_SOURCE_DIR}/common/GLFunctions.cpp
+        ${CMAKE_SOURCE_DIR}/common/Global.cpp
+        ${CMAKE_SOURCE_DIR}/common/ImageFilter.cpp
+        ${CMAKE_SOURCE_DIR}/common/ImageHandler.cpp
+        ${CMAKE_SOURCE_DIR}/common/ShaderFunctions.cpp
+        ${CMAKE_SOURCE_DIR}/common/TextureUtils.cpp
+        ${CMAKE_SOURCE_DIR}/common/Thread.cpp
+        ${CMAKE_SOURCE_DIR}/filters/AdvancedEffects.cpp
+        ${CMAKE_SOURCE_DIR}/filters/AdvancedEffectsCommon.cpp
+        ${CMAKE_SOURCE_DIR}/filters/BeautifyFilter.cpp
+        ${CMAKE_SOURCE_DIR}/filters/BilateralBlurFilter.cpp
+        ${CMAKE_SOURCE_DIR}/filters/BlendFilter.cpp
+        ${CMAKE_SOURCE_DIR}/filters/BrightnessAdjust.cpp
+        ${CMAKE_SOURCE_DIR}/filters/ColorBalanceAdjust.cpp
+        ${CMAKE_SOURCE_DIR}/filters/ColorLevelAdjust.cpp
+        ${CMAKE_SOURCE_DIR}/filters/ColorMappingFilter.cpp
+        ${CMAKE_SOURCE_DIR}/filters/ContrastAdjust.cpp
+        ${CMAKE_SOURCE_DIR}/filters/CrosshatchFilter.cpp
+        ${CMAKE_SOURCE_DIR}/filters/CurveAdjust.cpp
+        ${CMAKE_SOURCE_DIR}/filters/DataParsingEngine.cpp
+        ${CMAKE_SOURCE_DIR}/filters/DynamicFilters.cpp
+        ${CMAKE_SOURCE_DIR}/filters/DynamicWaveFilter.cpp
+        ${CMAKE_SOURCE_DIR}/filters/EdgeFilter.cpp
+        ${CMAKE_SOURCE_DIR}/filters/EmbossFilter.cpp
+        ${CMAKE_SOURCE_DIR}/filters/ExposureAdjust.cpp
+        ${CMAKE_SOURCE_DIR}/filters/FilterBasic.cpp
+        ${CMAKE_SOURCE_DIR}/filters/HalftoneFilter.cpp
+        ${CMAKE_SOURCE_DIR}/filters/HazeFilter.cpp
+        ${CMAKE_SOURCE_DIR}/filters/HueAdjust.cpp
+        ${CMAKE_SOURCE_DIR}/filters/LerpblurFilter.cpp
+        ${CMAKE_SOURCE_DIR}/filters/LiquifyFilter.cpp
+        ${CMAKE_SOURCE_DIR}/filters/LookupFilter.cpp
+        ${CMAKE_SOURCE_DIR}/filters/MaxValueFilter.cpp
+        ${CMAKE_SOURCE_DIR}/filters/MidValueFilter.cpp
+        ${CMAKE_SOURCE_DIR}/filters/MinValueFilter.cpp
+        ${CMAKE_SOURCE_DIR}/filters/MonochromeAdjust.cpp
+        ${CMAKE_SOURCE_DIR}/filters/MosaicBlurFilter.cpp
+        ${CMAKE_SOURCE_DIR}/filters/MotionFlowFilter.cpp
+        ${CMAKE_SOURCE_DIR}/filters/MultipleEffects.cpp
+        ${CMAKE_SOURCE_DIR}/filters/MultipleEffectsCommon.cpp
+        ${CMAKE_SOURCE_DIR}/filters/PolarPixellateFilter.cpp
+        ${CMAKE_SOURCE_DIR}/filters/PolkaDotFilter.cpp
+        ${CMAKE_SOURCE_DIR}/filters/RandomBlurFilter.cpp
+        ${CMAKE_SOURCE_DIR}/filters/SaturationAdjust.cpp
+        ${CMAKE_SOURCE_DIR}/filters/SelectiveColorAdjust.cpp
+        ${CMAKE_SOURCE_DIR}/filters/ShadowHighlightAdjust.cpp
+        ${CMAKE_SOURCE_DIR}/filters/SharpenBlurAdjust.cpp
+        ${CMAKE_SOURCE_DIR}/filters/SketchFilter.cpp
+        ${CMAKE_SOURCE_DIR}/filters/TiltshiftAdjust.cpp
+        ${CMAKE_SOURCE_DIR}/filters/VignetteAdjust.cpp
+        ${CMAKE_SOURCE_DIR}/filters/WhiteBalanceAdjust.cpp
         ${CMAKE_SOURCE_DIR}/faceTracker/FaceTracker.cpp
         ${CMAKE_SOURCE_DIR}/faceTracker/FaceTrackerWrapper.cpp
         ${CMAKE_SOURCE_DIR}/faceTracker/FaceTracker/CLM.cpp

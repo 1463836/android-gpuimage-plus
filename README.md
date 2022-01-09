@@ -107,7 +107,7 @@ public:
     
     bool init()
     {
-        CGEConstString fragmentShaderString = CGE_SHADER_STRING_PRECISION_H
+        ConstString fragmentShaderString = CGE_SHADER_STRING_PRECISION_H
         (
         varying vec2 textureCoordinate;  //defined in 'g_vshDefaultWithoutTexCoord'
         uniform sampler2D inputImageTexture; // the same to above.
@@ -124,7 +124,7 @@ public:
         return program.initWithShaderStrings(g_vshDefaultWithoutTexCoord, s_fsh);
     }
 
-    //void render2Texture(CGE::ImageHandlerInterface* handler, GLuint srcTexture, GLuint vertexBufferID)
+    //void render2Texture(CGE::ImageHandlerInterface* handler, GLuint textureSrc, GLuint vertexBufferID)
     //{
     //  //Your own render functions here.
     //  //Do not override this function to use the ImageFilterInterface's.

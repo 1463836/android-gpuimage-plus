@@ -30,7 +30,7 @@ namespace CGE {
         // Normally the count should not be more than 7 (1 for the origin input).
         void updateInputTextures(GLuint *textures, int count);
 
-        GLuint getProgramID() { return m_program.programID(); }
+        GLuint getProgramID() { return m_program.getProgramID(); }
 
     protected:
         // The input textures will not be released here.

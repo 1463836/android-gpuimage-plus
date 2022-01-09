@@ -10,7 +10,7 @@
 
 using namespace CGE;
 
-static CGEConstString s_fsh = CGE_SHADER_STRING_PRECISION_H
+static ConstString s_fsh = CGE_SHADER_STRING_PRECISION_H
                               (
                                       varying vec2 textureCoordinate;
                                       uniform sampler2D inputImageTexture;

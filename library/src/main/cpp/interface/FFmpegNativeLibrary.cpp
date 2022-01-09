@@ -26,7 +26,7 @@ extern "C"
 
     JNIEXPORT void JNICALL Java_org_wysaid_nativePort_CGEFFmpegNativeLibrary_avRegisterAll(JNIEnv *, jclass)
     {
-        logi("registerFFmpeg...");
+//        logi("registerFFmpeg...");
         av_register_all();
     }
 

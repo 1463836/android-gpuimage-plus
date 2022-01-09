@@ -167,7 +167,7 @@ namespace CGE {
             glClear(GL_COLOR_BUFFER_BIT);
 
             resultMutex.lock();
-            cacheDrawer->drawTexture(fastFrameHandler->getBufferTextureID());
+            textureDrawCache->drawTexture(fastFrameHandler->getBufferTextureID());
             // cacheDrawer->drawTexture(fastFrameHandler.getTargetTextureID());
             glFinish();
             // loge("draw texture time: %g", (getCurrentTimeMillis() - tm));
@@ -184,7 +184,7 @@ namespace CGE {
     }
 
     FrameRecorder::~FrameRecorder() {
-        logi("CGEFrameRecorder::~CGEFrameRecorder");
+//        logi("CGEFrameRecorder::~CGEFrameRecorder");
 
 
         endRecording(false);
@@ -271,7 +271,7 @@ namespace CGE {
                                        fastFrameHandler->getBufferTextureID(), 0);
 
                 glViewport(0, 0, dstSize.width, dstSize.height);
-                cacheDrawer->drawTexture(fastFrameHandler->getTargetTextureID());
+                textureDrawCache->drawTexture(fastFrameHandler->getTargetTextureID());
                 glFinish();
                 glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D,
                                        fastFrameHandler->getTargetTextureID(), 0);
@@ -323,7 +323,7 @@ namespace CGE {
             return false;
         }
 
-        logi("encoder created!");
+        logw("encoder created!");
 
         if (offscreenContext == nullptr || recordThread == nullptr)
             _createOffscreenContext(); //offscreen context will be created from another thread.
@@ -360,7 +360,7 @@ namespace CGE {
         _isRecordingPaused = false;
         recordingTimestamp = 0.0;
 
-        logi("CGEFrameRecorder::startRecording...");
+        logw("CGEFrameRecorder::startRecording... %s",filename);
 
         return true;
     }
@@ -372,7 +372,7 @@ namespace CGE {
     bool FrameRecorder::endRecording(bool shouldSave) {
         isRecording = false;
 
-        logi("Waiting for the recording threads...");
+//        logi("Waiting for the recording threads...");
 
         //wait for recoding over.
         while ((recordThread != nullptr && recordThread->isActive()) ||
@@ -382,7 +382,7 @@ namespace CGE {
         delete recordImageThread;
         recordImageThread = nullptr;
 
-        logi("threads sync.");
+//        logi("threads sync.");
 
         if (encoder == nullptr)
             return false;
@@ -435,9 +435,9 @@ namespace CGE {
     }
 
     void FrameRecorder::_createOffscreenContext() {
-        EGLContext sharedContext = eglGetCurrentContext();
+        EGLContext eglContext = eglGetCurrentContext();
 
-        if (sharedContext == EGL_NO_CONTEXT) {
+        if (eglContext == EGL_NO_CONTEXT) {
             loge("Context creation must be in the GL thread!");
             return;
         }
@@ -448,12 +448,12 @@ namespace CGE {
         recordThread->run(CGEThreadPool::Work([&](void *) {
 
             delete offscreenContext;
-            offscreenContext = CGESharedGLContext::create(sharedContext, dstSize.width,
+            offscreenContext = CGESharedGLContext::create(eglContext, dstSize.width,
                                                           dstSize.height,
                                                           CGESharedGLContext::RECORDABLE_ANDROID);
             if (offscreenContext == nullptr) {
                 loge("CGESharedGLContext : RECORDABLE_ANDROID is not supported!");
-                offscreenContext = CGESharedGLContext::create(sharedContext, dstSize.width,
+                offscreenContext = CGESharedGLContext::create(eglContext, dstSize.width,
                                                               dstSize.height,
                                                               CGESharedGLContext::PBUFFER);
                 if (offscreenContext == nullptr)
@@ -463,7 +463,7 @@ namespace CGE {
             if (offscreenContext != nullptr) {
                 glViewport(0, 0, dstSize.width, dstSize.height);
                 logi("Info from offscreen context thread (begin)....");
-                cgePrintGLInfo();
+                printGLInfo();
                 logi("Info from offscreen context thread (end)....");
             } else {
                 loge("Create OpenGL child thread failed! The device may be too old!");

@@ -2,13 +2,11 @@ package org.wysaid.cgeDemo;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 
 import org.wysaid.camera.CameraInstance;
 import org.wysaid.cgeDemo.demoUtils.MultiInputDemo;
-import org.wysaid.common.Common;
 
 public class MultiInputActivity extends AppCompatActivity {
 
@@ -39,7 +37,7 @@ public class MultiInputActivity extends AppCompatActivity {
     public void onPause() {
         super.onPause();
         CameraInstance.getInstance().stopCamera();
-        Log.i(Common.LOG_TAG, "activity onPause...");
+//        Log.i(Common.LOG_TAG, "activity onPause...");
         mCameraView.release(null);
         mCameraView.onPause();
     }

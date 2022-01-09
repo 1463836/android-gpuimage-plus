@@ -1,0 +1,7 @@
+Executable : E:\Android_development_windows\android-sdk-windows\cmake\3.10.2.4988404\bin\ninja.exe
+arguments : 
+-C
+F:\temp\android-gpuimage-plus\library\.cxx\cmake\debug\armeabi-v7a
+native-lib
+jvmArgs : 
+

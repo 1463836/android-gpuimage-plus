@@ -10,7 +10,7 @@
 
 using namespace CGE;
 
-static CGEConstString s_fsh1 = CGE_SHADER_STRING_PRECISION_M
+static ConstString s_fsh1 = CGE_SHADER_STRING_PRECISION_M
                                (
                                        varying vec2 textureCoordinate;
                                        uniform sampler2D inputImageTexture;
@@ -31,7 +31,7 @@ bool CustomFilter_1::init() {
 
 /////////////////////////////////////////////
 
-static CGEConstString s_fsh2 = CGE_SHADER_STRING_PRECISION_H
+static ConstString s_fsh2 = CGE_SHADER_STRING_PRECISION_H
                                (
                                        varying vec2 textureCoordinate;
                                        uniform sampler2D inputImageTexture;
@@ -103,7 +103,7 @@ bool CustomFilter_2::init() {
 
 /////////////////////////////////////////////
 
-static CGEConstString s_fsh3 = CGE_SHADER_STRING_PRECISION_H
+static ConstString s_fsh3 = CGE_SHADER_STRING_PRECISION_H
                                (
                                        varying vec2 textureCoordinate;
                                        uniform sampler2D inputImageTexture;
@@ -143,7 +143,7 @@ bool CustomFilter_3::init() {
 
 /////////////////////////////////////////////
 
-static CGEConstString s_fsh4 = CGE_SHADER_STRING_PRECISION_H
+static ConstString s_fsh4 = CGE_SHADER_STRING_PRECISION_H
                                (
                                        varying vec2 textureCoordinate;
                                        uniform sampler2D inputImageTexture;

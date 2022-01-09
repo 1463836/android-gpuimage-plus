@@ -15,7 +15,7 @@ public class FrameRecorder extends FrameRenderer {
 
     public FrameRecorder() {
         super(0); //avoid multiple creation.
-        mNativeAddress = nativeCreateRecorder();
+        nativeAddress = nativeCreateRecorder();
     }
 
     /////////////////视频录制相关////////////////////
@@ -25,26 +25,26 @@ public class FrameRecorder extends FrameRenderer {
     }
 
     public boolean startRecording(int fps, int bitRate, String filename) {
-        if (mNativeAddress != 0)
-            return nativeStartRecording(mNativeAddress, fps, filename, bitRate);
+        if (nativeAddress != 0)
+            return nativeStartRecording(nativeAddress, fps, filename, bitRate);
         return false;
     }
 
     public boolean isRecordingStarted() {
-        if (mNativeAddress != 0)
-            return nativeIsRecordingStarted(mNativeAddress);
+        if (nativeAddress != 0)
+            return nativeIsRecordingStarted(nativeAddress);
         return false;
     }
 
     public boolean endRecording(boolean shouldSave) {
-        if (mNativeAddress != 0)
-            return nativeEndRecording(mNativeAddress, shouldSave);
+        if (nativeAddress != 0)
+            return nativeEndRecording(nativeAddress, shouldSave);
         return false;
     }
 
     public void pauseRecording() {
-        if (mNativeAddress != 0)
-            nativePauseRecording(mNativeAddress);
+        if (nativeAddress != 0)
+            nativePauseRecording(nativeAddress);
     }
 
     //Not completed by now
@@ -61,58 +61,58 @@ public class FrameRecorder extends FrameRenderer {
 //    }
 
     public double getTimestamp() {
-        if (mNativeAddress != 0)
-            return nativeGetTimestamp(mNativeAddress);
+        if (nativeAddress != 0)
+            return nativeGetTimestamp(nativeAddress);
         return 0.0;
     }
 
     public double getVideoStreamtime() {
-        if (mNativeAddress != 0)
-            return nativeGetVideoStreamtime(mNativeAddress);
+        if (nativeAddress != 0)
+            return nativeGetVideoStreamtime(nativeAddress);
         return 0.0;
     }
 
     public double getAudioStreamtime() {
-        if (mNativeAddress != 0)
-            return nativeGetAudioStreamtime(mNativeAddress);
+        if (nativeAddress != 0)
+            return nativeGetAudioStreamtime(nativeAddress);
         return 0.0;
     }
 
     public void setTempDir(String dir) {
-        if (mNativeAddress != 0)
-            nativeSetTempDir(mNativeAddress, dir);
+        if (nativeAddress != 0)
+            nativeSetTempDir(nativeAddress, dir);
     }
 
     //需要置于GPU绘制线程
     public void recordImageFrame() {
-        if (mNativeAddress != 0)
-            nativeRecordImageFrame(mNativeAddress);
+        if (nativeAddress != 0)
+            nativeRecordImageFrame(nativeAddress);
     }
 
     //需要自行loop
     public void recordAudioFrame(ShortBuffer audioBuffer, int bufferLen) {
-        if (mNativeAddress != 0)
-            nativeRecordAudioFrame(mNativeAddress, audioBuffer, bufferLen);
+        if (nativeAddress != 0)
+            nativeRecordAudioFrame(nativeAddress, audioBuffer, bufferLen);
     }
 
     public void setGlobalFilter(String config) {
-        if (mNativeAddress != 0)
-            nativeSetGlobalFilter(mNativeAddress, config);
+        if (nativeAddress != 0)
+            nativeSetGlobalFilter(nativeAddress, config);
     }
 
     public void setBeautifyFilter() {
-        if (mNativeAddress != 0)
-            nativeSetBeautifyFilter(mNativeAddress);
+        if (nativeAddress != 0)
+            nativeSetBeautifyFilter(nativeAddress);
     }
 
     public void setGlobalFilterIntensity(float intensity) {
-        if (mNativeAddress != 0)
-            nativeSetGlobalFilterIntensity(mNativeAddress, intensity);
+        if (nativeAddress != 0)
+            nativeSetGlobalFilterIntensity(nativeAddress, intensity);
     }
 
     public void isGlobalFilterEnabled() {
-        if (mNativeAddress != 0)
-            nativeIsGlobalFilterEnabled(mNativeAddress);
+        if (nativeAddress != 0)
+            nativeIsGlobalFilterEnabled(nativeAddress);
     }
 
     /////////////////      private         ///////////////////////

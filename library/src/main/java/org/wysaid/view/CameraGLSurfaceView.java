@@ -39,11 +39,11 @@ public class CameraGLSurfaceView extends GLSurfaceView implements GLSurfaceView.
 
     public int mMaxTextureSize = 0;
 
-    protected int viewWidth;
-    protected int viewHeight;
+    protected int widthView;
+    protected int heightView;
 
-    protected int recordWidth = 480;
-    protected int recordHeight = 640;
+    protected int widthVideo = 480;
+    protected int heightVideo = 640;
 
     //isBigger 为true 表示当宽高不满足时，取最近的较大值.
     // 若为 false 则取较小的
@@ -140,8 +140,8 @@ public class CameraGLSurfaceView extends GLSurfaceView implements GLSurfaceView.
             height = (int) (height * scaling);
         }
 
-        recordWidth = width;
-        recordHeight = height;
+        widthVideo = width;
+        heightVideo = height;
         CameraInstance.getInstance().setPreferPreviewSize(width, height);
     }
 
@@ -202,17 +202,18 @@ public class CameraGLSurfaceView extends GLSurfaceView implements GLSurfaceView.
         void createOver();
     }
 
-    protected OnCreateCallback mOnCreateCallback;
+    protected OnCreateCallback onCreateCallback;
 
     //定制一些初始化操作
     public void setOnCreateCallback(final OnCreateCallback callback) {
-        mOnCreateCallback = callback;
+        onCreateCallback = callback;
     }
+
+//    GLSurfaceView.Renderer
 
     @Override
     public void onSurfaceCreated(GL10 gl, EGLConfig config) {
-        Log.i(LOG_TAG, "onSurfaceCreated...");
-
+//        Log.i(LOG_TAG, "onSurfaceCreated...");
         GLES20.glDisable(GLES20.GL_DEPTH_TEST);
         GLES20.glDisable(GLES20.GL_STENCIL_TEST);
         GLES20.glBlendFunc(GLES20.GL_SRC_ALPHA, GLES20.GL_ONE_MINUS_SRC_ALPHA);
@@ -222,9 +223,10 @@ public class CameraGLSurfaceView extends GLSurfaceView implements GLSurfaceView.
         GLES20.glGetIntegerv(GLES20.GL_MAX_TEXTURE_SIZE, texSize, 0);
         mMaxTextureSize = texSize[0];
 
-        if (mOnCreateCallback != null) {
-            mOnCreateCallback.createOver();
+        if (onCreateCallback != null) {
+            onCreateCallback.createOver();
         }
+
     }
 
     @Override
@@ -233,8 +235,8 @@ public class CameraGLSurfaceView extends GLSurfaceView implements GLSurfaceView.
 
         GLES20.glClearColor(0, 0, 0, 0);
 
-        viewWidth = width;
-        viewHeight = height;
+        widthView = width;
+        heightView = height;
 
         calcViewport();
     }
@@ -247,16 +249,16 @@ public class CameraGLSurfaceView extends GLSurfaceView implements GLSurfaceView.
     @Override
     public void onResume() {
         super.onResume();
-        Log.i(LOG_TAG, "glsurfaceview onResume...");
+//        Log.i(LOG_TAG, "glsurfaceview onResume...");
     }
 
     @Override
     public void onPause() {
-        Log.i(LOG_TAG, "glsurfaceview onPause in...");
+//        Log.i(LOG_TAG, "glsurfaceview onPause in...");
 
         CameraInstance.getInstance().stopCamera();
         super.onPause();
-        Log.i(LOG_TAG, "glsurfaceview onPause out...");
+//        Log.i(LOG_TAG, "glsurfaceview onPause out...");
     }
 
     public interface ReleaseOKCallback {
@@ -275,7 +277,7 @@ public class CameraGLSurfaceView extends GLSurfaceView implements GLSurfaceView.
 
                 onRelease();
 
-                Log.i(LOG_TAG, "GLSurfaceview release...");
+//                Log.i(LOG_TAG, "GLSurfaceview release...");
                 if (callback != null)
                     callback.releaseOK();
             }
@@ -292,8 +294,8 @@ public class CameraGLSurfaceView extends GLSurfaceView implements GLSurfaceView.
 
     protected void calcViewport() {
 
-        float scaling = recordWidth / (float) recordHeight;
-        float viewRatio = viewWidth / (float) viewHeight;
+        float scaling = widthVideo / (float) heightVideo;
+        float viewRatio = widthView / (float) heightView;
         float s = scaling / viewRatio;
 
         int w, h;
@@ -301,28 +303,30 @@ public class CameraGLSurfaceView extends GLSurfaceView implements GLSurfaceView.
         if (fitFullView) {
             //撑满全部view(内容大于view)
             if (s > 1.0) {
-                w = (int) (viewHeight * scaling);
-                h = viewHeight;
+                w = (int) (heightView * scaling);
+                h = heightView;
             } else {
-                w = viewWidth;
-                h = (int) (viewWidth / scaling);
+                w = widthView;
+                h = (int) (widthView / scaling);
             }
         } else {
             //显示全部内容(内容小于view)
             if (s > 1.0) {
-                w = viewWidth;
-                h = (int) (viewWidth / scaling);
+                w = widthView;
+                h = (int) (widthView / scaling);
             } else {
-                h = viewHeight;
-                w = (int) (viewHeight * scaling);
+                h = heightView;
+                w = (int) (heightView * scaling);
             }
         }
 
         drawViewport.width = w;
         drawViewport.height = h;
-        drawViewport.x = (viewWidth - drawViewport.width) / 2;
-        drawViewport.y = (viewHeight - drawViewport.height) / 2;
+        drawViewport.x = (widthView - drawViewport.width) / 2;
+        drawViewport.y = (heightView - drawViewport.height) / 2;
         Log.w(LOG_TAG, String.format("calcViewport : x %d, y %d, drawViewport w %d, drawViewport h %d,viewWidth w %d, viewHeight h %d",
-                drawViewport.x, drawViewport.y, drawViewport.width, drawViewport.height,viewWidth,viewHeight));
+                drawViewport.x, drawViewport.y, drawViewport.width, drawViewport.height, widthView, heightView));
+
+//        x 0, y 55, drawViewport w 656, drawViewport h 874,viewWidth w 656, viewHeight h 984
     }
 }

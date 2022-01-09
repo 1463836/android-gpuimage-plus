@@ -334,7 +334,7 @@ public class SimplePlayerDemoActivity extends AppCompatActivity {
     @Override
     public void onPause() {
         super.onPause();
-        Log.i(SimplePlayerGLSurfaceView.LOG_TAG, "activity onPause...");
+//        Log.i(SimplePlayerGLSurfaceView.LOG_TAG, "activity onPause...");
         mPlayerView.release();
         mPlayerView.onPause();
     }

@@ -46,13 +46,13 @@ public:
 
 private:
 
-    EGLDisplay m_display;
-    EGLSurface m_surface;
-    EGLContext m_context;
+    EGLDisplay eglDisplay;
+    EGLSurface eglSurface;
+    EGLContext eglContext;
 
     static EGLint s_bitR, s_bitG, s_bitB, s_bitA;
 
-    bool init(EGLContext sharedContext, int width, int height, ContextType type);
+    bool init(EGLContext eglContext, int width, int height, ContextType type);
 
     void destroy();
 };

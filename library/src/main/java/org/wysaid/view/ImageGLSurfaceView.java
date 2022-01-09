@@ -341,7 +341,7 @@ public class ImageGLSurfaceView extends GLSurfaceView implements Renderer {
             queueEvent(new Runnable() {
                 @Override
                 public void run() {
-                    Log.i(LOG_TAG, "ImageGLSurfaceView release...");
+//                    Log.i(LOG_TAG, "ImageGLSurfaceView release...");
 
                     if (mImageHandler != null) {
                         mImageHandler.release();

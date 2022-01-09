@@ -34,7 +34,7 @@ public class CameraInstance {
 
     private boolean mIsPreviewing = false;
 
-    private int mDefaultCameraID = -1;
+    private int defaultCameraID = -1;
 
     private static CameraInstance mThisInstance;
     private int previewWidth;
@@ -46,7 +46,7 @@ public class CameraInstance {
     private int preferPreviewWidth = 640;
     private int preferPreviewHeight = 640;
 
-    private int mFacing = 0;
+    private int facing = 0;
 
     private CameraInstance() {
     }
@@ -92,11 +92,11 @@ public class CameraInstance {
     }
 
     public int getFacing() {
-        return mFacing;
+        return facing;
     }
 
     public synchronized boolean tryOpenCamera(CameraOpenCallback callback, int facing) {
-        Log.i(LOG_TAG, "try open camera...");
+//        Log.i(LOG_TAG, "try open camera...");
 
         try {
             if (Build.VERSION.SDK_INT > Build.VERSION_CODES.FROYO) {
@@ -106,8 +106,8 @@ public class CameraInstance {
                 for (int i = 0; i < numberOfCameras; i++) {
                     Camera.getCameraInfo(i, cameraInfo);
                     if (cameraInfo.facing == facing) {
-                        mDefaultCameraID = i;
-                        mFacing = facing;
+                        defaultCameraID = i;
+                        this.facing = facing;
                         break;
                     }
                 }
@@ -116,11 +116,11 @@ public class CameraInstance {
             if (camera != null)
                 camera.release();
 
-            if (mDefaultCameraID >= 0) {
-                camera = Camera.open(mDefaultCameraID);
+            if (defaultCameraID >= 0) {
+                camera = Camera.open(defaultCameraID);
             } else {
                 camera = Camera.open();
-                mFacing = Camera.CameraInfo.CAMERA_FACING_BACK; //default: back facing
+                this.facing = Camera.CameraInfo.CAMERA_FACING_BACK; //default: back facing
             }
         } catch (Exception e) {
             Log.e(LOG_TAG, "Open Camera Failed!");
@@ -130,7 +130,7 @@ public class CameraInstance {
         }
 
         if (camera != null) {
-            Log.i(LOG_TAG, "Camera opened!");
+//            Log.i(LOG_TAG, "Camera opened!");
 
             try {
                 initCamera(DEFAULT_PREVIEW_RATE);
@@ -165,7 +165,7 @@ public class CameraInstance {
     }
 
     public synchronized void startPreview(SurfaceTexture texture, Camera.PreviewCallback callback) {
-        Log.i(LOG_TAG, "Camera startPreview...");
+//        Log.i(LOG_TAG, "Camera startPreview...");
         if (mIsPreviewing) {
             Log.e(LOG_TAG, "Err: camera is previewing...");
             return;

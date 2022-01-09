@@ -27,7 +27,7 @@ void main()
 }
 );
 
-static CGEConstString s_fshYUV420p = CGE_SHADER_STRING_PRECISION_M
+static ConstString s_fshYUV420p = CGE_SHADER_STRING_PRECISION_M
 (
 varying vec2 vTexCoord;
 

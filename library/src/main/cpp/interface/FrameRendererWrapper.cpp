@@ -22,7 +22,7 @@ extern "C" {
  */
 JNIEXPORT jlong JNICALL Java_org_wysaid_nativePort_FrameRenderer_nativeCreateRenderer
         (JNIEnv *env, jobject) {
-    cgePrintGLInfo();
+    printGLInfo();
     FrameRenderer *renderer = new FrameRenderer();
     return (jlong) renderer;
 }
@@ -36,7 +36,7 @@ JNIEXPORT jboolean JNICALL Java_org_wysaid_nativePort_FrameRenderer_nativeInit
         (JNIEnv *env, jobject, jlong addr, jint srcW, jint srcH, jint dstW, jint dstH) {
     FrameRenderer *renderer = (FrameRenderer *) addr;
     bool ret = renderer->init(srcW, srcH, dstW, dstH);
-    logi("native instance address: %p init result %d", renderer, ret);
+//    logi("native instance address: %p init result %d", renderer, ret);
     return ret;
 }
 
@@ -46,10 +46,10 @@ JNIEXPORT jboolean JNICALL Java_org_wysaid_nativePort_FrameRenderer_nativeInit
  * Signature: (Ljava/nio/ByteBuffer;I)V
  */
 JNIEXPORT void JNICALL Java_org_wysaid_nativePort_FrameRenderer_nativeUpdate
-        (JNIEnv *env, jobject, jlong addr, jint extTex, jfloatArray matrix) {
+        (JNIEnv *env, jobject, jlong addr, jint textureOES, jfloatArray matrix) {
     jfloat *mat = env->GetFloatArrayElements(matrix, nullptr);
     FrameRenderer *renderer = (FrameRenderer *) addr;
-    renderer->update(extTex, mat);
+    renderer->update(textureOES, mat);
     env->ReleaseFloatArrayElements(matrix, mat, 0);
 }
 
@@ -115,13 +115,13 @@ JNIEXPORT void JNICALL Java_org_wysaid_nativePort_FrameRenderer_nativeSetRenderF
  */
 JNIEXPORT void JNICALL Java_org_wysaid_nativePort_FrameRenderer_nativeSetFilterWithConfig
         (JNIEnv *env, jobject obj, jlong addr, jstring config) {
-    static CGETexLoadArg texLoadArg;
-    texLoadArg.env = env;
-    texLoadArg.cls = env->FindClass("org/wysaid/nativePort/CGENativeLibrary");
+    static CGETexLoadArg cgeTexLoadArg;
+    cgeTexLoadArg.env = env;
+    cgeTexLoadArg.cls = env->FindClass("org/wysaid/nativePort/CGENativeLibrary");
 
     FrameRenderer *renderer = (FrameRenderer *) addr;
     const char *configStr = env->GetStringUTFChars(config, 0);
-    renderer->setFilterWithConfig(configStr, cgeGlobalTextureLoadFunc, &texLoadArg);
+    renderer->setFilterWithConfig(configStr, cgeGlobalTextureLoadFunc, &cgeTexLoadArg);
     env->ReleaseStringUTFChars(config, configStr);
 }
 

@@ -26,7 +26,7 @@ extern "C" {
  */
 JNIEXPORT jlong JNICALL Java_org_wysaid_nativePort_FrameRecorder_nativeCreateRecorder
         (JNIEnv *env, jobject) {
-    cgePrintGLInfo();
+    printGLInfo();
     FrameRecorder *recorder = new FrameRecorder();
     return (jlong) recorder;
 }

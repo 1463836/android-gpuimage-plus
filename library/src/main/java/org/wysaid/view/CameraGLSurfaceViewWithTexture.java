@@ -37,7 +37,7 @@ import javax.microedition.khronos.opengles.GL10;
 public class CameraGLSurfaceViewWithTexture extends CameraGLSurfaceView implements SurfaceTexture.OnFrameAvailableListener {
 
     protected SurfaceTexture surfaceTexture;
-    protected int textureID;
+    protected int textureOES;
     protected boolean mIsTransformMatrixSet = false;
     protected FrameRecorder frameRecorder;
 
@@ -76,7 +76,7 @@ public class CameraGLSurfaceViewWithTexture extends CameraGLSurfaceView implemen
     //定制一些初始化操作
     public void setOnCreateCallback(final OnCreateCallback callback) {
         if (frameRecorder == null || callback == null) {
-            mOnCreateCallback = callback;
+            onCreateCallback = callback;
         } else {
             // Already created, just run.
             queueEvent(new Runnable() {
@@ -96,7 +96,7 @@ public class CameraGLSurfaceViewWithTexture extends CameraGLSurfaceView implemen
     public void onSurfaceCreated(GL10 gl, EGLConfig config) {
         frameRecorder = new FrameRecorder();
         mIsTransformMatrixSet = false;
-        if (!frameRecorder.init(recordWidth, recordHeight, recordWidth, recordHeight)) {
+        if (!frameRecorder.init(widthVideo, heightVideo, widthVideo, heightVideo)) {
             Log.e(LOG_TAG, "Frame Recorder init failed!");
         }
 
@@ -104,14 +104,12 @@ public class CameraGLSurfaceViewWithTexture extends CameraGLSurfaceView implemen
         frameRecorder.setSrcFlipScale(1.0f, -1.0f);
         frameRecorder.setRenderFlipScale(1.0f, -1.0f);
 
-        textureID = Common.genSurfaceTextureID();
-        surfaceTexture = new SurfaceTexture(textureID);
+        textureOES = Common.genSurfaceTextureID();
+        surfaceTexture = new SurfaceTexture(textureOES);
         surfaceTexture.setOnFrameAvailableListener(this);
 
         super.onSurfaceCreated(gl, config);
     }
-
-
 
 
     @Override
@@ -137,7 +135,7 @@ public class CameraGLSurfaceViewWithTexture extends CameraGLSurfaceView implemen
             CameraInstance.getInstance().tryOpenCamera(new CameraInstance.CameraOpenCallback() {
                 @Override
                 public void cameraReady() {
-                    Log.i(LOG_TAG, "tryOpenCamera OK...");
+//                    Log.i(LOG_TAG, "tryOpenCamera OK...");
                 }
             }, facing);
         }
@@ -162,7 +160,7 @@ public class CameraGLSurfaceViewWithTexture extends CameraGLSurfaceView implemen
         surfaceTexture.updateTexImage();
 
         surfaceTexture.getTransformMatrix(mTransformMatrix);
-        frameRecorder.update(textureID, mTransformMatrix);
+        frameRecorder.update(textureOES, mTransformMatrix);
 
         frameRecorder.runProc();
 
@@ -204,9 +202,9 @@ public class CameraGLSurfaceViewWithTexture extends CameraGLSurfaceView implemen
             surfaceTexture = null;
         }
 
-        if (textureID != 0) {
-            Common.deleteTextureID(textureID);
-            textureID = 0;
+        if (textureOES != 0) {
+            Common.deleteTextureID(textureOES);
+            textureOES = 0;
         }
 
         if (frameRecorder != null) {
@@ -243,15 +241,15 @@ public class CameraGLSurfaceViewWithTexture extends CameraGLSurfaceView implemen
                 IntBuffer buffer;
                 Bitmap bmp;
 
-                bufferTexID = Common.genBlankTextureID(recordWidth, recordHeight);
+                bufferTexID = Common.genBlankTextureID(widthVideo, heightVideo);
                 frameBufferObject.bindTexture(bufferTexID);
-                GLES20.glViewport(0, 0, recordWidth, recordHeight);
+                GLES20.glViewport(0, 0, widthVideo, heightVideo);
                 frameRecorder.drawCache();
-                buffer = IntBuffer.allocate(recordWidth * recordHeight);
-                GLES20.glReadPixels(0, 0, recordWidth, recordHeight, GLES20.GL_RGBA, GLES20.GL_UNSIGNED_BYTE, buffer);
-                bmp = Bitmap.createBitmap(recordWidth, recordHeight, Bitmap.Config.ARGB_8888);
+                buffer = IntBuffer.allocate(widthVideo * heightVideo);
+                GLES20.glReadPixels(0, 0, widthVideo, heightVideo, GLES20.GL_RGBA, GLES20.GL_UNSIGNED_BYTE, buffer);
+                bmp = Bitmap.createBitmap(widthVideo, heightVideo, Bitmap.Config.ARGB_8888);
                 bmp.copyPixelsFromBuffer(buffer);
-                Log.i(LOG_TAG, String.format("w: %d, h: %d", recordWidth, recordHeight));
+                Log.i(LOG_TAG, String.format("w: %d, h: %d", widthVideo, heightVideo));
 
                 frameBufferObject.release();
                 GLES20.glDeleteTextures(1, new int[]{bufferTexID}, 0);

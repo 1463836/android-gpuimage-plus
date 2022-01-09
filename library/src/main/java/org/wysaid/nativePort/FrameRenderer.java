@@ -11,10 +11,10 @@ public class FrameRenderer {
         NativeLibraryLoader.load();
     }
 
-    protected long mNativeAddress;
+    protected long nativeAddress;
 
     public FrameRenderer() {
-        mNativeAddress = nativeCreateRenderer();
+        nativeAddress = nativeCreateRenderer();
     }
 
     //Avoid 'nativeCreateRenderer' being called.
@@ -27,133 +27,133 @@ public class FrameRenderer {
     //dstWidth/dstHeight should not be changed after "init()" is called.
     //srcWidth/srcHeight could be changed by calling "srcResize" function.
     public boolean init(int srcWidth, int srcHeight, int dstWidth, int dstHeight) {
-        if (mNativeAddress != 0)
-            return nativeInit(mNativeAddress, srcWidth, srcHeight, dstWidth, dstHeight);
+        if (nativeAddress != 0)
+            return nativeInit(nativeAddress, srcWidth, srcHeight, dstWidth, dstHeight);
         return false;
     }
 
     //Will affect the framebuffer
-    public void update(int externalTexture, float[] transformMatrix) {
-        if (mNativeAddress != 0)
-            nativeUpdate(mNativeAddress, externalTexture, transformMatrix);
+    public void update(int textureOES, float[] transformMatrix) {
+        if (nativeAddress != 0)
+            nativeUpdate(nativeAddress, textureOES, transformMatrix);
     }
 
     public void runProc() {
-        if (mNativeAddress != 0)
-            nativeRunProc(mNativeAddress);
+        if (nativeAddress != 0)
+            nativeRunProc(nativeAddress);
     }
 
     //Won't affect the framebuffer
     //the arguments means the viewport.
     public void render(int x, int y, int width, int height) {
-        if (mNativeAddress != 0)
-            nativeRender(mNativeAddress, x, y, width, height);
+        if (nativeAddress != 0)
+            nativeRender(nativeAddress, x, y, width, height);
     }
 
     public void drawCache() {
-        if (mNativeAddress != 0)
-            nativeDrawCache(mNativeAddress);
+        if (nativeAddress != 0)
+            nativeDrawCache(nativeAddress);
     }
 
     //set the rotation of the camera texture
     public void setSrcRotation(float rad) {
-        if (mNativeAddress != 0)
-            nativeSetSrcRotation(mNativeAddress, rad);
+        if (nativeAddress != 0)
+            nativeSetSrcRotation(nativeAddress, rad);
     }
 
     //set the flip/scaling for the camera texture
     public void setSrcFlipScale(float x, float y) {
-        if (mNativeAddress != 0)
-            nativeSetSrcFlipScale(mNativeAddress, x, y);
+        if (nativeAddress != 0)
+            nativeSetSrcFlipScale(nativeAddress, x, y);
     }
 
     //set the render result's rotation
     public void setRenderRotation(float rad) {
-        if (mNativeAddress != 0)
-            nativeSetRenderRotation(mNativeAddress, rad);
+        if (nativeAddress != 0)
+            nativeSetRenderRotation(nativeAddress, rad);
     }
 
     //set the render result's flip/scaling
     public void setRenderFlipScale(float x, float y) {
-        if (mNativeAddress != 0)
-            nativeSetRenderFlipScale(mNativeAddress, x, y);
+        if (nativeAddress != 0)
+            nativeSetRenderFlipScale(nativeAddress, x, y);
     }
 
     //initialize the filters width config string
     public void setFilterWidthConfig(final String config) {
-        if (mNativeAddress != 0)
-            nativeSetFilterWithConfig(mNativeAddress, config);
+        if (nativeAddress != 0)
+            nativeSetFilterWithConfig(nativeAddress, config);
     }
 
     //set the mask rotation (radian)
     public void setMaskRotation(float rot) {
-        if (mNativeAddress != 0)
-            nativeSetMaskRotation(mNativeAddress, rot);
+        if (nativeAddress != 0)
+            nativeSetMaskRotation(nativeAddress, rot);
     }
 
     //set the mask flipscale
     public void setMaskFlipScale(float x, float y) {
-        if (mNativeAddress != 0)
-            nativeSetMaskFlipScale(mNativeAddress, x, y);
+        if (nativeAddress != 0)
+            nativeSetMaskFlipScale(nativeAddress, x, y);
 
     }
 
 
     //set the intensity of the filter
     public void setFilterIntensity(float value) {
-        if (mNativeAddress != 0)
-            nativeSetFilterIntensity(mNativeAddress, value);
+        if (nativeAddress != 0)
+            nativeSetFilterIntensity(nativeAddress, value);
     }
 
     public void srcResize(int width, int height) {
-        if (mNativeAddress != 0)
-            nativeSrcResize(mNativeAddress, width, height);
+        if (nativeAddress != 0)
+            nativeSrcResize(nativeAddress, width, height);
     }
 
     public void release() {
-        if (mNativeAddress != 0) {
-            nativeRelease(mNativeAddress);
-            mNativeAddress = 0;
+        if (nativeAddress != 0) {
+            nativeRelease(nativeAddress);
+            nativeAddress = 0;
         }
     }
 
 
     public void setMaskTexture(int texID, float aspectRatio) {
-        if (mNativeAddress != 0)
-            nativeSetMaskTexture(mNativeAddress, texID, aspectRatio);
+        if (nativeAddress != 0)
+            nativeSetMaskTexture(nativeAddress, texID, aspectRatio);
     }
 
     public void setMaskTextureRatio(float aspectRatio) {
-        if (mNativeAddress != 0)
-            nativeSetMaskTextureRatio(mNativeAddress, aspectRatio);
+        if (nativeAddress != 0)
+            nativeSetMaskTextureRatio(nativeAddress, aspectRatio);
     }
 
     public int queryBufferTexture() {
-        if (mNativeAddress != 0)
-            return nativeQueryBufferTexture(mNativeAddress);
+        if (nativeAddress != 0)
+            return nativeQueryBufferTexture(nativeAddress);
         return 0;
     }
 
     public long getImageHandler() {
-        return nativeGetImageHandler(mNativeAddress);
+        return nativeGetImageHandler(nativeAddress);
     }
 
     public void bindImageFBO() {
-        nativeBindImageFBO(mNativeAddress);
+        nativeBindImageFBO(nativeAddress);
     }
 
     public void swapImageFBO() {
-        nativeSwapBufferFBO(mNativeAddress);
+        nativeSwapBufferFBO(nativeAddress);
     }
 
     //nativeFilter 为 JNI 下的 CGEImageFilterInterfaceAbstract 或者其子类.
     public void processWithFilter(long nativeFilter) {
-        nativeProcessWithFilter(mNativeAddress, nativeFilter);
+        nativeProcessWithFilter(nativeAddress, nativeFilter);
     }
 
     //用于加入自定义滤镜
     public void setNativeFilter(long nativeFilter) {
-        nativeSetFilterWithAddr(mNativeAddress, nativeFilter);
+        nativeSetFilterWithAddr(nativeAddress, nativeFilter);
     }
 
     /////////////////      protected         ///////////////////////
@@ -162,7 +162,7 @@ public class FrameRenderer {
 
     protected native boolean nativeInit(long holder, int srcWidth, int srcHeight, int dstWidth, int dstHeight);
 
-    protected native void nativeUpdate(long holder, int externalTexture, float[] transformMatrix);
+    protected native void nativeUpdate(long holder, int textureOES, float[] transformMatrix);
 
     protected native void nativeRunProc(long holder);
 

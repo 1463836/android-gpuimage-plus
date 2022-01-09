@@ -6,7 +6,6 @@ import android.graphics.SurfaceTexture;
 import android.hardware.Camera;
 import android.opengl.GLES20;
 import android.util.AttributeSet;
-import android.util.Log;
 
 import org.wysaid.camera.CameraInstance;
 import org.wysaid.common.Common;
@@ -147,7 +146,7 @@ public class CameraGLSurfaceViewWithBuffer extends CameraGLSurfaceView implement
             CameraInstance.getInstance().tryOpenCamera(new CameraInstance.CameraOpenCallback() {
                 @Override
                 public void cameraReady() {
-                    Log.i(LOG_TAG, "tryOpenCamera OK...");
+//                    Log.i(LOG_TAG, "tryOpenCamera OK...");
                 }
             }, facing);
         }

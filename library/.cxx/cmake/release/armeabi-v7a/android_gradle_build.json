@@ -1,7 +1,7 @@
 {
   "stringTable": {
     "0": "F:/temp/android-gpuimage-plus/library/.cxx/cmake/release/armeabi-v7a",
-    "1": "--target=armv7-none-linux-androideabi --gcc-toolchain=E:/Android_development_windows/android-sdk-windows/ndk/16.1.4479499/toolchains/arm-linux-androideabi-4.9/prebuilt/windows-x86_64 --sysroot=E:/Android_development_windows/android-sdk-windows/ndk/16.1.4479499/sysroot -Dnative_lib_EXPORTS -IF:/temp/android-gpuimage-plus/library/src/main/cpp/cge/common -IF:/temp/android-gpuimage-plus/library/src/main/cpp/cge/extends -IF:/temp/android-gpuimage-plus/library/src/main/cpp/cge/filters -IF:/temp/android-gpuimage-plus/library/src/main/cpp/include -IF:/temp/android-gpuimage-plus/library/src/main/cpp/include/filters -IF:/temp/android-gpuimage-plus/library/src/main/cpp/interface -IF:/temp/android-gpuimage-plus/library/src/main/cpp/source -IF:/temp/android-gpuimage-plus/library/src/main/cpp/faceTracker -IF:/temp/android-gpuimage-plus/library/src/main/cpp/faceTracker/FaceTracker -IF:/temp/android-gpuimage-plus/library/src/main/cpp/opencv -IF:/temp/android-gpuimage-plus/library/src/main/cpp/ffmpeg -isystem E:/Android_development_windows/android-sdk-windows/ndk/16.1.4479499/sources/cxx-stl/gnu-libstdc++/4.9/include -isystem E:/Android_development_windows/android-sdk-windows/ndk/16.1.4479499/sources/cxx-stl/gnu-libstdc++/4.9/libs/armeabi-v7a/include -isystem E:/Android_development_windows/android-sdk-windows/ndk/16.1.4479499/sources/cxx-stl/gnu-libstdc++/4.9/include/backward -isystem E:/Android_development_windows/android-sdk-windows/ndk/16.1.4479499/sysroot/usr/include/arm-linux-androideabi -D__ANDROID_API__=14 -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -march=armv7-a -mfloat-abi=softfp -mfpu=vfpv3-d16 -fno-integrated-as -mthumb -Wa,--noexecstack -Wformat -Werror=format-security -fPIC -frtti -fexceptions -std=c++11 -Os -DNDEBUG -fPIC"
+    "1": "--target=armv7-none-linux-androideabi --gcc-toolchain=E:/Android_development_windows/android-sdk-windows/ndk/16.1.4479499/toolchains/arm-linux-androideabi-4.9/prebuilt/windows-x86_64 --sysroot=E:/Android_development_windows/android-sdk-windows/ndk/16.1.4479499/sysroot -Dnative_lib_EXPORTS -IF:/temp/android-gpuimage-plus/library/src/main/cpp/common -IF:/temp/android-gpuimage-plus/library/src/main/cpp/filters -IF:/temp/android-gpuimage-plus/library/src/main/cpp/include -IF:/temp/android-gpuimage-plus/library/src/main/cpp/interface -IF:/temp/android-gpuimage-plus/library/src/main/cpp/source -IF:/temp/android-gpuimage-plus/library/src/main/cpp/faceTracker -IF:/temp/android-gpuimage-plus/library/src/main/cpp/faceTracker/FaceTracker -IF:/temp/android-gpuimage-plus/library/src/main/cpp/opencv -IF:/temp/android-gpuimage-plus/library/src/main/cpp/ffmpeg -isystem E:/Android_development_windows/android-sdk-windows/ndk/16.1.4479499/sources/cxx-stl/gnu-libstdc++/4.9/include -isystem E:/Android_development_windows/android-sdk-windows/ndk/16.1.4479499/sources/cxx-stl/gnu-libstdc++/4.9/libs/armeabi-v7a/include -isystem E:/Android_development_windows/android-sdk-windows/ndk/16.1.4479499/sources/cxx-stl/gnu-libstdc++/4.9/include/backward -isystem E:/Android_development_windows/android-sdk-windows/ndk/16.1.4479499/sysroot/usr/include/arm-linux-androideabi -D__ANDROID_API__=14 -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -march=armv7-a -mfloat-abi=softfp -mfpu=vfpv3-d16 -fno-integrated-as -mthumb -Wa,--noexecstack -Wformat -Werror=format-security -fPIC -frtti -fexceptions -std=c++11 -Os -DNDEBUG -fPIC"
   },
   "buildFiles": [
     "E:\\android_development_windows\\android-sdk-windows\\ndk\\16.1.4479499\\build\\cmake\\android.toolchain.cmake",
@@ -20,262 +20,262 @@
       "artifactName": "native-lib",
       "files": [
         {
-          "src": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\cge\\common\\CommonDefine.cpp",
+          "src": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\common\\CommonDefine.cpp",
           "flagsOrdinal": 1,
           "workingDirectoryOrdinal": 0
         },
         {
-          "src": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\cge\\common\\GLFunctions.cpp",
+          "src": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\common\\GLFunctions.cpp",
           "flagsOrdinal": 1,
           "workingDirectoryOrdinal": 0
         },
         {
-          "src": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\cge\\common\\Global.cpp",
+          "src": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\common\\Global.cpp",
           "flagsOrdinal": 1,
           "workingDirectoryOrdinal": 0
         },
         {
-          "src": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\cge\\common\\ImageFilter.cpp",
+          "src": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\common\\ImageFilter.cpp",
           "flagsOrdinal": 1,
           "workingDirectoryOrdinal": 0
         },
         {
-          "src": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\cge\\common\\ImageHandler.cpp",
+          "src": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\common\\ImageHandler.cpp",
           "flagsOrdinal": 1,
           "workingDirectoryOrdinal": 0
         },
         {
-          "src": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\cge\\common\\ShaderFunctions.cpp",
+          "src": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\common\\ShaderFunctions.cpp",
           "flagsOrdinal": 1,
           "workingDirectoryOrdinal": 0
         },
         {
-          "src": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\cge\\common\\TextureUtils.cpp",
+          "src": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\common\\TextureUtils.cpp",
           "flagsOrdinal": 1,
           "workingDirectoryOrdinal": 0
         },
         {
-          "src": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\cge\\extends\\Thread.cpp",
+          "src": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\common\\Thread.cpp",
           "flagsOrdinal": 1,
           "workingDirectoryOrdinal": 0
         },
         {
-          "src": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\cge\\filters\\AdvancedEffects.cpp",
+          "src": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\filters\\AdvancedEffects.cpp",
           "flagsOrdinal": 1,
           "workingDirectoryOrdinal": 0
         },
         {
-          "src": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\cge\\filters\\AdvancedEffectsCommon.cpp",
+          "src": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\filters\\AdvancedEffectsCommon.cpp",
           "flagsOrdinal": 1,
           "workingDirectoryOrdinal": 0
         },
         {
-          "src": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\cge\\filters\\BeautifyFilter.cpp",
+          "src": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\filters\\BeautifyFilter.cpp",
           "flagsOrdinal": 1,
           "workingDirectoryOrdinal": 0
         },
         {
-          "src": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\cge\\filters\\BilateralBlurFilter.cpp",
+          "src": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\filters\\BilateralBlurFilter.cpp",
           "flagsOrdinal": 1,
           "workingDirectoryOrdinal": 0
         },
         {
-          "src": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\cge\\filters\\BlendFilter.cpp",
+          "src": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\filters\\BlendFilter.cpp",
           "flagsOrdinal": 1,
           "workingDirectoryOrdinal": 0
         },
         {
-          "src": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\cge\\filters\\BrightnessAdjust.cpp",
+          "src": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\filters\\BrightnessAdjust.cpp",
           "flagsOrdinal": 1,
           "workingDirectoryOrdinal": 0
         },
         {
-          "src": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\cge\\filters\\ColorBalanceAdjust.cpp",
+          "src": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\filters\\ColorBalanceAdjust.cpp",
           "flagsOrdinal": 1,
           "workingDirectoryOrdinal": 0
         },
         {
-          "src": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\cge\\filters\\ColorLevelAdjust.cpp",
+          "src": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\filters\\ColorLevelAdjust.cpp",
           "flagsOrdinal": 1,
           "workingDirectoryOrdinal": 0
         },
         {
-          "src": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\cge\\filters\\ColorMappingFilter.cpp",
+          "src": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\filters\\ColorMappingFilter.cpp",
           "flagsOrdinal": 1,
           "workingDirectoryOrdinal": 0
         },
         {
-          "src": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\cge\\filters\\ContrastAdjust.cpp",
+          "src": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\filters\\ContrastAdjust.cpp",
           "flagsOrdinal": 1,
           "workingDirectoryOrdinal": 0
         },
         {
-          "src": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\cge\\filters\\CrosshatchFilter.cpp",
+          "src": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\filters\\CrosshatchFilter.cpp",
           "flagsOrdinal": 1,
           "workingDirectoryOrdinal": 0
         },
         {
-          "src": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\cge\\filters\\CurveAdjust.cpp",
+          "src": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\filters\\CurveAdjust.cpp",
           "flagsOrdinal": 1,
           "workingDirectoryOrdinal": 0
         },
         {
-          "src": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\cge\\filters\\DataParsingEngine.cpp",
+          "src": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\filters\\DataParsingEngine.cpp",
           "flagsOrdinal": 1,
           "workingDirectoryOrdinal": 0
         },
         {
-          "src": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\cge\\filters\\DynamicFilters.cpp",
+          "src": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\filters\\DynamicFilters.cpp",
           "flagsOrdinal": 1,
           "workingDirectoryOrdinal": 0
         },
         {
-          "src": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\cge\\filters\\DynamicWaveFilter.cpp",
+          "src": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\filters\\DynamicWaveFilter.cpp",
           "flagsOrdinal": 1,
           "workingDirectoryOrdinal": 0
         },
         {
-          "src": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\cge\\filters\\EdgeFilter.cpp",
+          "src": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\filters\\EdgeFilter.cpp",
           "flagsOrdinal": 1,
           "workingDirectoryOrdinal": 0
         },
         {
-          "src": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\cge\\filters\\EmbossFilter.cpp",
+          "src": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\filters\\EmbossFilter.cpp",
           "flagsOrdinal": 1,
           "workingDirectoryOrdinal": 0
         },
         {
-          "src": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\cge\\filters\\ExposureAdjust.cpp",
+          "src": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\filters\\ExposureAdjust.cpp",
           "flagsOrdinal": 1,
           "workingDirectoryOrdinal": 0
         },
         {
-          "src": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\cge\\filters\\FilterBasic.cpp",
+          "src": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\filters\\FilterBasic.cpp",
           "flagsOrdinal": 1,
           "workingDirectoryOrdinal": 0
         },
         {
-          "src": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\cge\\filters\\HalftoneFilter.cpp",
+          "src": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\filters\\HalftoneFilter.cpp",
           "flagsOrdinal": 1,
           "workingDirectoryOrdinal": 0
         },
         {
-          "src": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\cge\\filters\\HazeFilter.cpp",
+          "src": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\filters\\HazeFilter.cpp",
           "flagsOrdinal": 1,
           "workingDirectoryOrdinal": 0
         },
         {
-          "src": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\cge\\filters\\HueAdjust.cpp",
+          "src": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\filters\\HueAdjust.cpp",
           "flagsOrdinal": 1,
           "workingDirectoryOrdinal": 0
         },
         {
-          "src": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\cge\\filters\\LerpblurFilter.cpp",
+          "src": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\filters\\LerpblurFilter.cpp",
           "flagsOrdinal": 1,
           "workingDirectoryOrdinal": 0
         },
         {
-          "src": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\cge\\filters\\LiquifyFilter.cpp",
+          "src": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\filters\\LiquifyFilter.cpp",
           "flagsOrdinal": 1,
           "workingDirectoryOrdinal": 0
         },
         {
-          "src": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\cge\\filters\\LookupFilter.cpp",
+          "src": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\filters\\LookupFilter.cpp",
           "flagsOrdinal": 1,
           "workingDirectoryOrdinal": 0
         },
         {
-          "src": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\cge\\filters\\MaxValueFilter.cpp",
+          "src": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\filters\\MaxValueFilter.cpp",
           "flagsOrdinal": 1,
           "workingDirectoryOrdinal": 0
         },
         {
-          "src": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\cge\\filters\\MidValueFilter.cpp",
+          "src": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\filters\\MidValueFilter.cpp",
           "flagsOrdinal": 1,
           "workingDirectoryOrdinal": 0
         },
         {
-          "src": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\cge\\filters\\MinValueFilter.cpp",
+          "src": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\filters\\MinValueFilter.cpp",
           "flagsOrdinal": 1,
           "workingDirectoryOrdinal": 0
         },
         {
-          "src": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\cge\\filters\\MonochromeAdjust.cpp",
+          "src": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\filters\\MonochromeAdjust.cpp",
           "flagsOrdinal": 1,
           "workingDirectoryOrdinal": 0
         },
         {
-          "src": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\cge\\filters\\MosaicBlurFilter.cpp",
+          "src": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\filters\\MosaicBlurFilter.cpp",
           "flagsOrdinal": 1,
           "workingDirectoryOrdinal": 0
         },
         {
-          "src": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\cge\\filters\\MotionFlowFilter.cpp",
+          "src": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\filters\\MotionFlowFilter.cpp",
           "flagsOrdinal": 1,
           "workingDirectoryOrdinal": 0
         },
         {
-          "src": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\cge\\filters\\MultipleEffects.cpp",
+          "src": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\filters\\MultipleEffects.cpp",
           "flagsOrdinal": 1,
           "workingDirectoryOrdinal": 0
         },
         {
-          "src": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\cge\\filters\\MultipleEffectsCommon.cpp",
+          "src": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\filters\\MultipleEffectsCommon.cpp",
           "flagsOrdinal": 1,
           "workingDirectoryOrdinal": 0
         },
         {
-          "src": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\cge\\filters\\PolarPixellateFilter.cpp",
+          "src": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\filters\\PolarPixellateFilter.cpp",
           "flagsOrdinal": 1,
           "workingDirectoryOrdinal": 0
         },
         {
-          "src": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\cge\\filters\\PolkaDotFilter.cpp",
+          "src": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\filters\\PolkaDotFilter.cpp",
           "flagsOrdinal": 1,
           "workingDirectoryOrdinal": 0
         },
         {
-          "src": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\cge\\filters\\RandomBlurFilter.cpp",
+          "src": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\filters\\RandomBlurFilter.cpp",
           "flagsOrdinal": 1,
           "workingDirectoryOrdinal": 0
         },
         {
-          "src": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\cge\\filters\\SaturationAdjust.cpp",
+          "src": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\filters\\SaturationAdjust.cpp",
           "flagsOrdinal": 1,
           "workingDirectoryOrdinal": 0
         },
         {
-          "src": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\cge\\filters\\SelectiveColorAdjust.cpp",
+          "src": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\filters\\SelectiveColorAdjust.cpp",
           "flagsOrdinal": 1,
           "workingDirectoryOrdinal": 0
         },
         {
-          "src": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\cge\\filters\\ShadowHighlightAdjust.cpp",
+          "src": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\filters\\ShadowHighlightAdjust.cpp",
           "flagsOrdinal": 1,
           "workingDirectoryOrdinal": 0
         },
         {
-          "src": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\cge\\filters\\SharpenBlurAdjust.cpp",
+          "src": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\filters\\SharpenBlurAdjust.cpp",
           "flagsOrdinal": 1,
           "workingDirectoryOrdinal": 0
         },
         {
-          "src": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\cge\\filters\\SketchFilter.cpp",
+          "src": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\filters\\SketchFilter.cpp",
           "flagsOrdinal": 1,
           "workingDirectoryOrdinal": 0
         },
         {
-          "src": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\cge\\filters\\TiltshiftAdjust.cpp",
+          "src": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\filters\\TiltshiftAdjust.cpp",
           "flagsOrdinal": 1,
           "workingDirectoryOrdinal": 0
         },
         {
-          "src": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\cge\\filters\\VignetteAdjust.cpp",
+          "src": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\filters\\VignetteAdjust.cpp",
           "flagsOrdinal": 1,
           "workingDirectoryOrdinal": 0
         },
         {
-          "src": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\cge\\filters\\WhiteBalanceAdjust.cpp",
+          "src": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\filters\\WhiteBalanceAdjust.cpp",
           "flagsOrdinal": 1,
           "workingDirectoryOrdinal": 0
         },

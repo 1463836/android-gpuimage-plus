@@ -16,6 +16,7 @@
 #include "TextureUtils.h"
 #include "Vec.h"
 
+
 namespace CGE {
     class FastFrameHandler : public ImageHandler {
     public:
@@ -44,7 +45,7 @@ namespace CGE {
         void srcResize(int width, int height);
 
         //会影响framebuffer设置。
-        virtual void update(GLuint externalTexture, float *transformMatrix);
+        virtual void update(GLuint textureOES, float *matrix);
 
         //滤镜process接口, 不调用将不产生滤镜效果
         virtual void runProc();
@@ -73,7 +74,7 @@ namespace CGE {
         void setRenderFlipScale(float x, float y);
 
         void
-        setFilterWithConfig(CGEConstString config, CGETextureLoadFun texLoadFunc, void *loadArg);
+        setFilterWithConfig(ConstString config, CGETextureLoadFun cgeGlobalTextureLoadFunc, void *cgeTexLoadArg);
 
         void setFilterIntensity(float value);
 
@@ -104,13 +105,13 @@ namespace CGE {
 
         FastFrameHandler *fastFrameHandler;
         //主要用于重绘external_OES类型texture
-        TextureDrawer *textureDrawer;
-        TextureDrawer4ExtOES *textureDrawerExtOES;
+        TextureDrawer *textureDrawBase;
+        TextureDrawer4ExtOES *textureDrawOES;
 
         Sizei srcSize, dstSize;
         Vec4i viewport;
 
-        TextureDrawer *cacheDrawer;
+        TextureDrawer *textureDrawCache;
         bool m_isUsingMask;
 
         //辅助参数

@@ -285,7 +285,7 @@ public class VideoPlayerDemoActivity extends AppCompatActivity {
     @Override
     public void onPause() {
         super.onPause();
-        Log.i(VideoPlayerGLSurfaceView.LOG_TAG, "activity onPause...");
+//        Log.i(VideoPlayerGLSurfaceView.LOG_TAG, "activity onPause...");
         mPlayerView.release();
         mPlayerView.onPause();
     }

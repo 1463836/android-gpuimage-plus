@@ -53,7 +53,7 @@ public class TrackingCameraGLSurfaceView extends CameraGLSurfaceViewWithBuffer {
         if (proc == null)
             return true;
 
-        if (!proc.setup(recordWidth, recordHeight)) {
+        if (!proc.setup(widthVideo, heightVideo)) {
             Log.e(LOG_TAG, "setup proc failed!");
             proc.release();
             return false;

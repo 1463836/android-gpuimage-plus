@@ -12,6 +12,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
@@ -112,6 +113,7 @@ public class CameraDemoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_camera_demo);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
 //        lastVideoPathFileName = FileUtil.getPathInPackage(CameraDemoActivity.this, true) + "/lastVideoPath.txt";
         Button takePicBtn = (Button) findViewById(R.id.takePicBtn);
@@ -237,7 +239,7 @@ public class CameraDemoActivity extends AppCompatActivity {
         cameraView.setOnCreateCallback(new CameraRecordGLSurfaceView.OnCreateCallback() {
             @Override
             public void createOver() {
-                Log.i(LOG_TAG, "view onCreate");
+//                Log.i(LOG_TAG, "view onCreate");
             }
         });
 
@@ -286,7 +288,7 @@ public class CameraDemoActivity extends AppCompatActivity {
                                     Log.e(LOG_TAG, String.format("Focus OK, pos: %g, %g", focusX, focusY));
                                 } else {
                                     Log.e(LOG_TAG, String.format("Focus failed, pos: %g, %g", focusX, focusY));
-                                  CameraInstance.getInstance().setFocusMode(Camera.Parameters.FOCUS_MODE_CONTINUOUS_VIDEO);
+                                    CameraInstance.getInstance().setFocusMode(Camera.Parameters.FOCUS_MODE_CONTINUOUS_VIDEO);
                                 }
                             }
                         });
@@ -319,6 +321,8 @@ public class CameraDemoActivity extends AppCompatActivity {
         cameraView.queueEvent(new Runnable() {
             @Override
             public void run() {
+                Log.w(CameraDemoActivity.class.getSimpleName(), "run: customFilterIndex "+customFilterIndex );
+
                 long customFilter = CGENativeLibrary.cgeCreateCustomNativeFilter(customFilterIndex, 1.0f, true);
                 cameraView.getRecorder().setNativeFilter(customFilter);
             }
@@ -326,9 +330,7 @@ public class CameraDemoActivity extends AppCompatActivity {
     }
 
     public void dynamicFilterClicked(View view) {
-
         cameraView.setFilterWithConfig("#unpack @dynamic mf 10 0");
-
     }
 
     @Override
@@ -347,7 +349,7 @@ public class CameraDemoActivity extends AppCompatActivity {
     public void onPause() {
         super.onPause();
         CameraInstance.getInstance().stopCamera();
-        Log.i(LOG_TAG, "activity onPause...");
+//        Log.i(LOG_TAG, "activity onPause...");
         cameraView.release(null);
         cameraView.onPause();
     }
