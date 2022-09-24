@@ -19,6 +19,384 @@
   },
   {
     "level": "INFO",
+    "message": "Parsing E:\\Android_development_windows\\android-sdk-windows\\build-tools\\22.0.1\\package.xml",
+    "file": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\CMakeLists.txt",
+    "tag": "release|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing E:\\Android_development_windows\\android-sdk-windows\\build-tools\\23.0.1\\package.xml",
+    "file": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\CMakeLists.txt",
+    "tag": "release|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing E:\\Android_development_windows\\android-sdk-windows\\build-tools\\27.0.3\\package.xml",
+    "file": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\CMakeLists.txt",
+    "tag": "release|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing E:\\Android_development_windows\\android-sdk-windows\\build-tools\\28.0.3\\package.xml",
+    "file": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\CMakeLists.txt",
+    "tag": "release|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing E:\\Android_development_windows\\android-sdk-windows\\build-tools\\29.0.2\\package.xml",
+    "file": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\CMakeLists.txt",
+    "tag": "release|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing E:\\Android_development_windows\\android-sdk-windows\\build-tools\\29.0.3\\package.xml",
+    "file": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\CMakeLists.txt",
+    "tag": "release|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing E:\\Android_development_windows\\android-sdk-windows\\build-tools\\30.0.0\\package.xml",
+    "file": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\CMakeLists.txt",
+    "tag": "release|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing E:\\Android_development_windows\\android-sdk-windows\\build-tools\\30.0.0-rc2\\package.xml",
+    "file": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\CMakeLists.txt",
+    "tag": "release|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing E:\\Android_development_windows\\android-sdk-windows\\build-tools\\30.0.1\\package.xml",
+    "file": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\CMakeLists.txt",
+    "tag": "release|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing E:\\Android_development_windows\\android-sdk-windows\\build-tools\\30.0.2\\package.xml",
+    "file": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\CMakeLists.txt",
+    "tag": "release|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing E:\\Android_development_windows\\android-sdk-windows\\build-tools\\30.0.3\\package.xml",
+    "file": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\CMakeLists.txt",
+    "tag": "release|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing E:\\Android_development_windows\\android-sdk-windows\\cmake\\3.10.2.4988404\\package.xml",
+    "file": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\CMakeLists.txt",
+    "tag": "release|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing E:\\Android_development_windows\\android-sdk-windows\\cmake\\3.6.4111459\\package.xml",
+    "file": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\CMakeLists.txt",
+    "tag": "release|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing E:\\Android_development_windows\\android-sdk-windows\\docs\\package.xml",
+    "file": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\CMakeLists.txt",
+    "tag": "release|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing E:\\Android_development_windows\\android-sdk-windows\\emulator\\package.xml",
+    "file": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\CMakeLists.txt",
+    "tag": "release|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing E:\\Android_development_windows\\android-sdk-windows\\extras\\android\\m2repository\\package.xml",
+    "file": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\CMakeLists.txt",
+    "tag": "release|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing E:\\Android_development_windows\\android-sdk-windows\\extras\\android\\support\\package.xml",
+    "file": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\CMakeLists.txt",
+    "tag": "release|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing E:\\Android_development_windows\\android-sdk-windows\\extras\\google\\gcm\\package.xml",
+    "file": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\CMakeLists.txt",
+    "tag": "release|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing E:\\Android_development_windows\\android-sdk-windows\\extras\\google\\google_play_services_fit_preview\\package.xml",
+    "file": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\CMakeLists.txt",
+    "tag": "release|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing E:\\Android_development_windows\\android-sdk-windows\\extras\\google\\google_play_services_froyo\\package.xml",
+    "file": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\CMakeLists.txt",
+    "tag": "release|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing E:\\Android_development_windows\\android-sdk-windows\\extras\\google\\m2repository\\package.xml",
+    "file": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\CMakeLists.txt",
+    "tag": "release|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing E:\\Android_development_windows\\android-sdk-windows\\extras\\google\\play_apk_expansion\\package.xml",
+    "file": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\CMakeLists.txt",
+    "tag": "release|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing E:\\Android_development_windows\\android-sdk-windows\\extras\\google\\play_billing\\package.xml",
+    "file": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\CMakeLists.txt",
+    "tag": "release|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing E:\\Android_development_windows\\android-sdk-windows\\extras\\google\\play_licensing\\package.xml",
+    "file": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\CMakeLists.txt",
+    "tag": "release|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing E:\\Android_development_windows\\android-sdk-windows\\extras\\google\\usb_driver\\package.xml",
+    "file": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\CMakeLists.txt",
+    "tag": "release|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing E:\\Android_development_windows\\android-sdk-windows\\extras\\google\\webdriver\\package.xml",
+    "file": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\CMakeLists.txt",
+    "tag": "release|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing E:\\Android_development_windows\\android-sdk-windows\\extras\\m2repository\\com\\android\\support\\constraint\\constraint-layout-solver\\1.0.2\\package.xml",
+    "file": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\CMakeLists.txt",
+    "tag": "release|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing E:\\Android_development_windows\\android-sdk-windows\\extras\\m2repository\\com\\android\\support\\constraint\\constraint-layout\\1.0.2\\package.xml",
+    "file": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\CMakeLists.txt",
+    "tag": "release|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing E:\\Android_development_windows\\android-sdk-windows\\lldb\\3.1\\package.xml",
+    "file": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\CMakeLists.txt",
+    "tag": "release|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing E:\\Android_development_windows\\android-sdk-windows\\ndk\\16.1.4479499\\package.xml",
+    "file": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\CMakeLists.txt",
+    "tag": "release|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing E:\\Android_development_windows\\android-sdk-windows\\ndk\\21.1.6352462\\package.xml",
+    "file": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\CMakeLists.txt",
+    "tag": "release|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing E:\\Android_development_windows\\android-sdk-windows\\ndk\\21.2.6472646\\package.xml",
+    "file": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\CMakeLists.txt",
+    "tag": "release|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing legacy package: E:\\Android_development_windows\\android-sdk-windows\\ndk\\android-ndk-r13b",
+    "file": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\CMakeLists.txt",
+    "tag": "release|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing E:\\Android_development_windows\\android-sdk-windows\\patcher\\v4\\package.xml",
+    "file": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\CMakeLists.txt",
+    "tag": "release|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing E:\\Android_development_windows\\android-sdk-windows\\platform-tools\\package.xml",
+    "file": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\CMakeLists.txt",
+    "tag": "release|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing E:\\Android_development_windows\\android-sdk-windows\\platforms\\android-10\\package.xml",
+    "file": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\CMakeLists.txt",
+    "tag": "release|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing E:\\Android_development_windows\\android-sdk-windows\\platforms\\android-14\\package.xml",
+    "file": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\CMakeLists.txt",
+    "tag": "release|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing E:\\Android_development_windows\\android-sdk-windows\\platforms\\android-15\\package.xml",
+    "file": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\CMakeLists.txt",
+    "tag": "release|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing E:\\Android_development_windows\\android-sdk-windows\\platforms\\android-16\\package.xml",
+    "file": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\CMakeLists.txt",
+    "tag": "release|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing E:\\Android_development_windows\\android-sdk-windows\\platforms\\android-18\\package.xml",
+    "file": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\CMakeLists.txt",
+    "tag": "release|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing E:\\Android_development_windows\\android-sdk-windows\\platforms\\android-19\\package.xml",
+    "file": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\CMakeLists.txt",
+    "tag": "release|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing E:\\Android_development_windows\\android-sdk-windows\\platforms\\android-20\\package.xml",
+    "file": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\CMakeLists.txt",
+    "tag": "release|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing E:\\Android_development_windows\\android-sdk-windows\\platforms\\android-21\\package.xml",
+    "file": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\CMakeLists.txt",
+    "tag": "release|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing E:\\Android_development_windows\\android-sdk-windows\\platforms\\android-22\\package.xml",
+    "file": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\CMakeLists.txt",
+    "tag": "release|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing E:\\Android_development_windows\\android-sdk-windows\\platforms\\android-23\\package.xml",
+    "file": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\CMakeLists.txt",
+    "tag": "release|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing E:\\Android_development_windows\\android-sdk-windows\\platforms\\android-24\\package.xml",
+    "file": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\CMakeLists.txt",
+    "tag": "release|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing E:\\Android_development_windows\\android-sdk-windows\\platforms\\android-25\\package.xml",
+    "file": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\CMakeLists.txt",
+    "tag": "release|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing E:\\Android_development_windows\\android-sdk-windows\\platforms\\android-26\\package.xml",
+    "file": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\CMakeLists.txt",
+    "tag": "release|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing E:\\Android_development_windows\\android-sdk-windows\\platforms\\android-27\\package.xml",
+    "file": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\CMakeLists.txt",
+    "tag": "release|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing E:\\Android_development_windows\\android-sdk-windows\\platforms\\android-28\\package.xml",
+    "file": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\CMakeLists.txt",
+    "tag": "release|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing E:\\Android_development_windows\\android-sdk-windows\\platforms\\android-29\\package.xml",
+    "file": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\CMakeLists.txt",
+    "tag": "release|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing E:\\Android_development_windows\\android-sdk-windows\\platforms\\android-30\\package.xml",
+    "file": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\CMakeLists.txt",
+    "tag": "release|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing E:\\Android_development_windows\\android-sdk-windows\\platforms\\android-8\\package.xml",
+    "file": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\CMakeLists.txt",
+    "tag": "release|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing E:\\Android_development_windows\\android-sdk-windows\\samples\\android-21\\package.xml",
+    "file": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\CMakeLists.txt",
+    "tag": "release|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing E:\\Android_development_windows\\android-sdk-windows\\sources\\android-25\\package.xml",
+    "file": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\CMakeLists.txt",
+    "tag": "release|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing E:\\Android_development_windows\\android-sdk-windows\\sources\\android-26\\package.xml",
+    "file": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\CMakeLists.txt",
+    "tag": "release|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing E:\\Android_development_windows\\android-sdk-windows\\sources\\android-27\\package.xml",
+    "file": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\CMakeLists.txt",
+    "tag": "release|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing E:\\Android_development_windows\\android-sdk-windows\\sources\\android-28\\package.xml",
+    "file": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\CMakeLists.txt",
+    "tag": "release|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing E:\\Android_development_windows\\android-sdk-windows\\sources\\android-29\\package.xml",
+    "file": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\CMakeLists.txt",
+    "tag": "release|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing E:\\Android_development_windows\\android-sdk-windows\\sources\\android-30\\package.xml",
+    "file": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\CMakeLists.txt",
+    "tag": "release|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing E:\\Android_development_windows\\android-sdk-windows\\system-images\\android-30\\google_apis\\x86\\package.xml",
+    "file": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\CMakeLists.txt",
+    "tag": "release|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing E:\\Android_development_windows\\android-sdk-windows\\system-images\\android-30\\google_apis_playstore\\x86\\package.xml",
+    "file": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\CMakeLists.txt",
+    "tag": "release|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing E:\\Android_development_windows\\android-sdk-windows\\tools\\package.xml",
+    "file": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\CMakeLists.txt",
+    "tag": "release|x86"
+  },
+  {
+    "level": "INFO",
     "message": "- CMake found in SDK at \u0027E:\\Android_development_windows\\android-sdk-windows\\cmake\\3.10.2.4988404\u0027 had version \u00273.10.2\u0027",
     "file": "F:\\temp\\android-gpuimage-plus\\library\\src\\main\\cpp\\CMakeLists.txt",
     "tag": "release|x86"

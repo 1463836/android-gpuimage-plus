@@ -6,8 +6,8 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.MediaPlayer;
 import android.net.Uri;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -25,7 +25,7 @@ import org.wysaid.view.VideoPlayerGLSurfaceView;
 
 public class VideoPlayerDemoActivity extends AppCompatActivity {
 
-    VideoPlayerGLSurfaceView mPlayerView;
+    VideoPlayerGLSurfaceView videoGLSurfaceView;
     Button mShapeBtn;
     Button mTakeshotBtn;
     Button mGalleryBtn;
@@ -33,6 +33,12 @@ public class VideoPlayerDemoActivity extends AppCompatActivity {
     String mCurrentConfig;
 
     public static final int REQUEST_CODE_PICK_VIDEO = 1;
+
+    String[] filePaths = {
+//            "android.resource://" + getPackageName() + "/" + R.raw.test,
+            "http://wge.wysaid.org/res/video/1.mp4",
+            "http://wysaid.org/p/test.mp4",
+    };
 
     private VideoPlayerGLSurfaceView.PlayCompletionCallback playCompletionCallback = new VideoPlayerGLSurfaceView.PlayCompletionCallback() {
         @Override
@@ -48,7 +54,7 @@ public class VideoPlayerDemoActivity extends AppCompatActivity {
         }
     };
 
-    class MyVideoButton extends Button implements View.OnClickListener {
+    class MyVideoButton extends android.support.v7.widget.AppCompatButton implements View.OnClickListener {
 
         Uri videoUri;
         VideoPlayerGLSurfaceView videoView;
@@ -65,10 +71,11 @@ public class VideoPlayerDemoActivity extends AppCompatActivity {
             videoView.setVideoUri(videoUri, new VideoPlayerGLSurfaceView.PlayPreparedCallback() {
                 @Override
                 public void playPrepared(MediaPlayer player) {
-                    mPlayerView.post(new Runnable() {
+                    videoGLSurfaceView.post(new Runnable() {
                         @Override
                         public void run() {
                             MsgUtil.toastMsg(VideoPlayerDemoActivity.this, "Start playing " + videoUri.getHost() + videoUri.getPath());
+                            Log.e(getClass().getSimpleName(), "Start playing " + videoUri.getHost() + videoUri.getPath() );
                         }
                     });
 
@@ -82,9 +89,9 @@ public class VideoPlayerDemoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_video_player_demo);
-        mPlayerView = (VideoPlayerGLSurfaceView) findViewById(R.id.videoGLSurfaceView);
-        mPlayerView.setZOrderOnTop(false);
-        mPlayerView.setZOrderMediaOverlay(true);
+        videoGLSurfaceView = (VideoPlayerGLSurfaceView) findViewById(R.id.videoGLSurfaceView);
+        videoGLSurfaceView.setZOrderOnTop(false);
+        videoGLSurfaceView.setZOrderMediaOverlay(true);
 
         mShapeBtn = (Button) findViewById(R.id.switchShapeBtn);
 
@@ -101,7 +108,7 @@ public class VideoPlayerDemoActivity extends AppCompatActivity {
                         bmp = BitmapFactory.decodeResource(getResources(), R.drawable.mask1);
 
                     if (bmp != null) {
-                        mPlayerView.setMaskBitmap(bmp, false, new VideoPlayerGLSurfaceView.SetMaskBitmapCallback() {
+                        videoGLSurfaceView.setMaskBitmap(bmp, false, new VideoPlayerGLSurfaceView.SetMaskBitmapCallback() {
                             @Override
                             public void setMaskOK(FrameRenderer renderer) {
 //                                if(mPlayerView.isUsingMask()) {
@@ -112,7 +119,7 @@ public class VideoPlayerDemoActivity extends AppCompatActivity {
                         });
                     }
                 } else {
-                    mPlayerView.setMaskBitmap(null, false);
+                    videoGLSurfaceView.setMaskBitmap(null, false);
                 }
 
             }
@@ -123,7 +130,7 @@ public class VideoPlayerDemoActivity extends AppCompatActivity {
         mTakeshotBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mPlayerView.takeShot(new VideoPlayerGLSurfaceView.TakeShotCallback() {
+                videoGLSurfaceView.takeShot(new VideoPlayerGLSurfaceView.TakeShotCallback() {
                     @Override
                     public void takeShotOK(Bitmap bmp) {
                         if (bmp != null) {
@@ -155,7 +162,7 @@ public class VideoPlayerDemoActivity extends AppCompatActivity {
                     }
 
                     Uri lastVideoUri = Uri.parse(lastVideoFileName);
-                    mPlayerView.setVideoUri(lastVideoUri, new VideoPlayerGLSurfaceView.PlayPreparedCallback() {
+                    videoGLSurfaceView.setVideoUri(lastVideoUri, new VideoPlayerGLSurfaceView.PlayPreparedCallback() {
                         @Override
                         public void playPrepared(MediaPlayer player) {
                             Log.i(Common.LOG_TAG, "The video is prepared to play");
@@ -166,17 +173,13 @@ public class VideoPlayerDemoActivity extends AppCompatActivity {
             });
         }
 
-        String[] filePaths = {
-                "android.resource://" + getPackageName() + "/" + R.raw.test,
-                "http://wge.wysaid.org/res/video/1.mp4",
-                "http://wysaid.org/p/test.mp4",
-        };
+
 
         for (int i = 0; i != filePaths.length; ++i) {
             MyVideoButton btn = new MyVideoButton(this);
             btn.setText("Video" + i);
             btn.videoUri = Uri.parse(filePaths[i]);
-            btn.videoView = mPlayerView;
+            btn.videoView = videoGLSurfaceView;
             btn.setOnClickListener(btn);
             menuLayout.addView(btn);
 
@@ -202,11 +205,11 @@ public class VideoPlayerDemoActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 shouldFit = !shouldFit;
-                mPlayerView.setFitFullView(shouldFit);
+                videoGLSurfaceView.setFitFullView(shouldFit);
             }
         });
 
-        mPlayerView.setPlayerInitializeCallback(new VideoPlayerGLSurfaceView.PlayerInitializeCallback() {
+        videoGLSurfaceView.setPlayerInitializeCallback(new VideoPlayerGLSurfaceView.PlayerInitializeCallback() {
             @Override
             public void initPlayer(final MediaPlayer player) {
                 //针对网络视频进行进度检查
@@ -229,7 +232,7 @@ public class VideoPlayerDemoActivity extends AppCompatActivity {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 float intensity = progress / 100.0f;
-                mPlayerView.setFilterIntensity(intensity);
+                videoGLSurfaceView.setFilterIntensity(intensity);
             }
 
             @Override
@@ -249,7 +252,7 @@ public class VideoPlayerDemoActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             CameraDemoActivity.MyButtons btn = (CameraDemoActivity.MyButtons) v;
-            mPlayerView.setFilterWithConfig(btn.filterConfig);
+            videoGLSurfaceView.setFilterWithConfig(btn.filterConfig);
             mCurrentConfig = btn.filterConfig;
         }
     };
@@ -269,7 +272,7 @@ public class VideoPlayerDemoActivity extends AppCompatActivity {
             case REQUEST_CODE_PICK_VIDEO:
                 if (resultCode == RESULT_OK) {
 
-                    mPlayerView.setVideoUri(data.getData(), new VideoPlayerGLSurfaceView.PlayPreparedCallback() {
+                    videoGLSurfaceView.setVideoUri(data.getData(), new VideoPlayerGLSurfaceView.PlayPreparedCallback() {
                         @Override
                         public void playPrepared(MediaPlayer player) {
                             Log.i(Common.LOG_TAG, "The video is prepared to play");
@@ -286,15 +289,15 @@ public class VideoPlayerDemoActivity extends AppCompatActivity {
     public void onPause() {
         super.onPause();
 //        Log.i(VideoPlayerGLSurfaceView.LOG_TAG, "activity onPause...");
-        mPlayerView.release();
-        mPlayerView.onPause();
+        videoGLSurfaceView.release();
+        videoGLSurfaceView.onPause();
     }
 
     @Override
     public void onResume() {
         super.onResume();
 
-        mPlayerView.onResume();
+        videoGLSurfaceView.onResume();
     }
 
     @Override
